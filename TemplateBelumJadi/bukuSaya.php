@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="icons/font-awesome/css/font-awesome.min.css">
     <!-- Custom Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-
+   
 </head>
 
 <body>
@@ -36,6 +36,7 @@
                 </a>
             </div>
         </div>
+        
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -56,7 +57,7 @@
                 <div class="header-left">
                     <div class="input-group icons">
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Telusuri" aria-label="Search">
+                            <input class="form-control mr-sm-2" style="width: 800px;" type="search" placeholder="Telusuri" aria-label="Search">
                             <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
@@ -101,17 +102,17 @@
                 <ul class="metismenu" id="menu">
                     <li>
                         <a href="index.html" aria-expanded="true">
-                            <span class="nav-text ml-3">Buku</span>
+                            <span class="nav-text ml-3" style="font-size: large;"><i class="fa fa-book fa-lg"></i> Buku</span>
                         </a>
                     </li>
                     <li>
                         <a href="bukuSaya.html" aria-expanded="false">
-                            <span class="nav-text ml-3">Buku Saya</span>
+                            <span class="nav-text ml-3" style="font-size: large;">Buku Saya</span>
                         </a>
                     </li>
                     <li>
                         <a href="index.html" aria-expanded="false">
-                            <span class="nav-text ml-3">Toko</span>
+                            <span class="nav-text ml-3" style="font-size: large;">Toko</span>
                         </a>
                     </li>
                 </ul>
@@ -119,51 +120,21 @@
                 <ul class="metismenu" id="menu">
                     <li>
                         <a href="akun.html" aria-expanded="false">
-                            <span class="nav-text">Akun</span>
+                            <span class="nav-text ml-3">Pembelian</span>
                         </a>
                     </li>
                     <li>
                         <a href="metode.html" aria-expanded="false">
-                            <span class="nav-text">Metode Pembayaran</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="playPoints.html" aria-expanded="false">
-                            <span class="nav-text">Play Points</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="langganan.html" aria-expanded="false">
-                            <span class="nav-text">Langganan saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tukarkan.html" aria-expanded="false">
-                            <span class="nav-text">Tukarkan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="beliKartu.html" aria-expanded="false">
-                            <span class="nav-text">Beli kartu hadiah</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishlist.html" aria-expanded="false">
-                            <span class="nav-text">Wishlish saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="aktivitas.html" aria-expanded="false">
-                            <span class="nav-text">Aktivitas Play saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="panduanOrang.html" aria-expanded="false">
-                            <span class="nav-text">Panduan Orang Tua</span>
+                            <span class="nav-text ml-3">Selesai</span>
                         </a>
                     </li>
                 </ul>
                 <hr>
+                <ul class="metismenu" id="menu">
+                    <li>
+                    <span class="nav-text ml-3"><button class="btn btn-info my-3 mx-5 ml-3" type="submit">Buat Rak</button></span>
+                    </li>
+                </ul>
             </div>
         </div>
         <!--**********************************
@@ -174,7 +145,19 @@
             Content body start
         ***********************************-->
         <div class="content-body">
-
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Buku</a>
+                </li>
+                            <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Seri</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+            </div>
             <div class="container-fluid">
                 <div class="row">
 
@@ -220,8 +203,7 @@
     <script src="js/gleek.js"></script>
     <script src="js/styleSwitcher.js"></script>
     <script src="js/dashboard/dashboard-1.js"></script>
-
-
+    
 </body>
 
 </html>
