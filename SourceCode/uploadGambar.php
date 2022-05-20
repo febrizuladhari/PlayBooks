@@ -23,43 +23,43 @@
             </div>
             <div class="form-group">
                 <span class="form-label">ID Ulasan</span>
-                <input class="form-control" name="ulasan" type="number"required="">
+                <input class="form-control" name="ulasan" type="number" required="">
             </div>
             <div class="form-group">
                 <span class="form-label">Judul</span>
-                <input class="form-control" name="judul" type="text"required="">
+                <input class="form-control" name="judul" type="text">
             </div>
             <div class="form-group">
                 <span class="form-label">Sinopsis</span>
-                <input class="form-control" name="sinopsis" type="text" required="">
+                <input class="form-control" name="sinopsis" type="text">
             </div>
             <div class="form-group">
                 <span class="form-label">Contoh gratis</span>
-                <input class="form-control" name="contoh" type="text" required="">
+                <input class="form-control" name="contoh" type="text">
             </div>
             <div class="form-group">
                 <span class="form-label">Rating</span>
-                <input class="form-control" name="rating" type="text" required="">
+                <input class="form-control" name="rating" type="text">
             </div>
             <div class="form-group">
                 <span class="form-label">Harga</span>
-                <input class="form-control" name="harga" type="text" required="">
+                <input class="form-control" name="harga" type="text">
             </div>
             <div class="form-group">
                 <span class="form-label">Halaman</span>
-                <input class="form-control" name="halaman" type="number" required="">
+                <input class="form-control" name="halaman" type="number">
             </div>
             <div class="form-group">
                 <span class="form-label">Bahasa</span>
-                <input class="form-control" name="bahasa" type="text" required="">
+                <input class="form-control" name="bahasa" type="text">
             </div>
             <div class="form-group">
                 <span class="form-label">Penerbit</span>
-                <input class="form-control" name="penerbit" type="text" required="">
+                <input class="form-control" name="penerbit" type="text">
             </div>
             <div class="form-group">
                 <span class="form-label">Tanggal</span>
-                <input class="form-control" name="tanggal" type="date" required="">
+                <input class="form-control" name="tanggal" type="date">
             </div>
             <div class="form-group">
                 <span class="form-label">Contain Buku</span>
@@ -87,8 +87,7 @@
 
             <?php
                 include 'includes/koneksi.php';
-                
-                
+            
                 if(isset($_POST['buttonins'])) {
                     $noseri_buku = $_POST['noSeri'];
                     $id_ulasan = $_POST['ulasan'];
@@ -102,21 +101,16 @@
                     $penerbit = $_POST['penerbit'];
                     $tanggal_terbit = $_POST['tanggal'];
 
-                    // Uplaad PDF
-                    $targetfolder = "pdfBuku/";
-                    $targetfolder = $targetfolder . basename( $_FILES['filePDF']['name']) ;
-                    $file_type = $_FILES['filePDF']['type'];
-                    if ($file_type == "application/pdf") {
-                        if(move_uploaded_file($_FILES['filePDF']['tmp_name'],$targetfolder)) {
-                            $sql = "INSERT INTO buku (contain_buku) VALUES ('$filePDF')";
-                        }
-                    }
+                    // Uplaod PDF
+                    $tujuan = "pdfBuku/";
+                    $nama_file = $_FILES['filePDF']['name'];
+                    move_uploaded_file($_FILES['filePDF']['tmp_name'],$tujuan.$nama_file);
 
                     // Upload Gambar
                     $direktori = "coverBuku/";
                     $file_name = $_FILES['namafile']['name'];
                     move_uploaded_file($_FILES['namafile']['tmp_name'],$direktori.$file_name);
-                    $sql = "INSERT INTO buku (noseri_buku, id_ulasan, judul, sinopsis, contoh_gratis, rating, harga_buku, jlh_halaman, bahasa, penerbit, tanggal_terbit, cover_buku) VALUES ('$noseri_buku','$id_ulasan','$judul','$sinopsis','$contoh_gratis','$rating','$harga_buku','$jlh_halaman','$bahasa','$penerbit','$tanggal_terbit','$file_name')";
+                    $sql = "INSERT INTO buku (noseri_buku, id_ulasan, judul, sinopsis, contoh_gratis, rating, harga_buku, jlh_halaman, bahasa, penerbit, tanggal_terbit, contain_buku, cover_buku) VALUES ('$noseri_buku','$id_ulasan','$judul','$sinopsis','$contoh_gratis','$rating','$harga_buku','$jlh_halaman','$bahasa','$penerbit','$tanggal_terbit','$nama_file','$file_name')";
                         
                     if($koneksi->query($sql)===TRUE){
                         echo "<script>setTimeout(\"location.href = '';\",1500);</script>";
@@ -129,27 +123,6 @@
             ?>
         </form>
 
-        <!-- <form action="" method="post" enctype="multipart/form-data">
-            <h2>File Upload</h2>
-            <input type="file" name="NamaFile">
-            <input type="submit" name="proses" value="Upload">
-        </form> -->
-
-        <?php 
-        // include 'includes/koneksi.php';
-
-        // if(isset($_POST['proses'])) {
-
-        //     $direktori = "coverBuku/";
-        //     $file_name = $_FILES['NamaFile']['name'];
-        //     move_uploaded_file($_FILES['NamaFile']['tmp_name'],$direktori.$file_name);
-
-        //     mysqli_query($koneksi, "INSERT into buku set cover_buku='$file_name'");
-
-        //     echo "Berhasil";
-
-        // }
-        ?>
 
 
 
