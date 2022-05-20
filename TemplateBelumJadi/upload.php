@@ -234,11 +234,29 @@
                                 <div class="row">
                                     <!-- Paling Populer -->
                                     <div class="col-6 text-left">
-                                        <h3 class="card-title">Buku di Pustaka Anda</h3>
+                                        <h3 class="card-title">Upload</h3>
                                     </div>
                                     <div class="row">
+                                        
+                                    <?php
+                                    require_once'../SourceCode/includes/koneksi.php';
+
+                                    $query = mysqli_query($koneksi, "SELECT * FROM file");
+                                          foreach ($query as $item) {
+                                                echo "
+                                                <div class='col-2'>
+                                                <div class='card'>
+                                                </div>
+                                                    <img class='img-fluid' src='images/file.png' alt=''>
+                                                     
+                                                    <div class='card-body'>
+                                                        <h5 class='card-title'>". $item['id_file'] ."</h5>
+                                                        <p class='card-text'>". $item['contain'] ."</p>
+                                                    </div>
+                                                </div>";
+                                          }
+                                    ?>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
