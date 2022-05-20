@@ -26,10 +26,6 @@
                 <input class="form-control" name="ulasan" type="number"required="">
             </div>
             <div class="form-group">
-                <span class="form-label">Contain Buku</span>
-                <input class="form-control" name="contain" type="text"required="">
-            </div>
-            <div class="form-group">
                 <span class="form-label">Judul</span>
                 <input class="form-control" name="judul" type="text"required="">
             </div>
@@ -66,6 +62,11 @@
                 <input class="form-control" name="tanggal" type="date" required="">
             </div>
             <div class="form-group">
+                <span class="form-label">Contain Buku</span>
+                <div class="input-group ">
+                    <input type="file" class="form-control" style="height:auto" id="inputGroupFile02" name="filePDF"> 
+                </div>            </div>
+            <div class="form-group">
                 <span class="form-label">Cover</span>
                 <div class="input-group ">
                     <input type="file" class="form-control" style="height:auto" id="inputGroupFile01" name="namafile"> 
@@ -91,7 +92,6 @@
                 if(isset($_POST['buttonins'])) {
                     $noseri_buku = $_POST['noSeri'];
                     $id_ulasan = $_POST['ulasan'];
-                    $contain_buku = $_POST['contain'];
                     $judul = $_POST['judul'];
                     $sinopsis = $_POST['sinopsis'];
                     $contoh_gratis = $_POST['contoh'];
@@ -101,10 +101,22 @@
                     $bahasa = $_POST['bahasa'];
                     $penerbit = $_POST['penerbit'];
                     $tanggal_terbit = $_POST['tanggal'];
+
+                    // Uplaad PDF
+                    $targetfolder = "pdfBuku/";
+                    $targetfolder = $targetfolder . basename( $_FILES['filePDF']['name']) ;
+                    $file_type = $_FILES['filePDF']['type'];
+                    if ($file_type == "application/pdf") {
+                        if(move_uploaded_file($_FILES['filePDF']['tmp_name'],$targetfolder)) {
+                            $sql = "INSERT INTO buku (contain_buku) VALUES ('$filePDF')";
+                        }
+                    }
+
+                    // Upload Gambar
                     $direktori = "coverBuku/";
                     $file_name = $_FILES['namafile']['name'];
                     move_uploaded_file($_FILES['namafile']['tmp_name'],$direktori.$file_name);
-                    $sql = "INSERT INTO buku (noseri_buku, id_ulasan, contain_buku, judul, sinopsis, contoh_gratis, rating, harga_buku, jlh_halaman, bahasa, penerbit, tanggal_terbit, cover_buku) VALUES ('$noseri_buku','$id_ulasan','$contain_buku','$judul','$sinopsis','$contoh_gratis','$rating','$harga_buku','$jlh_halaman','$bahasa','$penerbit','$tanggal_terbit','$file_name')";
+                    $sql = "INSERT INTO buku (noseri_buku, id_ulasan, judul, sinopsis, contoh_gratis, rating, harga_buku, jlh_halaman, bahasa, penerbit, tanggal_terbit, cover_buku) VALUES ('$noseri_buku','$id_ulasan','$judul','$sinopsis','$contoh_gratis','$rating','$harga_buku','$jlh_halaman','$bahasa','$penerbit','$tanggal_terbit','$file_name')";
                         
                     if($koneksi->query($sql)===TRUE){
                         echo "<script>setTimeout(\"location.href = '';\",1500);</script>";
