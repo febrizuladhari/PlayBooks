@@ -27,7 +27,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="index.php">
                     <b class="logo-abbr"><img src="user/images/googlePlayLogo.png" alt=""> </b>
                     <span class="logo-compact mx-auto"><img src="user/images/googlePlay.png" alt=""></span>
                     <span class="brand-title">
@@ -186,23 +186,15 @@
                                             <li class="nav-item dropdown">
                                                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Genre</a>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="#">Bimbingan Belajar & Bahasa Asing</a>
-                                                    <a class="dropdown-item" href="#">Biografi & Memoar</a>
-                                                    <a class="dropdown-item" href="#">Bisnis & Investasi</a>
-                                                    <a class="dropdown-item" href="#">Buku Anak</a>
-                                                    <a class="dropdown-item" href="#">Dewasa Muda</a>
-                                                    <a class="dropdown-item" href="#">Kesehatan, Pikiran & Tubuh</a>
-                                                    <a class="dropdown-item" href="#">Koleksi Sastra & Fiksi</a>
-                                                    <a class="dropdown-item" href="#">Komik</a>
-                                                    <a class="dropdown-item" href="#">Komputer & Teknologi</a>
-                                                    <a class="dropdown-item" href="#">Masak, Makanan & Minuman</a>
-                                                    <a class="dropdown-item" href="#">Pendidikan</a>
-                                                    <a class="dropdown-item" href="#">Pengasuhan & Keluarga</a>
-                                                    <a class="dropdown-item" href="#">Percintaan</a>
-                                                    <a class="dropdown-item" href="#">Perjalanan</a>
-                                                    <a class="dropdown-item" href="#">Sains & Matematika</a>
-                                                    <a class="dropdown-item" href="#">Sejarah</a>
-                                                    <a class="dropdown-item" href="#">Seni & Hiburan</a>
+                                                    <a class="dropdown-item" href="kategoriBuku/petualangan.php">Petualangan</a>
+                                                    <a class="dropdown-item" href="kategoriBuku/biografi.php">Biografi & Memoar</a>
+                                                    <a class="dropdown-item" href="kategoriBuku/bisnis.php">Bisnis & Investasi</a>
+                                                    <a class="dropdown-item" href="kategoriBuku/anak.php">Buku Anak</a>
+                                                    <a class="dropdown-item" href="kategoriBuku/kesehatan.php">Kesehatan</a>
+                                                    <a class="dropdown-item" href="kategoriBuku/komputer.php">Komputer & Teknologi</a>
+                                                    <a class="dropdown-item" href="kategoriBuku/masak.php">Masak, Makanan & Minuman</a>
+                                                    <a class="dropdown-item" href="kategoriBuku/romantis.php">Romantis</a>
+                                                    <a class="dropdown-item" href="kategoriBuku/sains.php">Sains dan Matematika</a>
                                                 </div>
                                             </li>
                                             <li>
@@ -214,7 +206,7 @@
                                                 <a class="nav-link" href="#">Beranda</a>
                                             </li>
                                             <li class="nav-item">
-                                                <a class="nav-link" href="#populer">Paling Populer</a>
+                                                <a class="nav-link" href="#rekomendasi">Rekomendasi</a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" href="#baru">Yang Baru</a>
@@ -237,107 +229,50 @@
             <!-- Daftar Buku -->
             <div class="container-fluid">
 
-            <?php 
-                include 'includes/koneksi.php';
-                
-            ?>
-
-                <div class="row" id="populer">
+                <div class="row" id="rekomendasi">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
                                     <!-- Paling Populer -->
                                     <div class="col-6 text-left">
-                                        <h4 class="card-title">Paling Populer</h4>
+                                        <h4 class="card-title">Rekomendasi</h4>
                                     </div>
                                     <div class="col-6 text-right">
                                         <button type="button" class="btn mb-3 btn-info">Lihat lainnya</button>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img1.jpg" alt="">
+                                        
+                                        <?php 
+                                            include 'includes/koneksi.php';
+
+                                            $sql = "SELECT * FROM buku ORDER BY rand() LIMIT 6";
+                                            $sql_query = mysqli_query($koneksi, $sql);
+
+                                            foreach ($sql_query as $data) {
+
+                                        ?>
+
+                                        <!-- Perulangan Buku -->
+                                        <div class="col-sm-6 col-md-4 col-lg-2" <?php echo $data['noseri_buku'] ?>>
+                                            <div class="card" style="height: 35rem;">
+                                                <a href="detailBuku.php?noseri_buku=<?php echo $data['noseri_buku'] ?>">
+                                                    <img class="img-fluid" src="coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
+                                                </a>
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
+                                                    <h5 class="card-title"><?php echo $data['judul'] ?></h5>
+                                                    <p class="card-text"><?php echo $data['penerbit'] ?></p>
+                                                    <p class="card-text"><?php echo $data['kategori'] ?></p>
                                                 </div>
                                                 <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
+                                                    <h5 class="text-info float-right"><?php echo $data['harga_buku'] ?></h5>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img2.jpg" alt="">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img3.jpg" alt="">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img4.jpg" alt="">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img5.jpg" alt="">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img6.jpg" alt="">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?php 
+                                            }
+                                        ?>
                                         
                                     </div>
                                     
@@ -360,89 +295,37 @@
                                         <button type="button" class="btn mb-3 btn-info">Lihat lainnya</button>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img6.jpg" alt="">
+                                        
+                                        <?php 
+                                            include 'includes/koneksi.php';
+
+                                            $sql = "SELECT * FROM buku ORDER BY tanggal_terbit DESC LIMIT 6";
+                                            $sql_query = mysqli_query($koneksi, $sql);
+
+                                            foreach ($sql_query as $data) {
+
+                                        ?>
+
+                                        <!-- Perulangan Buku -->
+                                        <div class="col-sm-6 col-md-4 col-lg-2" <?php echo $data['noseri_buku'] ?>>
+                                            <div class="card" style="height: 35rem;">
+                                                <a href="detailBuku.php?noseri_buku=<?php echo $data['noseri_buku'] ?>">
+                                                    <img class="img-fluid" src="coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
+                                                </a>
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
+                                                    <h5 class="card-title"><?php echo $data['judul'] ?></h5>
+                                                    <p class="card-text"><?php echo $data['penerbit'] ?></p>
+                                                    <p class="card-text"><?php echo $data['kategori'] ?></p>
                                                 </div>
                                                 <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
+                                                    <h5 class="text-info float-right"><?php echo $data['harga_buku'] ?></h5>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img7.jpg" alt="">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img8.png" alt="">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img9.png" alt="">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img1.jpg" alt="">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-sm-6 col-md-4 col-lg-2">
-                                            <div class="card">
-                                                <img class="img-fluid" src="images/coverBuku/img2.jpg" alt="">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Judul Buku 1</h5>
-                                                    <p class="card-text">Penulis 1</p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                    </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <?php 
+                                            }
+                                        ?>
                                         
                                     </div>
                                     
@@ -453,6 +336,8 @@
                 </div>
 
                 
+                
+
             </div>
             
             

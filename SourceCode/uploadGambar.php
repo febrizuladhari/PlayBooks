@@ -30,6 +30,10 @@
                 <input class="form-control" name="judul" type="text">
             </div>
             <div class="form-group">
+                <span class="form-label">Kategori</span>
+                <input class="form-control" name="kategori" type="text">
+            </div>
+            <div class="form-group">
                 <span class="form-label">Sinopsis</span>
                 <input class="form-control" name="sinopsis" type="text">
             </div>
@@ -92,6 +96,7 @@
                     $noseri_buku = $_POST['noSeri'];
                     $id_ulasan = $_POST['ulasan'];
                     $judul = $_POST['judul'];
+                    $kategori = $_POST['kategori'];
                     $sinopsis = $_POST['sinopsis'];
                     $contoh_gratis = $_POST['contoh'];
                     $rating = $_POST['rating'];
@@ -110,7 +115,7 @@
                     $direktori = "coverBuku/";
                     $file_name = $_FILES['namafile']['name'];
                     move_uploaded_file($_FILES['namafile']['tmp_name'],$direktori.$file_name);
-                    $sql = "INSERT INTO buku (noseri_buku, id_ulasan, judul, sinopsis, contoh_gratis, rating, harga_buku, jlh_halaman, bahasa, penerbit, tanggal_terbit, contain_buku, cover_buku) VALUES ('$noseri_buku','$id_ulasan','$judul','$sinopsis','$contoh_gratis','$rating','$harga_buku','$jlh_halaman','$bahasa','$penerbit','$tanggal_terbit','$nama_file','$file_name')";
+                    $sql = "INSERT INTO buku (noseri_buku, id_ulasan, judul, kategori, sinopsis, contoh_gratis, rating, harga_buku, jlh_halaman, bahasa, penerbit, tanggal_terbit, contain_buku, cover_buku) VALUES ('$noseri_buku','$id_ulasan','$judul','$kategori','$sinopsis','$contoh_gratis','$rating','$harga_buku','$jlh_halaman','$bahasa','$penerbit','$tanggal_terbit','$nama_file','$file_name')";
                         
                     if($koneksi->query($sql)===TRUE){
                         echo "<script>setTimeout(\"location.href = '';\",1500);</script>";

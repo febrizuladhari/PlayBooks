@@ -27,7 +27,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="index.php">
                     <b class="logo-abbr"><img src="user/images/googlePlayLogo.png" alt=""> </b>
                     <span class="logo-compact mx-auto"><img src="user/images/googlePlay.png" alt=""></span>
                     <span class="brand-title">
@@ -56,7 +56,7 @@
                 <div class="header-left">
                     <div class="input-group icons">
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Telusuri" aria-label="Search">
+                            <input class="form-control mr-sm-2" style="width: 800px;" type="search" placeholder="Telusuri" aria-label="Search">
                             <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
@@ -175,12 +175,74 @@
         ***********************************-->
         <div class="content-body">
 
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Genre</a>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="kategoriBuku/petualangan.php">Petualangan</a>
+                                                <a class="dropdown-item" href="kategoriBuku/biografi.php">Biografi & Memoar</a>
+                                                <a class="dropdown-item" href="kategoriBuku/bisnis.php">Bisnis & Investasi</a>
+                                                <a class="dropdown-item" href="kategoriBuku/anak.php">Buku Anak</a>
+                                                <a class="dropdown-item" href="kategoriBuku/kesehatan.php">Kesehatan</a>
+                                                <a class="dropdown-item" href="kategoriBuku/komputer.php">Komputer & Teknologi</a>
+                                                <a class="dropdown-item" href="kategoriBuku/masak.php">Masak, Makanan & Minuman</a>
+                                                <a class="dropdown-item" href="kategoriBuku/romantis.php">Romantis</a>
+                                                <a class="dropdown-item" href="kategoriBuku/sains.php">Sains dan Matematika</a>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div>
+                                                <h2 style = "color :rgb(226, 226, 226);">|</h2>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="index.php">Beranda</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="index.php">Rekomendasi</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="index.php">Yang Baru</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"><i class="fa fa-question-circle fa-lg"></i></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"><i class="fa fa-cog fa-lg"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
             <div class="container-fluid">
                 <div class="row">
+
                     <?php 
+
+                        function input($data) {
+                            $data = trim($data);
+                            $data = stripslashes($data);
+                            $data = htmlspecialchars($data);
+                            return $data;
+                        }
+
                         include 'includes/koneksi.php';
 
-                        
+                        $noseri_buku = input($_GET['noseri_buku']);
+                        $query = mysqli_query($koneksi, "SELECT * FROM buku WHERE noseri_buku='".$noseri_buku."' LIMIT 1");
+                        $data = mysqli_fetch_array($query);
+
                     ?>
                     <!-- Detail Buku -->
                     <div class="col-8">
@@ -188,16 +250,19 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-4">
-                                        <img class="img-fluid" src="user/images/coverBuku/img1.jpg" alt="">
+                                        <img class="img-fluid" src="coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
                                     </div>
                                     <div class="col-8">
-                                        <h2 class="mt-2">Judul Buku</h2>
+                                        <h1 class="mt-2"><?php echo $data['judul'] ?></h1>
                                         <hr>
-                                        <h3 class="mt-3">Penulis</h3>
-                                        <h4 class="mt-3">Tanggal Terbit</h4>
-                                        <h4 class="mt-3">Kepustakaan</h4>
+                                        <h3 class="mt-3"><?php echo $data['penerbit'] ?></h3>
+                                        <br>
+                                        <h5 class="mt-3">Kategori &nbsp; : <?php echo $data['kategori'] ?></h5>
+                                        <h5 class="mt-3">Bahasa &nbsp; &nbsp; : <?php echo $data['bahasa'] ?></h5>
+                                        <h5 class="mt-3">Halaman&nbsp; : <?php echo $data['jlh_halaman'] ?></h5>
+                                        <h5 class="mt-3">Terbitan &nbsp;&nbsp;: <?php echo $data['tanggal_terbit'] ?></h5>
                                         
-                                        <button type="button" class="btn mb-1 btn-info mt-5">Beli | Harga <span class="btn-icon-right"><i class="fa fa-shopping-cart"></i></span>
+                                        <button type="button" class="btn mb-1 btn-info mt-5">Beli | <?php echo $data['harga_buku'] ?> <span class="btn-icon-right"><i class="fa fa-shopping-cart"></i></span>
                                         </button>
                                         <button type="button" class="btn mb-1 btn-info mt-5">Tambah ke Wishlish <span class="btn-icon-right"><i class="fa fa-bookmark"></i></span>
                                         </button>
@@ -207,17 +272,9 @@
                                     <hr>
                                     <div class="row mt-3">
                                         <p class="text-justify">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur ullam amet esse accusantium libero nulla voluptatem laborum quasi veniam mollitia tempore deleniti in hic vero eaque, et commodi corporis vel.
-                                            Voluptatem, nostrum optio? Labore voluptate, et obcaecati quod beatae voluptas quos a odit harum eveniet, aliquam numquam, ipsum assumenda ratione commodi sequi nobis. Ut, repellat voluptatum. Nesciunt, quisquam impedit! Aliquam.
-                                            Mollitia magni neque, iure assumenda odit ea, veniam, placeat tenetur ad aut eius deserunt natus ullam temporibus omnis eveniet nulla deleniti distinctio quaerat hic totam quisquam dolorem. Vero, quia sapiente.
-                                            Vel eaque reiciendis est? Natus dicta quia corporis nam recusandae minima, incidunt dolor molestiae iste quod laboriosam ratione, aliquam provident ipsam culpa. Culpa non dolor excepturi deleniti debitis! Quod, voluptate?
-                                            Quo provident consequuntur earum, magnam aperiam sint eveniet, sunt distinctio quasi corrupti sapiente iste perferendis, ex rem possimus modi corporis voluptatum! Quaerat laudantium nihil suscipit ratione, illum debitis eum quam?
-                                            Consequatur fuga vel iusto sequi veniam, nostrum quo voluptatum inventore sunt neque possimus dolorum repudiandae dignissimos aliquid nesciunt excepturi facilis laborum? Cumque excepturi atque ad maxime qui ipsum labore aliquam.
-                                            Illum nulla, ducimus quod vitae maiores quos? Iusto, nesciunt illum, neque non at sed inventore impedit reiciendis natus quos tenetur ipsa cum fugiat quo veritatis alias aliquid aspernatur quaerat animi.
-                                            Aperiam itaque nulla ex cupiditate modi praesentium placeat ducimus consequatur ipsum dolore error nesciunt voluptatem excepturi, optio fuga labore consequuntur voluptates repellat iste nisi totam nam eum dicta earum. Expedita?
-                                            Obcaecati deleniti natus nulla dolor fuga. Reiciendis eligendi quasi, est nulla deserunt, enim alias voluptates magnam repellat fugiat quidem nam dolore quia dolores iusto temporibus? Impedit molestias nesciunt eveniet voluptatem.
-                                            Sunt ea excepturi reiciendis veniam natus aut cupiditate fugiat voluptatibus, deleniti enim vel autem nihil asperiores facere distinctio porro hic, aliquam voluptatem quam culpa? Consequuntur magnam quis quam sint error!
+                                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <?php echo $data['sinopsis'] ?>
                                         </p>
+                                        <hr>
                                     </div>
                                     <hr>
                                 </div>
@@ -233,60 +290,33 @@
                                     <h4 class="card-title">Rekomendasi</h4>
                                 </div>
                                 <div class="row">
-                                    <div class="col-6">
-                                        <div class="card">
-                                            <img class="img-fluid" src="user/images/coverBuku/img1.jpg" alt="">
+                                    <?php 
+                                        include 'includes/koneksi.php';
+
+                                        $sql = "SELECT * FROM buku ORDER BY RAND() LIMIT 4";
+                                        $sql_query = mysqli_query($koneksi, $sql);
+
+                                        foreach ($sql_query as $data) {
+                                    ?>
+                                    <div class="col-6" <?php echo $data['noseri_buku'] ?>>
+                                        <div class="card" style="height: 35rem;">
+                                                <a href="detailBuku.php?noseri_buku=<?php echo $data['noseri_buku'] ?>">
+                                                    <img class="img-fluid" src="coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
+                                                </a>
                                             <div class="card-body">
-                                                <h5 class="card-title">Judul Buku 1</h5>
-                                                <p class="card-text">Penulis 1</p>
+                                                <h5 class="card-title"><?php echo $data['judul'] ?></h5>
+                                                <p class="card-text"><?php echo $data['penerbit'] ?></p>
+                                                    <p class="card-text"><?php echo $data['kategori'] ?></p>
                                             </div>
                                             <div class="card-footer">
-                                                <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
+                                                <h5 class="text-info float-right"><?php echo $data['harga_buku'] ?></h5>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-6">
-                                        <div class="card">
-                                            <img class="img-fluid" src="user/images/coverBuku/img1.jpg" alt="">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Judul Buku 1</h5>
-                                                <p class="card-text">Penulis 1</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="card">
-                                            <img class="img-fluid" src="user/images/coverBuku/img1.jpg" alt="">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Judul Buku 1</h5>
-                                                <p class="card-text">Penulis 1</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="card">
-                                            <img class="img-fluid" src="user/images/coverBuku/img1.jpg" alt="">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Judul Buku 1</h5>
-                                                <p class="card-text">Penulis 1</p>
-                                            </div>
-                                            <div class="card-footer">
-                                                <p class="card-text d-inline"><small class="text-muted">Bintang</small>
-                                                </p><a href="#" class="card-link float-right"><small>Rp 100.000</small></a>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                    <?php 
+                                        }
+                                    ?>
                                 </div>
                             </div>
                         </div>
