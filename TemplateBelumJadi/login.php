@@ -1,4 +1,57 @@
+<?php 
+// mengaktifkan session pada php
 
+ 
+// menghubungkan php dengan koneksi database
+include 'config.php';
+ 
+// menangkap data yang dikirim dari form login
+
+ 
+ 
+// menyeleksi data user dengan email dan password yang sesuai
+
+if(isset($_POST["submit"])){
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $login = mysqli_query($koneksi,"SELECT * from user where email='$email' and password='$password'");
+    // menghitung jumlah data yang ditemukan    
+    $cek = mysqli_num_rows($login);
+    if($cek > 0){
+     
+        $data = mysqli_fetch_assoc($login);
+     
+        // cek jika user login sebagai admin
+        if($data['level']=="admin"){
+     
+            // buat session login dan email
+            $_SESSION['email'] = $email;
+            $_SESSION['level'] = "admin";
+            // alihkan ke halaman dashboard admin
+            header("location:admin.php");
+     
+        // cek jika user login sebagai pegawai
+        }else if($data['level']=="user_penerbit"){
+            // buat session login dan email
+            $_SESSION['email'] = $email;
+            $_SESSION['level'] = "user_penerbit";
+            // alihkan ke halaman dashboard user_penerbit
+            header("location:index.html");
+     
+        // cek jika user login sebagai pengurus
+        }else if($data['level']=="user_pembeli"){
+            // buat session login dan email
+            $_SESSION['email'] = $email;
+            $_SESSION['level'] = "user_pembeli";
+            // alihkan ke halaman dashboard user_pembeli
+            header("location:index.html");
+     
+        }
+    }
+}
+// cek apakah email dan password di temukan pada database
+
+?>
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 <head>
@@ -34,7 +87,7 @@
                                     </div>
                                     <button class="btn login-form__btn submit w-100">Sign In</button>
                                 </form>
-                                <p class="mt-5 login-form__footer">Dont have account? <a href="register.html" class="text-primary">Sign Up</a> now</p>
+                                <p class="mt-5 login-form__footer">Dont have account? <a href="register.php" class="text-primary">Sign Up</a> now</p>
                             </div>
                         </div>
                     </div>

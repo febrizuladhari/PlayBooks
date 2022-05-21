@@ -1,3 +1,41 @@
+<?php
+    // include "config.php";
+
+    // if(isset($_POST['submit'])){
+    //     if(registrasi($_POST)){
+    //         header("location : login.php");
+    //         exit;
+    //     }
+    // }
+    // function registrasi($datanya){
+    //     global $koneksi;
+    //     $username=stripslashes(stripslashes(htmlspecialchars($datanya['username'])));
+    //     $first_name=stripslashes(stripslashes(htmlspecialchars($datanya['first_name'])));
+    //     $last_name=stripslashes(stripslashes(htmlspecialchars($datanya['last_name'])));
+    //     $email=stripslashes(stripslashes(htmlspecialchars($datanya['email'])));
+    //     $email_verified=stripslashes(stripslashes(htmlspecialchars($datanya['email_verified'])));
+    //     $password=stripslashes(stripslashes(htmlspecialchars($datanya['password'])));
+    //     $level=stripslashes(stripslashes(htmlspecialchars($datanya['level'])));
+        
+
+    //     $query = "INSERT INTO user VALUES('','username','first_name','last_name','email','email_verified','password','level')";
+    //     mysqli_query($koneksi,$query);
+    //     return mysqli_affected_rows($koneksi);
+    // }
+    require 'config.php';
+
+    if(isset($_POST["register"])){
+        if(registrasi($_POST) > 0){
+            echo "<script>
+                    alert('user baru berhasil ditambahkan!');
+            </script>";
+        } else{
+            echo mysqli_error($koneksi);
+        }
+    }
+
+?>
+
 <!DOCTYPE html>
 <html class="h-100" lang="en">
 
@@ -25,43 +63,47 @@
                             <div class="card-body pt-5 ">
                                     <img src="images/google.png" alt=""width="70px">
                                     <h5 class="mt-3"sizes="">Buat Akun Google</h5>
-                                <form class="mt-4 mb-5 login-input">
+                                <form class="mt-4 mb-5 login-input" method="POST">
                                     <div class="row">
                                         <div class="col-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control"  placeholder="First Name" required>
+                                        <input type="text" class="form-control"  placeholder="First Name" name="first_name" required>
                                     </div>
                                     </div>
                                         <div class="col-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control"  placeholder="Last Name" required>
+                                        <input type="text" class="form-control"  placeholder="Last Name" name="last_name" required>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="" class="form-control" placeholder="E-mail Address" name="email" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="" class="form-control" placeholder="Username" name="username" required>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="Password" name="password" required>
                                     </div>
                                     </div>
                                         <div class="col-6">
                                     <div class="form-group">
-                                        <input type="" class="form-control" placeholder="E-mail Address" required>
+                                        <input type="password" class="form-control" placeholder="Konfirmasi Password" name="konfirmasi_password" required>
                                     </div>
                                     </div>
-                                        <div class="col-6">
-                                    <div class="form-group">
-                                        <input type="" class="form-control" placeholder="E-mail Verified" required>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Username" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Password" required>
                                     </div>
                                     <div class="form-group">
                                         <div class="btn-group dropdown mb-1">
                                             <button type="button" class="btn btn-primary dropdown-toggle btn-lg btn-block" style="width: 672.5px;" data-toggle="dropdown">Level User</button>
-                                            <div class="dropdown-menu" style="width: 672.5px; text-align: center;"><a class="dropdown-item" href="#">Penerbit</a> <a class="dropdown-item" href="#">Pembeli</a>
+                                            <div class="dropdown-menu" style="width: 672.5px; text-align: center;">
+                                            <a class="dropdown-item" href="#" name="level" id="user_penerbit">Penerbit</a> 
+                                            <a class="dropdown-item" href="#" name="level" id="user_pembeli">Pembeli</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <button class="btn login-form__btn submit w-100">Sign up</button>
+                                    <button class="btn login-form__btn submit w-100" name="register" type="submit">Sign up</button>
                                 </form>
                                     <p class="mt-5 login-form__footer">Have account <a href="login.html" class="text-primary">Sign in </a> now</p>
                                     </p>
