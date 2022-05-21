@@ -243,7 +243,7 @@
                                         <?php 
                                             include '../includes/koneksi.php';
 
-                                            $sql = "SELECT * FROM buku WHERE kategori = 'Petualangan'";
+                                            $sql = "SELECT * FROM buku WHERE kategori = 'Masak, Makanan & Minuman'";
                                             $sql_query = mysqli_query($koneksi, $sql);
 
                                             foreach ($sql_query as $data) {
