@@ -24,7 +24,7 @@ if(!isset($_SESSION)){
         $password=mysqli_real_escape_string($koneksi, $datanya["password"]);
         //$password2=mysqli_real_escape_string($koneksi, $datanya["password2"]);
         $level=stripslashes(stripslashes(htmlspecialchars($datanya["level"])));
-    
+
         $password = password_hash($password, PASSWORD_DEFAULT);
 
         // var_dump($password);die;

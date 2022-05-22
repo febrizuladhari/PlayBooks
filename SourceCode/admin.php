@@ -156,7 +156,7 @@
 
                                          // tombol delete
                                          echo "<td><form onsubmit=\"return confirm ('Anda yakin mau menghapus data?');\"method='POST'>";
-                                         echo "<input hidden type='text'name='id' value=$data[id_user]>";
+                                         echo "<input hidden type='text'name='id_user' value=$data[id_user]>";
                                          echo "<button type='submit' name='btnHapus'class='btn btn-danger'><i class='far fa-trash-alt'></i> Delete</button>";
                                          echo "</form></td>";
 
@@ -168,10 +168,10 @@
                                      ?>
                                      <?php
                                         if(isset($_POST['btnHapus'])){
-                                            $id = $_POST['id'];
+                                            $id = $_POST['id_user'];
                                             
                                             if($koneksi) {
-                                                $sql = "DELETE FROM user WHERE id=$id";
+                                                $sql = "DELETE FROM user WHERE id_user=$id";
                                                 mysqli_query($koneksi, $sql);
                                                 echo "<p class='alert alert-success text-center'><b> Data Akun berhasil dihapus.</b></p>";
                                             } elseif ($koneksi->connect_error){

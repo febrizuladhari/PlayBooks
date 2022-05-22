@@ -33,6 +33,10 @@ if(isset($_POST['submit'])){
         // cek jika user login sebagai pegawai
         }else if($data['level']=="user_penerbit"){
             // buat session login dan email
+            $_SESSION['id_user'] = $data['id_user'];
+            $_SESSION['first_name'] = $data['first_name'];
+            $_SESSION['last_name'] = $data['last_name'];
+            $_SESSION['email'] = $data['email'];
             $_SESSION['username'] = $username;
             $_SESSION['level'] = "user_penerbit";
             // alihkan ke halaman dashboard user_penerbit
@@ -41,6 +45,10 @@ if(isset($_POST['submit'])){
         // cek jika user login sebagai pengurus
         }else if($data['level']=="user_pembeli"){
             // buat session login dan email
+            $_SESSION['id_user'] = $data['id_user'];
+            $_SESSION['first_name'] = $data['first_name'];
+            $_SESSION['last_name'] = $data['last_name'];
+            $_SESSION['email'] = $data['email'];
             $_SESSION['username'] = $username;
             $_SESSION['level'] = "user_pembeli";
             // alihkan ke halaman dashboard user_pembeli
