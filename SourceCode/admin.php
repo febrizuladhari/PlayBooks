@@ -132,12 +132,62 @@
                                     <div class="col-6 text-left">
                                         <h4 class="card-title">User Management</h4>
                                     </div>
-                                    
+                                    <?php
+                                    require("includes/koneksi.php");
+                                     $query = "SELECT * FROM user";
+                                     $hasil = mysqli_query($koneksi,$query);
+                                     echo "<table class ='table table-bordered'>";
+                                     echo "<tr><th>Username</th><th>First Name</th><th>Last Name</th>
+                                    </th><th>Email</th><th>Level</th><tr>";
+                                     foreach ($hasil as $data){
+                                         echo "<tr>";
+                                         echo "<td>$data[username]";
+                                         echo "<td>$data[first_name]";
+                                         echo "<td>$data[last_name]";
+                                         echo "<td>$data[email]";
+                                         echo "<td>$data[level]";
+
+                                         // tombol update
+                                         // input hidden = nampak id nya
+                                         echo "<td><form method='POST'action='ubah.php'>";
+                                         echo "<input hidden type='text'name='id' value=$data[id_user]>";
+                                         echo "<button type='submit' name='btnUpdate'class='btn btn-success'>Update</button>";
+                                         echo "</form></td>";
+
+                                         // tombol delete
+                                         echo "<td><form onsubmit=\"return confirm ('Anda yakin mau menghapus data?');\"method='POST'>";
+                                         echo "<input hidden type='text'name='id' value=$data[id_user]>";
+                                         echo "<button type='submit' name='btnHapus'class='btn btn-danger'><i class='far fa-trash-alt'></i> Delete</button>";
+                                         echo "</form></td>";
+
+                                         // tomboh tambah
+
+                                         echo "</tr>";
+                                     }
+                                     echo "</table>";
+                                     ?>
+                                     <?php
+                                        if(isset($_POST['btnHapus'])){
+                                            $id = $_POST['id'];
+                                            
+                                            if($koneksi) {
+                                                $sql = "DELETE FROM user WHERE id=$id";
+                                                mysqli_query($koneksi, $sql);
+                                                echo "<p class='alert alert-success text-center'><b> Data Akun berhasil dihapus.</b></p>";
+                                            } elseif ($koneksi->connect_error){
+                                                echo "<p class='alert alert-danger text-center><b> Data gagal dihapus. Terjadi kesalahan: ";
+                                                echo $koneksi->connect_error . "</b></p>";
+                                            }
+
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </di>
+                </div>
+             </div>
             
             <!-- #/ container -->
         </div>
@@ -178,7 +228,5 @@
     <script src="user/js/styleSwitcher.js"></script>
     <script src="user/js/dashboard/dashboard-1.js"></script>
 
-
 </body>
-
 </html>

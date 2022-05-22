@@ -1,3 +1,11 @@
+<?php
+require_once "includes/koneksi.php";
+session_start();
+    if(empty($_SESSION['level'])) {
+        echo "<script>alert('Sorry, you are not allowed to access this page.'); document.location='login.php'</script>";
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,7 +64,7 @@
                 <div class="header-left">
                     <div class="input-group icons">
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2" style="width: 800px;" type="search" placeholder="Telusuri" aria-label="Search">
+                            <input class="form-control mr-sm-2" style="width: 750px;" type="search" placeholder="Telusuri" aria-label="Search">
                             <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
@@ -79,7 +87,7 @@
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="login.html"><span>Logout</span></a>
+                                            <a href="logout.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>

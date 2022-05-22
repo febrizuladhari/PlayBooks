@@ -20,27 +20,20 @@ if(!isset($_SESSION)){
         $first_name=stripslashes(stripslashes(htmlspecialchars($datanya["first_name"])));
         $last_name=stripslashes(stripslashes(htmlspecialchars($datanya["last_name"])));
         $email=stripslashes(stripslashes(htmlspecialchars($datanya["email"])));
-        //$email_verified=stripslashes(stripslashes(htmlspecialchars($datanya["email_verified"])));
+        // $email_verified=stripslashes(stripslashes(htmlspecialchars($datanya["email_verified"])));
         $password=mysqli_real_escape_string($koneksi, $datanya["password"]);
-        $konfirmasi_password=mysqli_real_escape_string($koneksi, $datanya["konfirmasi_password"]);
+        //$password2=mysqli_real_escape_string($koneksi, $datanya["password2"]);
         $level=stripslashes(stripslashes(htmlspecialchars($datanya["level"])));
-        
-        if($password !== $konfirmasi_password){
-            echo "<script>
-                    alert('konfirmasi password tidak sesuai');
-            </script>";
-            return false;
-        }
-
+    
         $password = password_hash($password, PASSWORD_DEFAULT);
 
         // var_dump($password);die;
-    
-        mysqli_query($koneksi, "INSERT INTO user VALUES('', '$username', '$first_name', '$last_name', '$email', '$password', '$konfirmasi_password', '$level')");
+        mysqli_query($koneksi, "INSERT INTO user VALUES('', '$username', '$first_name', '$last_name', '$email', '$password', '$level')");
         return mysqli_affected_rows($koneksi);
         // $query = "INSERT INTO user VALUES('','username','first_name','last_name','email','email_verified','password','level')";
         // mysqli_query($koneksi,$query);
         // return mysqli_affected_rows($koneksi);
     }
-    
+
+
 ?>
