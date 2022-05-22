@@ -1,20 +1,20 @@
 <?php 
 // mengaktifkan session pada php
-
+session_start();
  
 // menghubungkan php dengan koneksi database
-include 'config.php';
+require_once 'config.php';
  
 // menangkap data yang dikirim dari form login
 
  
  
-// menyeleksi data user dengan email dan password yang sesuai
+// menyeleksi data user dengan username dan password yang sesuai
 
-if(isset($_POST["submit"])){
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $login = mysqli_query($koneksi,"SELECT * from user where email='$email' and password='$password'");
+if(isset($_POST['submit'])){
+    $username = mysqli_escape_string($koneksi, $_POST['username']);
+    $password = $_POST['password'];
+    $login = mysqli_query($koneksi,"SELECT * from user where username='$username'");
     // menghitung jumlah data yang ditemukan    
     $cek = mysqli_num_rows($login);
     if($cek > 0){
@@ -24,8 +24,8 @@ if(isset($_POST["submit"])){
         // cek jika user login sebagai admin
         if($data['level']=="admin"){
      
-            // buat session login dan email
-            $_SESSION['email'] = $email;
+            // buat session login dan username
+            $_SESSION['username'] = $username;
             $_SESSION['level'] = "admin";
             // alihkan ke halaman dashboard admin
             header("location:admin.php");
@@ -33,19 +33,18 @@ if(isset($_POST["submit"])){
         // cek jika user login sebagai pegawai
         }else if($data['level']=="user_penerbit"){
             // buat session login dan email
-            $_SESSION['email'] = $email;
+            $_SESSION['username'] = $username;
             $_SESSION['level'] = "user_penerbit";
             // alihkan ke halaman dashboard user_penerbit
-            header("location:index.html");
+            header("location:index.php");
      
         // cek jika user login sebagai pengurus
         }else if($data['level']=="user_pembeli"){
             // buat session login dan email
-            $_SESSION['email'] = $email;
+            $_SESSION['username'] = $username;
             $_SESSION['level'] = "user_pembeli";
             // alihkan ke halaman dashboard user_pembeli
-            header("location:index.html");
-     
+            header("location:index.php");
         }
     }
 }
@@ -60,9 +59,9 @@ if(isset($_POST["submit"])){
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Login</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/googlePlayLogo.png">
+    <link rel="icon" type="user/images/image/png" sizes="16x16" href="user/images/googlePlayLogo.png">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="user/css/style.css" rel="stylesheet">
     
 </head>
 
@@ -76,16 +75,16 @@ if(isset($_POST["submit"])){
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <img src="images/google.png" alt=""width="70px"style="display:block; margin:auto;">
+                                <img src="user/images/google.png" alt=""width="70px"style="display:block; margin:auto;">
                                 <a class="text-center"> <h4 class="mt-3">Login</h4></a>
-                                <form class="mt-5 mb-5 login-input">
+                                <form class="mt-5 mb-5 login-input" method="POST">
                                     <div class="form-group">
-                                        <input type="username" class="form-control" placeholder="Username">
+                                        <input type="username" class="form-control" placeholder="Username" name="username">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Password">
+                                        <input type="password" class="form-control" placeholder="Password" name="password">
                                     </div>
-                                    <button class="btn login-form__btn submit w-100">Sign In</button>
+                                    <button class="btn login-form__btn submit w-100" type="submit" name="submit">Sign In</button>
                                 </form>
                                 <p class="mt-5 login-form__footer">Dont have account? <a href="register.php" class="text-primary">Sign Up</a> now</p>
                             </div>
@@ -102,11 +101,11 @@ if(isset($_POST["submit"])){
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+    <script src="user/plugins/common/common.min.js"></script>
+    <script src="user/js/custom.min.js"></script>
+    <script src="user/js/settings.js"></script>
+    <script src="user/js/gleek.js"></script>
+    <script src="user/js/styleSwitcher.js"></script>
 </body>
 </html>
 
