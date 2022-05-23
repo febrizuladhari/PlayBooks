@@ -126,6 +126,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="rakSaya.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Rak Saya</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="pembelian.php" aria-expanded="false">
                             <span class="nav-text ml-3">Pembelian</span>
                         </a>
@@ -135,13 +140,10 @@
                             <span class="nav-text ml-3">Selesai</span>
                         </a>
                     </li>
-                </ul>
+                    </ul>
+                    
+                
                 <hr>
-                <ul class="metismenu" id="menu">
-                    <li>
-                    <span class="nav-text ml-3"><button class="btn btn-info my-3 mx-5 ml-3" type="submit">Buat Rak</button></span>
-                    </li>
-                </ul>
             </div>
         </div>
         <!--**********************************
@@ -169,12 +171,13 @@
                                             <li class="nav-item ">
                                                 <a class="nav-link"  href="#"><i class="fa fa-cog fa-lg"></i></a>
                                             </li>
-                                            <button class="btn btn-info mx-2 my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal">Upload File</button>                                       
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <button class="btn btn-info mx-2 my-2 my-sm-0" type="button" data-toggle="modal" data-target="#uploadModal">Upload File</button>                                       
+                                            <!-- Modal Upload File -->
+                                            <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Upload File</h5>
+                                                            <h5 class="modal-title" id="uploadModalLabel">Upload File</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
@@ -204,7 +207,48 @@
                                                                     $sql = "INSERT INTO file (id_file, contain) VALUES ('$id_file','$file_name')";
                                                                                         
                                                                     if($koneksi->query($sql)===TRUE){
-                                                                    echo "<script>setTimeout(\"location.href = 'bukuSaya.php';\",1500);</script>";
+                                                                    echo "<script>setTimeout(\"location.href = 'upload.php';\",1500);</script>";
+                                                                    } else {
+                                                                    echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
+                                                                    }
+
+                                                                    
+                                                                }
+                                                            ?>
+                                                        </form>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-info mx-2 my-2 my-sm-0" type="button" data-toggle="modal" data-target="#rakModal">Buat Rak</button>                                      
+                                            <!-- Modal Buat Rak -->
+                                            <div class="modal fade" id="rakModal" tabindex="-1" role="dialog" aria-labelledby="rakModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="rakModalLabel">Masukkan Nama untuk Rak Ini</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        <form method="POST" enctype="multipart/form-data">
+                                                            <div class="form-group">
+                                                                <label for="recipient-name" class="col-form-label">Nama Rak :</label>
+                                                                <input type="text" class="form-control" id="recipient-name" name="rak">
+                                                            </div>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary" name="buttonrak">Buat Rak</button>
+                                                            <?php
+                                                                require_once'../SourceCode/includes/koneksi.php';
+                                                                
+                                                                
+                                                                if(isset($_POST['buttonrak'])){
+                                                                    $nama_rak = $_POST['rak'];
+                                                                    $sql = "INSERT INTO rak (nama_rak) VALUES ('$nama_rak')";
+                                                                                        
+                                                                    if($koneksi->query($sql)===TRUE){
+                                                                    echo "<script>setTimeout(\"location.href = 'rakSaya.php';\",1500);</script>";
                                                                     } else {
                                                                     echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
                                                                     }

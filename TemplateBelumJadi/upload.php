@@ -113,7 +113,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="index.html" aria-expanded="false">
+                        <a href="index.php" aria-expanded="false">
                             <span class="nav-text ml-3" style="font-size: large;">Toko</span>
                         </a>
                     </li>
@@ -126,6 +126,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="rakSaya.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Rak Saya</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="pembelian.php" aria-expanded="false">
                             <span class="nav-text ml-3">Pembelian</span>
                         </a>
@@ -135,13 +140,10 @@
                             <span class="nav-text ml-3">Selesai</span>
                         </a>
                     </li>
-                </ul>
+                    </ul>
+                    
+                
                 <hr>
-                <ul class="metismenu" id="menu">
-                    <li>
-                    <span class="nav-text ml-3"><button class="btn btn-info my-3 mx-5 ml-3" type="submit">Buat Rak</button></span>
-                    </li>
-                </ul>
             </div>
         </div>
         <!--**********************************
@@ -153,7 +155,7 @@
         ***********************************-->
         <div class="content-body">
         <div class="container-fluid">
-                <div class="row">
+        <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
@@ -169,12 +171,13 @@
                                             <li class="nav-item ">
                                                 <a class="nav-link"  href="#"><i class="fa fa-cog fa-lg"></i></a>
                                             </li>
-                                            <button class="btn btn-info mx-2 my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal">Upload File</button>                                       
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <button class="btn btn-info mx-2 my-2 my-sm-0" type="button" data-toggle="modal" data-target="#uploadModal">Upload File</button>                                       
+                                            <!-- Modal Upload File -->
+                                            <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Upload File</h5>
+                                                            <h5 class="modal-title" id="uploadModalLabel">Upload File</h5>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
@@ -204,7 +207,48 @@
                                                                     $sql = "INSERT INTO file (id_file, contain) VALUES ('$id_file','$file_name')";
                                                                                         
                                                                     if($koneksi->query($sql)===TRUE){
-                                                                    echo "<script>setTimeout(\"location.href = 'bukuSaya.php';\",1500);</script>";
+                                                                    echo "<script>setTimeout(\"location.href = 'upload.php';\",1500);</script>";
+                                                                    } else {
+                                                                    echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
+                                                                    }
+
+                                                                    
+                                                                }
+                                                            ?>
+                                                        </form>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="btn btn-info mx-2 my-2 my-sm-0" type="button" data-toggle="modal" data-target="#rakModal">Buat Rak</button>                                      
+                                            <!-- Modal Buat Rak -->
+                                            <div class="modal fade" id="rakModal" tabindex="-1" role="dialog" aria-labelledby="rakModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="rakModalLabel">Masukkan Nama untuk Rak Ini</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                        <form method="POST" enctype="multipart/form-data">
+                                                            <div class="form-group">
+                                                                <label for="recipient-name" class="col-form-label">Nama Rak :</label>
+                                                                <input type="text" class="form-control" id="recipient-name" name="rak">
+                                                            </div>
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary" name="buttonrak">Buat Rak</button>
+                                                            <?php
+                                                                require_once'../SourceCode/includes/koneksi.php';
+                                                                
+                                                                
+                                                                if(isset($_POST['buttonrak'])){
+                                                                    $nama_rak = $_POST['rak'];
+                                                                    $sql = "INSERT INTO rak (nama_rak) VALUES ('$nama_rak')";
+                                                                                        
+                                                                    if($koneksi->query($sql)===TRUE){
+                                                                    echo "<script>setTimeout(\"location.href = 'rakSaya.php';\",1500);</script>";
                                                                     } else {
                                                                     echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
                                                                     }
@@ -227,35 +271,163 @@
                 </div>
             </div>
             <div class="container-fluid">
-                <div class="row" id="populer">
+                <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
                                     <!-- Paling Populer -->
-                                    <div class="col-6 text-left">
+                                    <div class="col-6 text-left ml-2">
                                         <h3 class="card-title">Upload</h3>
                                     </div>
                                     <div class="row">
-                                        
                                     <?php
-                                    require_once'../SourceCode/includes/koneksi.php';
+                                        require_once'../SourceCode/includes/koneksi.php';
 
-                                    $query = mysqli_query($koneksi, "SELECT * FROM file");
-                                          foreach ($query as $item) {
-                                                echo "
-                                                <div class='col-2'>
-                                                <div class='card'>
-                                                </div>
-                                                    <img class='img-fluid' src='images/file.png' alt=''>
-                                                     
-                                                    <div class='card-body'>
-                                                        <h5 class='card-title'>". $item['id_file'] ."</h5>
-                                                        <p class='card-text'>". $item['contain'] ."</p>
-                                                    </div>
-                                                </div>";
-                                          }
+                                        $SQL = "SELECT * FROM file";
+                                        $SQL_QUERY = mysqli_query($koneksi, $SQL);
+
+                                        while ($data = mysqli_fetch_array($SQL_QUERY)){
+                                            $id_file=$data['id_file'];
+                                            $contain=$data['contain'];
                                     ?>
+                                    <div class="col-2">
+                                        <div class="card">
+                                        </div> 
+                                        <img class="img-fluid" src="images/file.png"  alt="">
+                                            <div class="card-body">
+                                            <div class="btn-group dropright mb-1" aria-expanded="false">
+                                            <p class="card-text"><?=$contain;?></p>
+                                            </div>
+                                            <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" style="width:90px"></button>
+                                            <div class="dropdown-menu"><a class="dropdown-item" data-toggle="modal" data-target="#detailModal<?=$id_file;?>">Detail</a>
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#addrakModal<?=$id_file;?>">Tambah ke Rak</a>
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#alreadyModal<?=$id_file;?>">Tandai Sudah di Baca</a>
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#deletefileModal<?=$id_file;?>">Delete</a>
+                                            </div>
+                                            </div>
+                                    </div>
+                                    <!-- Modal Add to Rak -->
+                                    <div class="modal fade" id="addrakModal<?=$id_file;?>">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title">Tambah ke Rak</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                                    </button>
+                                                </div>
+                                                <form method="POST" action="proses.php">
+                                                <div class="modal-body">Tambahkan file <?=$contain;?> ke Rak : 
+                                                </div>
+                                                    <div class="form-group ml-3">
+                                                        <?php
+                                                        require_once'../SourceCode/includes/koneksi.php';
+
+                                                        $SQLr = "SELECT * FROM rak";
+                                                        $SQL_QUERYr = mysqli_query($koneksi, $SQLr);
+
+                                                        while ($data = mysqli_fetch_array($SQL_QUERYr)){
+                                                            $id_rakt=$data['id_rak'];
+                                                            $nama_rak=$data['nama_rak'];
+                                                        ?>
+                                                        <div class="form-group">
+                                                            <label class="form-check-label ml-3">
+                                                                <input type="radio" class="form-check-input" name="rakt" value="<?=$id_rakt;?>"><?=$nama_rak;?></label>
+                                                        </div>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <input hidden type="text" name="idfiletmb" value="<?=$id_file;?>">
+                                                    <button type="submit" class="btn btn-primary" name="addtorak" action>Save changes</button>
+                                                    
+                                                </div>
+                                                </form>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Add to Selesai -->
+                                    <div class="modal fade" id="alreadyModal<?=$id_file;?>" tabindex="-1" role="dialog" aria-labelledby="alreadyModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                             <div class="modal-content">
+                                                <div class="modal-header">
+                                                   <h5 class="modal-title" id="alreadyModalLabel">Selesai di Baca</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                         <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                </div>
+                                                   <form method="POST">
+                                                   <div class="modal-body">
+                                                    Apakah Anda Telah Selesai Baca <?=$contain;?>?
+                                                   </div>
+                                                      <button type="submit" class="btn btn-secondary ml-3 mb-3" data-dismiss="modal">Batal</button>
+                                                      <input hidden type="text" name="idfilee" value="<?=$id_file;?>">
+                                                      <input hidden type="text" name="isi" value="<?=$contain;?>">
+                                                      <button type="submit" name="btnselesai" class="btn btn-info ml-1 mb-3" action>Tambahi Selesai</button>
+                                                        <?php
+                                                                require_once'../SourceCode/includes/koneksi.php';
+                                                                
+                                                                
+                                                                if(isset($_POST['btnselesai'])){
+                                                                    $id_file = $_POST['idfilee'];
+                                                                    $contain = $_POST['isi'];
+                                                                    $sql = "INSERT INTO selesai (id_selesai, contain_selesai) VALUES ('$id_file','$contain')";
+                                                                                        
+                                                                    if($koneksi->query($sql)===TRUE){
+                                                                    echo "<script>setTimeout(\"location.href = 'selesai.php';\",1500);</script>";
+                                                                    } else {
+                                                                    echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
+                                                                    }
+
+                                                                    
+                                                                }
+                                                        ?>
+                                                   </form>
+                                             </div>
+                                          </div>
+                                    </div>
+                                    <!-- Modal Delete File -->
+                                    <div class="modal fade" id="deletefileModal<?=$id_file;?>" tabindex="-1" role="dialog" aria-labelledby="deletefileModalLabel" aria-hidden="true">
+                                          <div class="modal-dialog" role="document">
+                                             <div class="modal-content">
+                                                <div class="modal-header">
+                                                   <h5 class="modal-title" id="deletefileModalLabel">Hapus File ?</h5>
+                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                         <span aria-hidden="true">&times;</span>
+                                                      </button>
+                                                </div>
+                                                   <form method="POST">
+                                                   <div class="modal-body">
+                                                    Apakah Anda Yakin Ingin Menghapus <?=$contain;?>?
+                                                   </div>
+                                                      <button type="submit" class="btn btn-secondary ml-3 mb-3" data-dismiss="modal">Batal</button>
+                                                      <input hidden type="text" name="idfile" value="<?=$id_file;?>">
+                                                      <button type="submit" name="btnhapusfile" class="btn btn-danger ml-1 mb-3" action>Hapus File</button>
+                                                    <?php
+                                                    require_once'../SourceCode/includes/koneksi.php';
+                                                    if (isset($_POST['btnhapusfile'])){
+                                            
+                                                        $id_file = $_POST['idfile'];
+                                                        $hapusfile = mysqli_query($koneksi, "DELETE FROM file WHERE id_file='$id_file'");
+                                                        if ($hapusfile){
+                                                           echo "<script>setTimeout(\"location.href = 'upload.php';\",1500);</script>";
+                                                
+                                                        } elseif($koneksi->connect_error){
+                                                            echo 'Gagal';
+                                                            header('upload.php');
+                                                        }
+                                                    }
+                                                    ?>
+                                                   </form>
+                                             </div>
+                                          </div>
+                                    </div>
+                                    <?php
+                                    }
+                                    ?>  
                                     </div>
                                 </div>
                             </div>
