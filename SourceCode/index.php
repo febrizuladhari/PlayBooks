@@ -1,11 +1,13 @@
 <?php
-require_once "includes/koneksi.php";
 session_start();
     if(empty($_SESSION['level'])) {
-        echo "<script>alert('Sorry, you are not allowed to access this page.'); document.location='login.php'</script>";
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='login.php'</script>";
     }
 ?>
 
+<?php 
+    include "includes/koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -71,10 +73,11 @@ session_start();
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
-                            <i class="fa fa-th fa-lg mr-3"></i>
+                            <h5 class="mx-3"><?=$_SESSION['first_name']?> <?=$_SESSION['last_name']?></h5>
+                            <!-- <i class="fa fa-th fa-lg mr-3"></i> -->
                         </li>
                         <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
                                 <img src="user/images/profile.png" height="40" width="40" alt="">
                             </div>
@@ -82,7 +85,7 @@ session_start();
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="akun.html"><span>Kelola Akun Anda</span></a>
+                                            <a href="#"><span>Kelola Akun Anda</span></a>
                                         </li>
                                         <hr class="my-2">
                                         <li>
@@ -246,7 +249,7 @@ session_start();
                                         <h4 class="card-title">Rekomendasi</h4>
                                     </div>
                                     <div class="col-6 text-right">
-                                        <button type="button" class="btn mb-3 btn-info">Lihat lainnya</button>
+                                        <button type="button" class="btn mb-3 btn-info"><a href="kategoriBuku/rekomendasi.php" class="text-white">Lihat lainnya</a></button>
                                     </div>
                                     <div class="row">
                                         
@@ -299,7 +302,7 @@ session_start();
                                         <h4 class="card-title">Yang Baru</h4>
                                     </div>
                                     <div class="col-6 text-right">
-                                        <button type="button" class="btn mb-3 btn-info">Lihat lainnya</button>
+                                        <button type="button" class="btn mb-3 btn-info"><a href="kategoriBuku/baru.php" class="text-white">Lihat lainnya</a></button>
                                     </div>
                                     <div class="row">
                                         

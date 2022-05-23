@@ -1,3 +1,14 @@
+<?php
+session_start();
+    if(empty($_SESSION['level'])) {
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='login.php'</script>";
+    }
+?>
+
+<?php 
+    include "../includes/koneksi.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,7 +67,7 @@
                 <div class="header-left">
                     <div class="input-group icons">
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2" style="width: 800px;" type="search" placeholder="Telusuri" aria-label="Search">
+                            <input class="form-control mr-sm-2" style="width: 750px;" type="search" placeholder="Telusuri" aria-label="Search">
                             <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
@@ -64,7 +75,8 @@
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
-                            <i class="fa fa-th fa-lg mr-3"></i>
+                            <h5 class="mx-3"><?=$_SESSION['first_name']?> <?=$_SESSION['last_name']?></h5>
+                            <!-- <i class="fa fa-th fa-lg mr-3"></i> -->
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
@@ -79,7 +91,7 @@
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="login.html"><span>Logout</span></a>
+                                            <a href="logout.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>

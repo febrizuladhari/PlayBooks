@@ -16,7 +16,7 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Bisnis & Investasi</title>
+    <title>Rekomendasi</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/googlePlayLogo.png">
     <!-- Font Awesome -->
@@ -246,16 +246,16 @@ session_start();
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
-                                    <!-- Paling Populer -->
+                                    <!-- Rekomendasi -->
                                     <div class="col-6 text-left mb-4">
-                                        <h4 class="card-title">Bisnis dan Investasi</h4>
+                                        <h4 class="card-title">Rekomendasi Untuk Anda</h4>
                                     </div>
                                     <div class="row">
                                         
                                         <?php 
                                             include '../includes/koneksi.php';
 
-                                            $sql = "SELECT * FROM buku WHERE kategori = 'Bisnis & Investasi'";
+                                            $sql = "SELECT * FROM buku ORDER BY rand()";
                                             $sql_query = mysqli_query($koneksi, $sql);
 
                                             foreach ($sql_query as $data) {

@@ -1,14 +1,12 @@
 <?php 
 // mengaktifkan session pada php
 session_start();
- 
+
 // menghubungkan php dengan koneksi database
 require_once 'config.php';
- 
+
 // menangkap data yang dikirim dari form login
 
- 
- 
 // menyeleksi data user dengan username dan password yang sesuai
 
 if(isset($_POST['submit'])){
@@ -18,19 +16,19 @@ if(isset($_POST['submit'])){
     // menghitung jumlah data yang ditemukan    
     $cek = mysqli_num_rows($login);
     if($cek > 0){
-     
+    
         $data = mysqli_fetch_assoc($login);
-     
+    
         // cek jika user login sebagai admin
         if($data['level']=="admin"){
-     
+    
             // buat session login dan username
             $_SESSION['username'] = $username;
-            $_SESSION['level'] = "admin";
-            // alihkan ke halaman dashboard admin
+            $_SESSION['level'] = "Admin";
+            // alihkan ke halaman admin
             header("location:admin.php");
-     
-        // cek jika user login sebagai pegawai
+    
+        // cek jika user login sebagai penerboit
         }else if($data['level']=="user_penerbit"){
             // buat session login dan email
             $_SESSION['id_user'] = $data['id_user'];
@@ -38,11 +36,11 @@ if(isset($_POST['submit'])){
             $_SESSION['last_name'] = $data['last_name'];
             $_SESSION['email'] = $data['email'];
             $_SESSION['username'] = $username;
-            $_SESSION['level'] = "user_penerbit";
-            // alihkan ke halaman dashboard user_penerbit
+            $_SESSION['level'] = "Penerbit";
+            // alihkan ke halaman  user_penerbit
             header("location:index.php");
-     
-        // cek jika user login sebagai pengurus
+    
+        // cek jika user login sebagai pembeli
         }else if($data['level']=="user_pembeli"){
             // buat session login dan email
             $_SESSION['id_user'] = $data['id_user'];
@@ -50,7 +48,7 @@ if(isset($_POST['submit'])){
             $_SESSION['last_name'] = $data['last_name'];
             $_SESSION['email'] = $data['email'];
             $_SESSION['username'] = $username;
-            $_SESSION['level'] = "user_pembeli";
+            $_SESSION['level'] = "Pembeli";
             // alihkan ke halaman dashboard user_pembeli
             header("location:index.php");
         }
@@ -68,7 +66,7 @@ if(isset($_POST['submit'])){
     <title>Login</title>
     <!-- Favicon icon -->
     <link rel="icon" type="user/images/image/png" sizes="16x16" href="user/images/googlePlayLogo.png">
-    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link href="user/css/style.css" rel="stylesheet">
     
 </head>

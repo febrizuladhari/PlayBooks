@@ -27,8 +27,8 @@
     if(isset($_POST["register"])){
         if(registrasi($_POST) > 0){
             echo "<script>
-                    alert('user baru berhasil ditambahkan!');
-            </script>";
+                    alert('Selamat, Diri Anda Berhasil Terdaftar !');
+                </script>";
         } else{
             echo mysqli_error($koneksi);
         }
@@ -66,20 +66,20 @@
                                 <form class="mt-4 mb-5 "method="POST">
                                     <div class="row">
                                         <div class="col-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control"  placeholder="First Name" name="first_name" required>
-                                    </div>
-                                    </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="First Name" name="first_name" required>
+                                        </div>
+                                        </div>
                                         <div class="col-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control"  placeholder="Last Name" name="last_name" required>
-                                    </div>
-                                    </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Last Name" name="last_name" required>
+                                            </div>
+                                        </div>
                                         <div class="col-6">
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="E-mail Address" name="email" required>
-                                    </div>
-                                    </div>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" placeholder="E-mail Address" name="email" required>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Username" name="username" required>
@@ -89,9 +89,9 @@
                                     </div>
                                     <div class="form-group">
                                         <select class="form-control" name="level" >
-                                        <option value="#">Level User</option>
-                                        <option value="user_penerbit" name="level">Penerbit</option>
-                                        <option value="user_pembeli" name="level">Pembeli</option>
+                                            <option value="#">Level User</option>
+                                            <option value="user_penerbit" name="level">Penerbit</option>
+                                            <option value="user_pembeli" name="level">Pembeli</option>
                                         </select>
                                     </div>
                                     <button class="btn login-form__btn submit w-100" name="register">Sign up</button>
