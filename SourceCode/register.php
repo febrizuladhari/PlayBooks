@@ -1,27 +1,4 @@
 <?php
-    // include "config.php";
-
-    // if(isset($_POST['submit'])){
-    //     if(registrasi($_POST)){
-    //         header("location : login.php");
-    //         exit;
-    //     }
-    // }
-    // function registrasi($datanya){
-    //     global $koneksi;
-    //     $username=stripslashes(stripslashes(htmlspecialchars($datanya['username'])));
-    //     $first_name=stripslashes(stripslashes(htmlspecialchars($datanya['first_name'])));
-    //     $last_name=stripslashes(stripslashes(htmlspecialchars($datanya['last_name'])));
-    //     $email=stripslashes(stripslashes(htmlspecialchars($datanya['email'])));
-    //     $email_verified=stripslashes(stripslashes(htmlspecialchars($datanya['email_verified'])));
-    //     $password=stripslashes(stripslashes(htmlspecialchars($datanya['password'])));
-    //     $level=stripslashes(stripslashes(htmlspecialchars($datanya['level'])));
-        
-
-    //     $query = "INSERT INTO user VALUES('','username','first_name','last_name','email','email_verified','password','level')";
-    //     mysqli_query($koneksi,$query);
-    //     return mysqli_affected_rows($koneksi);
-    // }
     require 'config.php';
 
     if(isset($_POST["register"])){
@@ -45,9 +22,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Register</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="user/images/image/png" sizes="16x16" href="user/images/googlePlayLogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="user/images/googlePlayLogo.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href="user/css/style.css" rel="stylesheet">
+    <link href="user_pembeli/css/style.css" rel="stylesheet">
     
 </head>
 
@@ -114,11 +91,11 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="user/plugins/common/common.min.js"></script>
-    <script src="user/js/custom.min.js"></script>
-    <script src="user/js/settings.js"></script>
-    <script src="user/js/gleek.js"></script>
-    <script src="user/js/styleSwitcher.js"></script>
+    <script src="user_pembeli/plugins/common/common.min.js"></script>
+    <script src="user_pembeli/js/custom.min.js"></script>
+    <script src="user_pembeli/js/settings.js"></script>
+    <script src="user_pembeli/js/gleek.js"></script>
+    <script src="user_pembeli/js/styleSwitcher.js"></script>
 </body>
 </html>
 

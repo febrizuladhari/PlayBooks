@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
             $_SESSION['username'] = $username;
             $_SESSION['level'] = "Admin";
             // alihkan ke halaman admin
-            header("location:admin.php");
+            header("location:admin/admin.php");
     
         // cek jika user login sebagai penerboit
         }else if($data['level']=="user_penerbit"){
@@ -37,8 +37,8 @@ if(isset($_POST['submit'])){
             $_SESSION['email'] = $data['email'];
             $_SESSION['username'] = $username;
             $_SESSION['level'] = "Penerbit";
-            // alihkan ke halaman  user_penerbit
-            header("location:index.php");
+            // alihkan ke halaman user_penerbit
+            header("location:user_penerbit/index.php");
     
         // cek jika user login sebagai pembeli
         }else if($data['level']=="user_pembeli"){
@@ -49,8 +49,8 @@ if(isset($_POST['submit'])){
             $_SESSION['email'] = $data['email'];
             $_SESSION['username'] = $username;
             $_SESSION['level'] = "Pembeli";
-            // alihkan ke halaman dashboard user_pembeli
-            header("location:index.php");
+            // alihkan ke halaman  user_pembeli
+            header("location:user_pembeli/index.php");
         }
     }
 }
@@ -65,9 +65,9 @@ if(isset($_POST['submit'])){
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Login</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="user/images/image/png" sizes="16x16" href="user/images/googlePlayLogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="user_pembeli/images/googlePlayLogo.png">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <link href="user/css/style.css" rel="stylesheet">
+    <link href="user_pembeli/css/style.css" rel="stylesheet">
     
 </head>
 
@@ -107,11 +107,11 @@ if(isset($_POST['submit'])){
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="user/plugins/common/common.min.js"></script>
-    <script src="user/js/custom.min.js"></script>
-    <script src="user/js/settings.js"></script>
-    <script src="user/js/gleek.js"></script>
-    <script src="user/js/styleSwitcher.js"></script>
+    <script src="user_pembeli/plugins/common/common.min.js"></script>
+    <script src="user_pembeli/js/custom.min.js"></script>
+    <script src="user_pembeli/js/settings.js"></script>
+    <script src="user_pembeli/js/gleek.js"></script>
+    <script src="user_pembeli/js/styleSwitcher.js"></script>
 </body>
 </html>
 
