@@ -292,8 +292,6 @@ session_start();
                                         
                                         
                                         
-                                        
-                                        
                                     </div>
                                 </div>
                                 <div class="container">
@@ -306,15 +304,13 @@ session_start();
                                     </div>
                                     <hr>
 
-                                    
-
-                                    <!-- Rating -->
-                                    <!-- <div class="row mt-3">
+                                    <!-- Rating Review Buku -->
+                                    <div class="container">
                                         <div class="card">
                                             <div class="card-header">Review Buku</div>
                                             <div class="card-body">
                                                 <div class="row">
-                                                    <div class="col-4 text-center">
+                                                    <div class="col-sm-4 text-center">
                                                         <h1 class="text-warning mt-4 mb-4">
                                                             <b><span id="average_rating">0.0</span> / 5</b>
                                                         </h1>
@@ -327,7 +323,7 @@ session_start();
                                                         </div>
                                                         <h3><span id="total_review">0</span> Review</h3>
                                                     </div>
-                                                    <div class="col-4">
+                                                    <div class="col-sm-4">
                                                         <p>
                                                             <div class="progress-label-left"><b>5</b> <i class="fa fa-star text-warning"></i></div>
 
@@ -369,20 +365,20 @@ session_start();
                                                             </div>               
                                                         </p>
                                                     </div>
-                                                    <div class="col-4 text-center">
-                                                        <h3 class="mt-4 mb-3">Tulis Review Anda</h3>
+                                                    <div class="col-sm-4 text-center">
+                                                        <h3 class="mt-4 mb-3">Tulis Ulasan Anda !</h3>
                                                         <button type="button" name="add_review" id="add_review" class="btn btn-primary">Review</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        
                                         <div class="mt-5" id="review_content"></div>
+                                        <!-- Modal Rating -->
                                         <div id="review_modal" class="modal" tabindex="-1" role="dialog">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title">Submit Review</h5>
+                                                        <h5 class="modal-title">Review Buku</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
@@ -395,17 +391,29 @@ session_start();
                                                             <i class="fa fa-star star-light submit_star mr-1" id="submit_star_4" data-rating="4"></i>
                                                             <i class="fa fa-star star-light submit_star mr-1" id="submit_star_5" data-rating="5"></i>
                                                         </h4>
+                                                        
                                                         <div class="form-group">
-                                                            <input type="text" name="id_user" id="id_user" class="form-control" placeholder="ID User" />
+                                                            <input type="text" name="id_user" id="id_user" class="form-control" value="<?=$_SESSION['id_user']?>" disabled>
+                                                        </div>
+
+                                                        <?php 
+                                                            $noseri_buku = input($_GET['noseri_buku']);
+                                                            $query = mysqli_query($koneksi, "SELECT * FROM buku WHERE noseri_buku='".$noseri_buku."' LIMIT 1");
+                                                            $data = mysqli_fetch_array($query);
+
+                                                            $select = mysqli_query($koneksi, "SELECT * FROM ulasan JOIN buku on ulasan.noseri_buku = buku.noseri_buli");
+                                                        ?>
+
+                                                        <div class="form-group">
+                                                            <input type="text" name="id_ulasan" id="id_ulasan" class="form-control" value="<?php echo $data['id_ulasan'] ?>" disabled>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="text" name="id_ulasan" id="id_ulasan" class="form-control" placeholder="ID Ulasan" />
+                                                            <span class="form-label">Username</span>
+                                                            <input type="text" name="username" id="username" class="form-control" value="<?=$_SESSION['username']?>" disabled>
                                                         </div>
                                                         <div class="form-group">
-                                                            <input type="text" name="inisial" id="inisial" class="form-control" placeholder="Enter Your Name" />
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <textarea name="user_review" id="user_review" class="form-control" placeholder="Type Review Here"></textarea>
+                                                            <span class="form-label">Ulasan Anda</span>
+                                                            <textarea name="ulasan" id="ulasan" class="form-control" placeholder="Tulis Ulasan Anda Disini..."></textarea>
                                                         </div>
                                                         <div class="form-group text-center mt-4">
                                                             <button type="button" class="btn btn-primary" id="save_review">Submit</button>
@@ -414,7 +422,8 @@ session_start();
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
+                                    
 
                                 </div>
                             </div>
@@ -512,6 +521,7 @@ session_start();
 
 </html>
 
+
     <!-- Styling Rating -->
     <style>
         .progress-label-left
@@ -540,22 +550,17 @@ session_start();
             var rating_data = 0;
 
             $('#add_review').click(function(){
-
                 $('#review_modal').modal('show');
-
             });
 
             $(document).on('mouseenter', '.submit_star', function(){
-
                 var rating = $(this).data('rating');
 
                 reset_background();
 
                 for(var count = 1; count <= rating; count++)
                 {
-
                     $('#submit_star_'+count).addClass('text-warning');
-
                 }
 
             });
@@ -564,11 +569,8 @@ session_start();
             {
                 for(var count = 1; count <= 5; count++)
                 {
-
                     $('#submit_star_'+count).addClass('star-light');
-
                     $('#submit_star_'+count).removeClass('text-warning');
-
                 }
             }
 
@@ -578,29 +580,25 @@ session_start();
 
                 for(var count = 1; count <= rating_data; count++)
                 {
-
                     $('#submit_star_'+count).removeClass('star-light');
-
                     $('#submit_star_'+count).addClass('text-warning');
                 }
 
             });
 
             $(document).on('click', '.submit_star', function(){
-
                 rating_data = $(this).data('rating');
-
             });
 
             $('#save_review').click(function(){
+                var id_ulasan = $('#id_ulasan').val();
+                var id_user = $('#id_user').val();
+                var username = $('#username').val();
+                var ulasan = $('#ulasan').val();
 
-                var inisial = $('#inisial').val();
-
-                var user_review = $('#user_review').val();
-
-                if(inisial == '' || user_review == '')
+                if(ulasan == '')
                 {
-                    alert("Please Fill Both Field");
+                    alert("Tolong Isi Ulasan Anda");
                     return false;
                 }
                 else
@@ -608,13 +606,11 @@ session_start();
                     $.ajax({
                         url:"submit_rating.php",
                         method:"POST",
-                        data:{id_user:id_user, id_ulasan:id_ulasan, rating_data:rating_data, inisial:inisial, user_review:user_review},
+                        data:{rating_data:rating_data, id_ulasan:id_ulasan, id_user:id_user, username:username, ulasan:ulasan},
                         success:function(data)
                         {
                             $('#review_modal').modal('hide');
-
                             load_rating_data();
-
                             alert(data);
                         }
                     })
@@ -648,25 +644,15 @@ session_start();
                         });
 
                         $('#total_five_star_review').text(data.five_star_review);
-
                         $('#total_four_star_review').text(data.four_star_review);
-
                         $('#total_three_star_review').text(data.three_star_review);
-
                         $('#total_two_star_review').text(data.two_star_review);
-
                         $('#total_one_star_review').text(data.one_star_review);
-
                         $('#five_star_progress').css('width', (data.five_star_review/data.total_review) * 100 + '%');
-
                         $('#four_star_progress').css('width', (data.four_star_review/data.total_review) * 100 + '%');
-
                         $('#three_star_progress').css('width', (data.three_star_review/data.total_review) * 100 + '%');
-
                         $('#two_star_progress').css('width', (data.two_star_review/data.total_review) * 100 + '%');
-
                         $('#one_star_progress').css('width', (data.one_star_review/data.total_review) * 100 + '%');
-
                         if(data.review_data.length > 0)
                         {
                             var html = '';
@@ -674,15 +660,10 @@ session_start();
                             for(var count = 0; count < data.review_data.length; count++)
                             {
                                 html += '<div class="row mb-3">';
-
-                                html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">'+data.review_data[count].inisial.charAt(0)+'</h3></div></div>';
-
+                                html += '<div class="col-sm-1"><div class="rounded-circle bg-danger text-white pt-2 pb-2"><h3 class="text-center">'+data.review_data[count].username.charAt(0)+'</h3></div></div>';
                                 html += '<div class="col-sm-11">';
-
                                 html += '<div class="card">';
-
-                                html += '<div class="card-header"><b>'+data.review_data[count].inisial+'</b></div>';
-
+                                html += '<div class="card-header"><b>'+data.review_data[count].username+'</b></div>';
                                 html += '<div class="card-body">';
 
                                 for(var star = 1; star <= 5; star++)
@@ -702,17 +683,11 @@ session_start();
                                 }
 
                                 html += '<br />';
-
-                                html += data.review_data[count].user_review;
-
+                                html += data.review_data[count].ulasan;
                                 html += '</div>';
-
                                 html += '<div class="card-footer text-right">On '+data.review_data[count].datetime+'</div>';
-
                                 html += '</div>';
-
                                 html += '</div>';
-
                                 html += '</div>';
                             }
 
@@ -725,4 +700,5 @@ session_start();
         });
 
     </script>
+
 

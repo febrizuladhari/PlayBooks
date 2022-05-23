@@ -91,7 +91,7 @@ session_start();
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="logout.php"><span>Logout</span></a>
+                                            <a href="../logout.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
