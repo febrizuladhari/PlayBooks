@@ -1,3 +1,14 @@
+<?php
+session_start();
+    if(empty($_SESSION['level'])) {
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../login.php'</script>";
+    }
+?>
+
+<?php 
+    include "../includes/koneksi.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -134,11 +145,12 @@
                             $hasil = mysqli_query($koneksi,$query);
 
                             echo "<table class ='table table-bordered'>";
-                            echo "<tr><th>id</th><th>Username</th><th>No Seri Buku</th><th>Metode Pembayaran</th><th>Judul Buku</th>
+                            echo "<tr><th>id method</th><th>id user</th><th>Username</th><th>No Seri Buku</th><th>Metode Pembayaran</th><th>Judul Buku</th>
                             </th><th>Harga Buku</th><tr>";
 
                             foreach ($hasil as $data){
                                 echo "<tr>";
+                                echo "<td>$data[id_method]";
                                 echo "<td>$data[id_user]";
                                 echo "<td>$data[username]";
                                 echo "<td>$data[noseri_buku]";
@@ -160,6 +172,7 @@
                                 echo "<button type='submit' name='btnHapus'class='btn btn-danger btn-sm'><i class='fa fa-trash' title='hapus'></i></button>";
                                 echo "</form></td>";
                                 echo "</tr>";
+
                             }
                             echo "</table>";
 
@@ -167,18 +180,24 @@
 
                             <?php
                                 if(isset($_POST['btnUbah'])){
-                                    $id = $_POST['id_method'];
-                                    
-                                    if($koneksi) {
-                                        $sql = "UPDATE FROM metode_pembayaran WHERE id_method=$id";
-                                        mysqli_query($koneksi, $sql);
-                                        echo "<p class='alert alert-success text-center'><b> Pembayaran Disetujui ! <a href='admin.php' class='btn btn-primary'>Kembali</a></b></p>";
-                                    } elseif ($koneksi->connect_error){
-                                        echo "<p class='alert alert-danger text-center><b> Data gagal dihapus. Terjadi kesalahan: ";
-                                        echo $koneksi->connect_error . "</b></p>";
-                                    }
 
-                                }
+                                    require_once'../includes/koneksi.php';
+
+                                        //$id_method = $_POST['id_method'];
+                                        $id_user = $_POST['id_user'];
+                                        $noseri_buku = $_POST['noseri_buku'];
+                                        $method_payment = $_POST['method_payment'];
+                                        $username = $_POST['username'];
+                                        $judul_buku = $_POST['judul'];
+                                        $harga_buku = $_POST['harga_buku'];
+                                        $sql = "INSERT INTO pembelian (id_user,noseri_buku,method_payment,username,judul,harga_buku) VALUES ('$id_user','$noseri_buku','$method_payment','$username','$judul','$harga_buku')";
+                                    
+                                    if($koneksi->query($sql)===TRUE){
+                                        echo "<p class='alert alert-success text-center'><b>Pembayaran Disetujui.<a href='payment.php' class='btn btn-primary'>Kembali</a></b></p>";
+                                    } else {
+                                    echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
+                                 }   
+                                } 		
                             ?>
 
                             <?php
@@ -196,7 +215,7 @@
 
                                 }
                             ?>
-                </div>
+                        </div>
                     </div>
                 </div>
             </div>
