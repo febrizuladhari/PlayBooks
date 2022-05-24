@@ -66,9 +66,16 @@ session_start();
                 </div>
                 <div class="header-left">
                     <div class="input-group icons">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" style="width: 750px;" type="search" placeholder="Telusuri" aria-label="Search">
-                            <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
+                        <!-- Form Search Data -->
+                        <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST" class="form-inline">
+                        <?php
+                            $kata_kunci="";
+                            if (isset($_POST['kata_kunci'])) {
+                                $kata_kunci = $_POST['kata_kunci'];
+                            }
+                        ?>    
+                        <input name="kata_kunci" value="<?php echo $kata_kunci;?>" class="form-control mr-sm-2" style="width: 750px;" type="text" placeholder="Telusuri" aria-label="Search">
+                            <button name="cari" value="cari" class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
                 </div>
@@ -252,9 +259,21 @@ session_start();
                                     </div>
                                     <div class="row">
                                         
+                                        <!-- Fungsi Search Data -->
                                         <?php 
-                                            $sql = "SELECT * FROM buku ORDER BY tanggal_terbit DESC";
-                                            $sql_query = mysqli_query($koneksi, $sql);
+                                            include '../../includes/koneksi.php';
+
+                                            if(isset($_POST['kata_kunci'])) {
+
+                                                $kata_kunci = trim($_POST['kata_kunci']);
+                                                $sql = "SELECT * FROM buku WHERE judul LIKE '%".$kata_kunci."%' or penerbit LIKE '%".$kata_kunci."%' or bahasa LIKE '%".$kata_kunci."%' or harga_buku LIKE '%".$kata_kunci."%'";
+                                                $sql_query = mysqli_query($koneksi, $sql);
+
+                                            } else {
+
+                                                $sql = "SELECT * FROM buku ORDER BY tanggal_terbit DESC";
+                                                $sql_query = mysqli_query($koneksi, $sql);
+                                            }
 
                                             foreach ($sql_query as $data) {
                                         ?>

@@ -278,8 +278,13 @@ session_start();
                                         <h5 class="mt-3">Halaman&nbsp; : <?php echo $data['jlh_halaman'] ?></h5>
                                         <h5 class="mt-3">Terbitan &nbsp;&nbsp;: <?php echo $data['tanggal_terbit'] ?></h5>
                                         
-                                        <button type="button" class="btn mb-1 btn-info mt-5">Beli | <?php echo $data['harga_buku'] ?> <span class="btn-icon-right"><i class="fa fa-shopping-cart"></i></span>
-                                        </button>
+                                        <!-- Tombol Beli Buku -->
+                                        <a class="text-white text-decoration-none" href="metode.php?noseri_buku=<?php echo $data['noseri_buku'] ?>">
+                                            <button type="button" class="btn mb-1 btn-info mt-5">Beli | <?php echo $data['harga_buku'] ?>
+                                                <span class="btn-icon-right"><i class="fa fa-book"></i></span>
+                                            </button>
+                                        </a>
+
                                         <button type="button" class="btn mb-1 btn-info mt-5">Tambah ke Wishlish <span class="btn-icon-right"><i class="fa fa-bookmark"></i></span>
                                         </button>
                                         
@@ -402,9 +407,9 @@ session_start();
                                                             $data = mysqli_fetch_array($query);
                                                         ?>
 
-                                                        <!-- <div class="form-group">
-                                                            <input type="text" name="id_ulasan" id="id_ulasan" class="form-control" value="<?php echo $data['id_ulasan'] ?>" disabled>
-                                                        </div> -->
+                                                        <div class="form-group">
+                                                            <input type="text" name="noseri_buku" id="noseri_buku" class="form-control" value="<?php echo $data['noseri_buku'] ?>" disabled>
+                                                        </div>
                                                         <div class="form-group">
                                                             <span class="form-label">Username</span>
                                                             <input type="text" name="username" id="username" class="form-control" value="<?=$_SESSION['username']?>" disabled>
@@ -553,7 +558,6 @@ session_start();
 
             $(document).on('mouseenter', '.submit_star', function(){
                 var rating = $(this).data('rating');
-
                 reset_background();
 
                 for(var count = 1; count <= rating; count++)
@@ -573,7 +577,6 @@ session_start();
             }
 
             $(document).on('mouseleave', '.submit_star', function(){
-
                 reset_background();
 
                 for(var count = 1; count <= rating_data; count++)
@@ -589,10 +592,10 @@ session_start();
             });
 
             $('#save_review').click(function(){
-                var id_ulasan = $('#id_ulasan').val();
                 var id_user = $('#id_user').val();
                 var username = $('#username').val();
                 var ulasan = $('#ulasan').val();
+                var noseri_buku = $('#noseri_buku').val();
 
                 if(ulasan == '')
                 {
@@ -604,7 +607,7 @@ session_start();
                     $.ajax({
                         url:"submit_rating.php",
                         method:"POST",
-                        data:{rating_data:rating_data, id_ulasan:id_ulasan, id_user:id_user, username:username, ulasan:ulasan},
+                        data:{rating_data:rating_data, id_user:id_user, username:username, ulasan:ulasan, noseri_buku:noseri_buku},
                         success:function(data)
                         {
                             $('#review_modal').modal('hide');
@@ -654,7 +657,6 @@ session_start();
                         if(data.review_data.length > 0)
                         {
                             var html = '';
-
                             for(var count = 0; count < data.review_data.length; count++)
                             {
                                 html += '<div class="row mb-3">';

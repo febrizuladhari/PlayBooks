@@ -6,18 +6,18 @@
 	{
 
 		$data = array(
-			':id_ulasan'	=>	$_POST["id_ulasan"],
 			':id_user'		=>	$_POST["id_user"],
 			':username'		=>	$_POST["username"],
 			':rating'		=>	$_POST["rating_data"],
 			':ulasan'		=>	$_POST["ulasan"],
-			':datetime'		=>	time()
+			':datetime'		=>	time(),
+			':noseri_buku'	=>	$_POST["noseri_buku"]
 		);
 
 		$query = "
 		INSERT INTO ulasan 
-		(id_ulasan, id_user, username, rating, ulasan, datetime) 
-		VALUES (:id_ulasan, :id_user, :username, :rating, :ulasan, :datetime)
+		(id_user, username, rating, ulasan, datetime, noseri_buku) 
+		VALUES (:id_user, :username, :rating, :ulasan, :datetime, :noseri_buku)
 		";
 
 		$statement = $koneksi->prepare($query) or die('Gagal');
@@ -40,10 +40,28 @@
 		$total_user_rating = 0;
 		$review_content = array();
 
+		// start tes
+		// $noseri_buku = input($_GET['noseri_buku']);
+
+		function input($data1) {
+			$data1 = trim($data1);
+			$data1 = stripslashes($data1);
+			$data1 = htmlspecialchars($data1);
+			return $data1;
+		}
+
+		include '../includes/koneksi.php';
+
+		$noseri_buku = input($_GET['noseri_buku']);
+		$query1 = mysqli_query($koneksi, "SELECT * FROM buku WHERE noseri_buku='$noseri_buku'");
+		$data1 = mysqli_fetch_array($query1);
+		$pilih_buku = $data1['noseri_buku'];
+		// end tes
+
 		$query = "
-		SELECT * FROM ulasan 
-		ORDER BY id_ulasan DESC
+		SELECT * FROM ulasan WHERE noseri_buku = $pilih_buku
 		";
+		
 
 		$result = $koneksi->query($query, PDO::FETCH_ASSOC);
 
