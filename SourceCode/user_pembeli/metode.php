@@ -37,7 +37,7 @@ session_start();
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="../index.php">
+                <a href="index.php">
                     <b class="logo-abbr"><img src="images/googlePlayLogo.png" alt=""> </b>
                     <span class="logo-compact mx-auto"><img src="images/googlePlay.png" alt=""></span>
                     <span class="brand-title">
@@ -110,7 +110,7 @@ session_start();
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
                     <li>
-                        <a href="../index.php" aria-expanded="true">
+                        <a href="index.php" aria-expanded="true">
                             <span class="nav-text ml-3">Buku</span>
                         </a>
                     </li>
@@ -120,7 +120,7 @@ session_start();
                         </a>
                     </li>
                     <li>
-                        <a href="../index.php" aria-expanded="false">
+                        <a href="index.php" aria-expanded="false">
                             <span class="nav-text ml-3">Toko</span>
                         </a>
                     </li>
@@ -185,103 +185,115 @@ session_start();
         ***********************************-->
         <div class="content-body">
             <div class="container-fluid">
-                <div class="container mt-3 d-flex justify-content-left">
-                    <div class="card p-4">
-                    <?php 
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
 
-                    function input($data) {
-                        $data = trim($data);
-                        $data = stripslashes($data);
-                        $data = htmlspecialchars($data);
-                        return $data;
-                    }
+                                        <?php 
+                                            function input($data) {
+                                                $data = trim($data);
+                                                $data = stripslashes($data);
+                                                $data = htmlspecialchars($data);
+                                                return $data;
+                                            }
 
-                    include '../includes/koneksi.php';
+                                            include '../includes/koneksi.php';
 
-                    $noseri_buku = input($_GET['noseri_buku']);
-                    $query = mysqli_query($koneksi, "SELECT * FROM buku WHERE noseri_buku='".$noseri_buku."' LIMIT 1");
-                    $data = mysqli_fetch_array($query);
+                                            $noseri_buku = input($_GET['noseri_buku']);
+                                            $query = mysqli_query($koneksi, "SELECT * FROM buku WHERE noseri_buku='".$noseri_buku."' LIMIT 1");
+                                            $data = mysqli_fetch_array($query);
+                                        ?>
 
-                    ?>
-                    <form class="mt-4 mb-5 "method="POST">
-                        <div class="row">
-                            <div class="col-12">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="total-amount">Total amount</h5>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h7 class="total-amount">Pilih Metode Pembayaran</h7>
-                        </div>
-                        <div class="d-flex justify-content-between align-items-center form-check mt-4">
-                            <div class="form-group">
-                                <label class="radio-inline mr-3">
-                                    <input type="radio" value="transfer_bank" name="method_payment" > Transfer Bank</label>
-                                <label class="radio-inline mr-3">
-                                    <input type="radio" value="gopay" name="method_payment" > Gopay </label>
-                                <label class="radio-inline">
-                                    <input type="radio" value="shopeepay"  name="method_payment" > Shopeepay</label>
+                                        <form class="mt-4 mb-5 "method="POST">
+                                            <div class="row">
+                                                <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h5 class="total-amount">Total amount</h5>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h7 class="total-amount">Pilih Metode Pembayaran</h7>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center form-check mt-4">
+                                                <div class="form-group">
+                                                    <label class="radio-inline mr-3">
+                                                        <input type="radio" value="transfer_bank" name="method_payment" required> Transfer Bank</label>
+                                                    <label class="radio-inline mr-3">
+                                                        <input type="radio" value="gopay" name="method_payment" required> Gopay </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" value="shopeepay"  name="method_payment" required> Shopeepay</label>
+                                                </div>
+                                            </div>
+                                            <div>  
+                                                <input type="hidden" value="<?=$_SESSION['id_user']?>" id="id_user"  name="id_user" class="form-control credit-card-number" placeholder="ID User">
+                                            </div>
+                                            <div class="pt-4"> 
+                                                <label class="d-flex justify-content-between"> 
+                                                    <span class="label-text label-text-cc-number">Username</span>
+                                                    <img src="https://img.icons8.com/dusk/64/000000/visa.png" width="30" class="visa-icon" />
+                                                </label>
+                                            <div>  
+                                                <input type="text" value="<?=$_SESSION['username']?>" id="username" name="username" class="form-control credit-card-number" placeholder="username" required>
+                                            </div>
+                                            <div>  
+                                                <input type="hidden" value="<?php echo $data['noseri_buku'] ?>" id="noseri_buku" name="noseri_buku" class="form-control credit-card-number" placeholder="No Seri Buku">
+                                            </div>
+                                            <div class="mt-3">  
+                                                <label><span class="label-text">Judul Buku</span></label> 
+                                                <input type="text" value="<?php echo $data['judul'] ?>" id="judul" name="judul" class="form-control expiry-class" placeholder="Judul Buku" required> 
+                                            </div>
+                                            <div class="mt-3">  
+                                                <label><span class="label-text">Harga Buku</span></label> 
+                                                <input type="text" value="<?php echo $data['harga_buku'] ?>" id="harga_buku" name="harga_buku" class="form-control cvv-class" placeholder="Harga Buku" required> 
+                                            </div>
+                                            <div class="d-flex justify-content-between pt-5 align-items-center"> 
+                                            <div class="mt-3">
+
+                                                <button class="btn mb-1 btn-rounded btn-outline-danger"><a class="text-decoration-none text-black" href="index.php">Cancel</a></button>
+                                                <button name="beli" type="submit" class="btn mb-1 btn-rounded btn-outline-success">Make Payment</button>
+                                            </div>
+
+                                                <?php
+                                                    include '../includes/koneksi.php';
+                                                    
+                                                    if(isset($_POST['beli'])){
+
+                                                    $id_user = $_POST['id_user'];
+                                                    $method_payment = $_POST['method_payment'];
+                                                    $username = $_POST['username'];
+                                                    $noseri_buku = $_POST['noseri_buku'];
+                                                    $judul = $_POST['judul'];
+                                                    $harga_buku = $_POST['harga_buku'];
+                                                    
+                                                    $sql = "INSERT INTO metode_pembayaran (id_user,noseri_buku,method_payment,username,judul,harga_buku) VALUES ('$id_user','$noseri_buku','$method_payment','$username','$judul','$harga_buku')";
+                                                
+                                                        if($koneksi->query($sql)===TRUE){
+                                                            echo "<script>
+                                                            alert('Pembayaran Anda Berhasil !');
+                                                            setTimeout(\"location.href = 'index.php';\",1500);
+                                                            </script> ";
+                                                        } else {
+                                                        echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
+                                                        }   
+                                                    }		
+
+                                                    // $koneksi->close();
+                                                ?>
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div>  
-                            <input type="number" value="<?=$_SESSION['id_user']?>"  name="id_user" class="form-control credit-card-number" placeholder="username" disabled>
-                        </div>
-                        <div>  
-                            <input type="number" value="<?php echo $data['noseri_buku'] ?>" name="noseri_buku" class="form-control credit-card-number" placeholder="username" disabled>
-                        </div>
-                    <div class="pt-4"> 
-                            <label class="d-flex justify-content-between"> 
-                                <span class="label-text label-text-cc-number">Username</span>
-                                <img src="https://img.icons8.com/dusk/64/000000/visa.png" width="30" class="visa-icon" />
-                            </label>
-                        <div>  
-                            <input type="text" value="<?=$_SESSION['username']?>" name="username" class="form-control credit-card-number" placeholder="username" disabled>
-                         </div>
-                        <div class="d-flex justify-content-between pt-4">
-                            <div> 
-                                <label>
-                                <span class="label-text">Judul Buku</span> </label> 
-                                <input type="text" value="<?php echo $data['judul'] ?>" name="judul_buku" class="form-control expiry-class" placeholder="Judul Buku" disabled> 
-                            </div>
-                        <div> 
-                                <label>
-                                <span class="label-text">Harga</span> </label> 
-                                <input type="text" value="<?php echo $data['harga_buku'] ?>" name="harga_buku" class="form-control cvv-class" pattern="\d*" placeholder="Harga Buku" disabled> 
-                        </div>
-                    </div>
-                        <div class="d-flex justify-content-between pt-5 align-items-center"> 
-                            <button class="btn cancel-btn">Cancel</button> 
-                            <button class="btn payment-btn" name="beli">Make Payment</button> 
-                            <?php
-                                require_once'../includes/koneksi.php';
-                                
-                                if(isset($_POST['beli'])){
-                                $id_user = $_POST['id_user'];
-                                $noseri_buku = $_POST['noseri_buku'];
-	                            $method_payment = $_POST['method_payment'];
-	                            $username = $_POST['username'];
-	                            $judul_buku = $_POST['judul'];
-	                            $harga_buku = $_POST['harga_buku'];
-			                    $sql = "INSERT INTO metode_pembayaran (id_user,noseri_buku,method_payment,username,judul,harga_buku) VALUES ('$id_user','$noseri_buku','$method_payment','$username','$judul','$harga_buku')";
-					        
-                            if($koneksi->query($sql)===TRUE){
-                                echo "<script>
-                                alert('Pembayaran Anda Berhasil !');
-                                </script> ";
-					        } else {
-						    echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
-					     }   
-				    }		
-
-	                        $koneksi->close();
-	            ?>
-                    </form>
-                        </div>
-                          </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
             <!-- #/ container -->
+        </div>
+        </div>
+        </div>
         </div>
         <!--**********************************
             Content body end

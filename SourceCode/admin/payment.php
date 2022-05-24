@@ -113,7 +113,7 @@
                 </ul>
             </div>
         </div>
-           
+        
         <div class="content-body">
 
 <!-- Daftar Buku -->
@@ -127,77 +127,81 @@
                         <div class="col-6 text-left">
                             <h4 class="card-title">Daftar Pembelian</h4>
                         </div>
+
                         <?php
-                        require("../includes/koneksi.php");
-                         $query = "SELECT * FROM metode_pembayaran
-                         JOIN file ON metode_pembayaran.noseri_buku= buku.noseri_buku";
-                         $hasil = mysqli_query($koneksi,$query);
-                         echo "<table class ='table table-bordered'>";
-                         echo "<tr><th>Username</th><th>No Seri Buku</th><th>Metode Pembayaran</th><th>Judul Buku</th>
-                        </th><th>Harga Buku</th><tr>";
-                         foreach ($hasil as $data){
-                             echo "<tr>";
-                             echo "<td>$data[username]";
-                             echo "<td>$data[noseri_buku]";
-                             echo "<td>$data[method_payment]";
-                             echo "<td>$data[judul]";
-                             echo "<td>$data[harga_buku]";
+                            require("../includes/koneksi.php");
+                            $query = "SELECT * FROM metode_pembayaran JOIN buku ON metode_pembayaran.noseri_buku= buku.noseri_buku";
+                            $hasil = mysqli_query($koneksi,$query);
 
-                             // tombol konfirmasi
-                             // input hidden = nampak id nya
-                             echo "<td><form onsubmit=\"return confirm ('Setujui Pembayaran Ini?');\"method='POST'>";
-                             echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
-                             echo "<button type='submit' name='btnUbah'class='btn btn-success btn-sm'>
-                             <i class= 'fa fa-check' title='konfirmasi'></i></button>";
-                             echo "</form></td>";
+                            echo "<table class ='table table-bordered'>";
+                            echo "<tr><th>Username</th><th>No Seri Buku</th><th>Metode Pembayaran</th><th>Judul Buku</th>
+                            </th><th>Harga Buku</th><tr>";
 
-                             // tombol delete
-                             echo "<td><form onsubmit=\"return confirm ('Hapus Pembayaran ini?');\"method='POST'>";
-                             echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
-                             echo "<button type='submit' name='btnHapus'class='btn btn-danger btn-sm'><i class='fa fa-trash' title='hapus'></i></button>";
-                             echo "</form></td>";
-                             echo "</tr>";
-                         }
-                         echo "</table>";
+                            foreach ($hasil as $data){
+                                echo "<tr>";
+                                echo "<td>$data[username]";
+                                echo "<td>$data[noseri_buku]";
+                                echo "<td>$data[method_payment]";
+                                echo "<td>$data[judul]";
+                                echo "<td>$data[harga_buku]";
 
-                                ?>
-                                     <?php
-                                        if(isset($_POST['btnUbah'])){
-                                            $id = $_POST['id_method'];
-                                            
-                                            if($koneksi) {
-                                                $sql = "UPDATE FROM metode_pembayaran WHERE id_method=$id";
-                                                mysqli_query($koneksi, $sql);
-                                                echo "<p class='alert alert-success text-center'><b> Pembayaran Disetujui ! <a href='admin.php' class='btn btn-primary'>Kembali</a></b></p>";
-                                            } elseif ($koneksi->connect_error){
-                                                echo "<p class='alert alert-danger text-center><b> Data gagal dihapus. Terjadi kesalahan: ";
-                                                echo $koneksi->connect_error . "</b></p>";
-                                            }
+                                // tombol konfirmasi
+                                // input hidden = nampak id nya
+                                echo "<td><form onsubmit=\"return confirm ('Setujui Pembayaran Ini?');\"method='POST'>";
+                                echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
+                                echo "<button type='submit' name='btnUbah'class='btn btn-success btn-sm'>
+                                <i class= 'fa fa-check' title='konfirmasi'></i></button>";
+                                echo "</form></td>";
 
-                                        }
-                                        ?>
-                                         <?php
-                                        if(isset($_POST['btnHapus'])){
-                                            $id = $_POST['id_method'];
-                                            
-                                            if($koneksi) {
-                                                $sql = "DELETE FROM metode_pembayaran WHERE id_method=$id";
-                                                mysqli_query($koneksi, $sql);
-                                                echo "<p class='alert alert-success text-center'><b>Pembayaran berhasil dihapus.<a href='payment.php' class='btn btn-primary'>Kembali</a></b></p>";
-                                            } elseif ($koneksi->connect_error){
-                                                echo "<p class='alert alert-danger text-center><b>Pembayaran gagal dihapus. Terjadi kesalahan: ";
-                                                echo $koneksi->connect_error . "</b></p>";
-                                            }
+                                // tombol delete
+                                echo "<td><form onsubmit=\"return confirm ('Hapus Pembayaran ini?');\"method='POST'>";
+                                echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
+                                echo "<button type='submit' name='btnHapus'class='btn btn-danger btn-sm'><i class='fa fa-trash' title='hapus'></i></button>";
+                                echo "</form></td>";
+                                echo "</tr>";
+                            }
+                            echo "</table>";
 
-                                        }
-                                        ?>
-                        </div>
+                        ?>
+
+                            <?php
+                                if(isset($_POST['btnUbah'])){
+                                    $id = $_POST['id_method'];
+                                    
+                                    if($koneksi) {
+                                        $sql = "UPDATE FROM metode_pembayaran WHERE id_method=$id";
+                                        mysqli_query($koneksi, $sql);
+                                        echo "<p class='alert alert-success text-center'><b> Pembayaran Disetujui ! <a href='admin.php' class='btn btn-primary'>Kembali</a></b></p>";
+                                    } elseif ($koneksi->connect_error){
+                                        echo "<p class='alert alert-danger text-center><b> Data gagal dihapus. Terjadi kesalahan: ";
+                                        echo $koneksi->connect_error . "</b></p>";
+                                    }
+
+                                }
+                            ?>
+
+                            <?php
+                                if(isset($_POST['btnHapus'])){
+                                    $id = $_POST['id_method'];
+                                    
+                                    if($koneksi) {
+                                        $sql = "DELETE FROM metode_pembayaran WHERE id_method=$id";
+                                        mysqli_query($koneksi, $sql);
+                                        echo "<p class='alert alert-success text-center'><b>Pembayaran berhasil dihapus.<a href='payment.php' class='btn btn-primary'>Kembali</a></b></p>";
+                                    } elseif ($koneksi->connect_error){
+                                        echo "<p class='alert alert-danger text-center><b>Pembayaran gagal dihapus. Terjadi kesalahan: ";
+                                        echo $koneksi->connect_error . "</b></p>";
+                                    }
+
+                                }
+                            ?>
+                </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
- </div>
+</div>
 
 <!-- #/ container -->
 </div>

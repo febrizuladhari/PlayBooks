@@ -42,10 +42,6 @@
                 <input class="form-control" name="contoh" type="text">
             </div>
             <div class="form-group">
-                <span class="form-label">Rating</span>
-                <input class="form-control" name="rating" type="text">
-            </div>
-            <div class="form-group">
                 <span class="form-label">Harga</span>
                 <input class="form-control" name="harga" type="text">
             </div>
