@@ -7,11 +7,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Google Admin</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="user/images/image/png" sizes="16x16" href="user/images/googlePlayLogo.png">
+    <link rel="icon" type="images/image/png" sizes="16x16" href="images/googlePlayLogo.png">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="user/icons/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="icons/font-awesome/css/font-awesome.min.css">
     <!-- Custom Stylesheet -->
-    <link href="user/css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
 </head>
 <body>
@@ -26,11 +26,11 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.php">
-                    <b class="logo-abbr"><img src="user/images/googlePlayLogo.png" alt=""> </b>
-                    <span class="logo-compact mx-auto"><img src="user/images/googlePlay.png" alt=""></span>
+                <a href="../index.php">
+                    <b class="logo-abbr"><img src="images/googlePlayLogo.png" alt=""> </b>
+                    <span class="logo-compact mx-auto"><img src="images/googlePlay.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="user/images/googlePlay.png" alt="" width="100%">
+                        <img src="images/googlePlay.png" alt="" width="100%">
                     </span>
                 </a>
             </div>
@@ -68,7 +68,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="user/images/profile.png" height="40" width="40" alt="">
+                                <img src="images/profile.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -78,7 +78,7 @@
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="login.php"><span>Logout</span></a>
+                                            <a href="SourceCode/login.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -88,7 +88,7 @@
                 </div>
             </div>
         </div>
-        <!--**********************************
+           <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
 
@@ -120,77 +120,105 @@
             Content body start
         ***********************************-->
         <div class="content-body">
+              <!-- Begin Page Content -->
+              <div class="container-fluid">
 
-            <!-- Daftar Buku -->
-            <div class="container-fluid">
-                <div class="row" id="populer">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <!-- Paling Populer -->
-                                    <div class="col-6 text-left">
-                                        <h4 class="card-title">User Management</h4>
-                                    </div>
-                                    <?php
-                                    require("includes/koneksi.php");
-                                     $query = "SELECT * FROM user";
-                                     $hasil = mysqli_query($koneksi,$query);
-                                     echo "<table class ='table table-bordered'>";
-                                     echo "<tr><th>Username</th><th>First Name</th><th>Last Name</th>
-                                    </th><th>Email</th><th>Level</th><tr>";
-                                     foreach ($hasil as $data){
-                                         echo "<tr>";
-                                         echo "<td>$data[username]";
-                                         echo "<td>$data[first_name]";
-                                         echo "<td>$data[last_name]";
-                                         echo "<td>$data[email]";
-                                         echo "<td>$data[level]";
+<!-- Content Row -->
+<div class="row">
 
-                                         // tombol update
-                                         // input hidden = nampak id nya
-                                         echo "<td><form method='POST'action='ubah.php'>";
-                                         echo "<input hidden type='text'name='id' value=$data[id_user]>";
-                                         echo "<button type='submit' name='btnUpdate'class='btn btn-success'>Update</button>";
-                                         echo "</form></td>";
-
-                                         // tombol delete
-                                         echo "<td><form onsubmit=\"return confirm ('Anda yakin mau menghapus data?');\"method='POST'>";
-                                         echo "<input hidden type='text'name='id_user' value=$data[id_user]>";
-                                         echo "<button type='submit' name='btnHapus'class='btn btn-danger'><i class='far fa-trash-alt'></i> Delete</button>";
-                                         echo "</form></td>";
-
-                                         // tomboh tambah
-
-                                         echo "</tr>";
-                                     }
-                                     echo "</table>";
-                                     ?>
-                                     <?php
-                                        if(isset($_POST['btnHapus'])){
-                                            $id = $_POST['id_user'];
-                                            
-                                            if($koneksi) {
-                                                $sql = "DELETE FROM user WHERE id_user=$id";
-                                                mysqli_query($koneksi, $sql);
-                                                echo "<p class='alert alert-success text-center'><b> Data Akun berhasil dihapus.</b></p>";
-                                            } elseif ($koneksi->connect_error){
-                                                echo "<p class='alert alert-danger text-center><b> Data gagal dihapus. Terjadi kesalahan: ";
-                                                echo $koneksi->connect_error . "</b></p>";
-                                            }
-
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Area Chart -->
+    <div class="col-xl-10 col-lg-8">
+        <div class="card shadow mb-4">
+            <!-- Card Header - Dropdown -->
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Update Akun</h6>
+            </div>
+            <!-- Card Body -->
+            <div class="card-body">
+            <?php 
+            require("../includes/koneksi.php");
+            $id = $_POST['id_user'];
+            $query = "SELECT * FROM user WHERE id_user=$id";
+            $hasil = mysqli_query($koneksi,$query);
+            foreach ($hasil as $data) {
+            }
+            ?>
+        <form method="POST" class="my-login-validation">
+            <input hidden type="number"name="id_user" value="<?php echo $data['id_user']; ?>">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input value="<?php echo $data ['username']; ?>" id="Username" type="text" class="form-control" name="username" required autofocus>
+                <div class="invalid-feedback">
+                    What's your username?
                 </div>
-             </div>
-            
-            <!-- #/ container -->
+            </div>
+            <div class="form-group">
+                <label for="username">First Name</label>
+                <input value="<?php echo $data ['first_name']; ?>" id="first_name" type="text" class="form-control" name="first_name" required autofocus>
+                <div class="invalid-feedback">
+                    What's your first name?
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="username">Last Name</label>
+                <input value="<?php echo $data ['last_name']; ?>" id="last_name" type="text" class="form-control" name="last_name" required autofocus>
+                <div class="invalid-feedback">
+                    What's your last name?
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input value="<?php echo $data ['password']; ?>" id="password" type="password" class="form-control" name="password" required data-eye>
+                <div class="invalid-feedback">
+                    Password is required
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail Address</label>
+                <input value="<?php echo $data ['email']; ?>" id="email" type="email" class="form-control" name="email" required>
+                <div class="invalid-feedback">
+                    Your email is invalid
+                </div>
+            </div>
+
+            <div class="form-group m-0">
+                <button name="btnUbah" type="submit" class="btn btn-primary btn-block">
+                    Update Akun
+                </button>
+            </div>
+        </form>
+        <?php 
+        if (isset($_POST['btnUbah'])){
+           $no = $_POST['id_user'];
+           $user = $_POST['username'];
+           $first_name = $_POST['first_name'];
+           $last_name = $_POST['last_name'];
+           $pass = $_POST['password'];
+           $email = $_POST['email'];
+
+           if ($koneksi){
+            $sql = "UPDATE user SET username='$user',first_name='$first_name', last_name='$last_name', password='$pass',email='$email' WHERE id_user=$no";
+            mysqli_query($koneksi,$sql);
+            echo "<p class='alert alert-success text-center'><b>Perubahan Akun Berhasil Disimpan. <a href='admin.php' class='btn btn-primary'>Kembali</a></b></p>";
+          } elseif ($koneksi->connect_error) {
+                echo "<p class='alert alert-danger text-center><b>Terjadi kesalahan: $error</b></p>";
+          }      
+        }
+        ?>
+    </div>
         </div>
+    </div>
+
+</div>
+
+
+
+</div>
+<!-- /.container-fluid -->
+
+</div>
+ <!-- #/ container -->
+ </div>
         <!--**********************************
             Content body end
         ***********************************-->
@@ -221,12 +249,12 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="user/plugins/common/common.min.js"></script>
-    <script src="user/js/custom.min.js"></script>
-    <script src="user/js/settings.js"></script>
-    <script src="user/js/gleek.js"></script>
-    <script src="user/js/styleSwitcher.js"></script>
-    <script src="user/js/dashboard/dashboard-1.js"></script>
+    <script src="plugins/common/common.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/gleek.js"></script>
+    <script src="js/styleSwitcher.js"></script>
+    <script src="js/dashboard/dashboard-1.js"></script>
 
 </body>
 </html>

@@ -5,16 +5,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Metode Pembayaran</title>
+    <title>Google Admin</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/googlePlayLogo.png">
+    <link rel="icon" type="images/image/png" sizes="16x16" href="images/googlePlayLogo.png">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="icons/font-awesome/css/font-awesome.min.css">
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href= "css/style.css" rel="stylesheet">
 
 </head>
-
 <body>
 
     <!--**********************************
@@ -27,7 +26,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="../index.php">
                     <b class="logo-abbr"><img src="images/googlePlayLogo.png" alt=""> </b>
                     <span class="logo-compact mx-auto"><img src="images/googlePlay.png" alt=""></span>
                     <span class="brand-title">
@@ -56,7 +55,7 @@
                 <div class="header-left">
                     <div class="input-group icons">
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Telusuri" aria-label="Search">
+                            <input class="form-control mr-sm-2" style="width: 750px;" type="search" placeholder="Telusuri" aria-label="Search">
                             <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
@@ -75,11 +74,11 @@
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="akun.html"><span>Kelola Akun Anda</span></a>
+                                            <a href="#"><span>Kelola Akun Anda</span></a>
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="login.html"><span>Logout</span></a>
+                                            <a href="../login.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -99,71 +98,18 @@
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
+                    <hr>
                     <li>
-                        <a href="index.html" aria-expanded="true">
-                            <span class="nav-text ml-3">Buku</span>
+                        <a href="admin.php" aria-expanded="true">
+                            <span class="nav-text ml-3">Management User</span>
                         </a>
                     </li>
                     <li>
-                        <a href="bukuSaya.html" aria-expanded="false">
-                            <span class="nav-text ml-3">Buku Saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="index.html" aria-expanded="false">
-                            <span class="nav-text ml-3">Toko</span>
+                        <a href="payment.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Payment</span>
                         </a>
                     </li>
                 </ul>
-                <hr>
-                <ul class="metismenu" id="menu">
-                    <li>
-                        <a href="akun.html" aria-expanded="false">
-                            <span class="nav-text">Akun</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="metode.html" aria-expanded="false">
-                            <span class="nav-text">Metode Pembayaran</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="playPoints.html" aria-expanded="false">
-                            <span class="nav-text">Play Points</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="langganan.html" aria-expanded="false">
-                            <span class="nav-text">Langganan saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tukarkan.html" aria-expanded="false">
-                            <span class="nav-text">Tukarkan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="beliKartu.html" aria-expanded="false">
-                            <span class="nav-text">Beli kartu hadiah</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishlist.html" aria-expanded="false">
-                            <span class="nav-text">Wishlish saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="aktivitas.html" aria-expanded="false">
-                            <span class="nav-text">Aktivitas Play saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="panduanOrang.html" aria-expanded="false">
-                            <span class="nav-text">Panduan Orang Tua</span>
-                        </a>
-                    </li>
-                </ul>
-                <hr>
             </div>
         </div>
         <!--**********************************
@@ -175,24 +121,80 @@
         ***********************************-->
         <div class="content-body">
 
+            <!-- Daftar Buku -->
             <div class="container-fluid">
-                <div class="row">
-                    <p style="margin: 10px;">Tambahkan Metode Pembayaran</p>
-                    <form action="" method="POST">
-                        <input required class="input-form laf"type="text" name="" placeholder="Username" value="">
-                        <input required class="input-form laf"type="number" name="" placeholder="No Resi Pembelian" value="">
-                        <input required class="input-form laf"type="text" name="" placeholder="Metode Pembayaran" value="">
-                        <button type="submit" class="btn btn-primary" name="buttonup">Upload Bukti Pembayaran</button>
-                    </form>
+                <div class="row" id="populer">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <!-- Paling Populer -->
+                                    <div class="col-6 text-left">
+                                        <h4 class="card-title">User Management</h4>
+                                    </div>
+                                    <?php
+                                    require("../includes/koneksi.php");
+                                     $query = "SELECT * FROM user";
+                                     $hasil = mysqli_query($koneksi,$query);
+                                     echo "<table class ='table table-bordered'>";
+                                     echo "<tr><th>Username</th><th>First Name</th><th>Last Name</th>
+                                    </th><th>Email</th><th>Level</th><tr>";
+                                     foreach ($hasil as $data){
+                                         echo "<tr>";
+                                         echo "<td>$data[username]";
+                                         echo "<td>$data[first_name]";
+                                         echo "<td>$data[last_name]";
+                                         echo "<td>$data[email]";
+                                         echo "<td>$data[level]";
+
+                                         // tombol update
+                                         // input hidden = nampak id nya
+                                         echo "<td><form method='POST'action='ubah.php'>";
+                                         echo "<input hidden type='text'name='id_user' value=$data[id_user]>";
+                                         echo "<button type='submit' name='btnUpdate'class='btn btn-success'>Update</button>";
+                                         echo "</form></td>";
+
+                                         // tombol delete
+                                         echo "<td><form onsubmit=\"return confirm ('Anda yakin mau menghapus data?');\"method='POST'>";
+                                         echo "<input hidden type='text'name='id_user' value=$data[id_user]>";
+                                         echo "<button type='submit' name='btnHapus'class='btn btn-danger'><i class='far fa-trash-alt'></i> Delete</button>";
+                                         echo "</form></td>";
+
+                                         // tomboh tambah
+
+                                         echo "</tr>";
+                                     }
+                                     echo "</table>";
+                                     ?>
+                                     <?php
+                                        if(isset($_POST['btnHapus'])){
+                                            $id = $_POST['id_user'];
+                                            
+                                            if($koneksi) {
+                                                $sql = "DELETE FROM user WHERE id_user=$id";
+                                                mysqli_query($koneksi, $sql);
+                                                echo "<p class='alert alert-success text-center'><b> Data Akun berhasil dihapus.</b></p>";
+                                            } elseif ($koneksi->connect_error){
+                                                echo "<p class='alert alert-danger text-center><b> Data gagal dihapus. Terjadi kesalahan: ";
+                                                echo $koneksi->connect_error . "</b></p>";
+                                            }
+
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+             </div>
             
             <!-- #/ container -->
         </div>
         <!--**********************************
             Content body end
         ***********************************-->
-        
+
         <!--**********************************
             Footer start
         ***********************************-->
@@ -226,7 +228,5 @@
     <script src="js/styleSwitcher.js"></script>
     <script src="js/dashboard/dashboard-1.js"></script>
 
-
 </body>
-
 </html>

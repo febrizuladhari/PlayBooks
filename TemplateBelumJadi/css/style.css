@@ -3942,7 +3942,7 @@ button.close {
   .modal-open .modal {
     overflow-x: hidden;
     overflow-y: auto; }
-
+    
 .modal {
   position: fixed;
   top: 0;
