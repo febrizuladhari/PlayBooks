@@ -134,11 +134,12 @@
                             $hasil = mysqli_query($koneksi,$query);
 
                             echo "<table class ='table table-bordered'>";
-                            echo "<tr><th>Username</th><th>No Seri Buku</th><th>Metode Pembayaran</th><th>Judul Buku</th>
+                            echo "<tr><th>id</th><th>Username</th><th>No Seri Buku</th><th>Metode Pembayaran</th><th>Judul Buku</th>
                             </th><th>Harga Buku</th><tr>";
 
                             foreach ($hasil as $data){
                                 echo "<tr>";
+                                echo "<td>$data[id_user]";
                                 echo "<td>$data[username]";
                                 echo "<td>$data[noseri_buku]";
                                 echo "<td>$data[method_payment]";
