@@ -266,7 +266,7 @@ session_start();
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-4">
-                                        <img class="img-fluid" src="coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
+                                        <img class="img-fluid" src="../user_pembeli/coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
                                     </div>
                                     <div class="col-8">
                                         <h1 class="mt-2"><?php echo $data['judul'] ?></h1>
@@ -457,7 +457,7 @@ session_start();
                                     <div class="col-6" <?php echo $data['noseri_buku'] ?>>
                                         <div class="card" style="height: 35rem;">
                                                 <a href="detailBuku.php?noseri_buku=<?php echo $data['noseri_buku'] ?>">
-                                                    <img class="img-fluid" src="coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
+                                                    <img class="img-fluid" src="../user_pembeli/coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
                                                 </a>
                                             <div class="card-body">
                                                 <h5 class="card-title"><?php echo $data['judul'] ?></h5>

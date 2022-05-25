@@ -210,10 +210,13 @@
                                                     <label for="judul" class="col-form-label">Judul Buku :</label>
                                                     <input type="text" name="judul" value="<?= $data['judul'] ?>" class="form-control" required>
                                                 </div>
-                                                
                                                 <div class="form-group">
                                                     <label for="harga_buku" class="col-form-label">Harga Buku :</label>
                                                     <input type="text" name="harga_buku" value="<?= $data['harga_buku'] ?>" class="form-control" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="contain_buku" class="col-form-label">Contain Buku :</label>
+                                                    <input type="text" name="contain_buku" value="<?= $data['contain_buku'] ?>" class="form-control" required>
                                                 </div>
                                                 <div class="modal-footer"> 
                                                     <button type="submit" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -314,8 +317,9 @@
                                         $noseri_buku = $_POST['noseri_buku'];
                                         $judul = $_POST['judul'];
                                         $harga_buku = $_POST['harga_buku'];
+                                        $contain_buku = $_POST['contain_buku'];
 
-                                        $SQL_masuk = "INSERT INTO pembelian (id_user,method_payment,noseri_buku,username,judul,harga_buku) VALUES ('$id_user','$method_payment','$noseri_buku','$username','$judul','$harga_buku')";
+                                        $SQL_masuk = "INSERT INTO pembelian (id_user,method_payment,noseri_buku,username,judul,harga_buku,contain_buku) VALUES ('$id_user','$method_payment','$noseri_buku','$username','$judul','$harga_buku','$contain_buku')";
                                         $selesaiKonfirmasi = mysqli_query($koneksi, "DELETE FROM metode_pembayaran WHERE id_method = '$id_method'");
 
                                     if($koneksi->query($SQL_masuk)===TRUE && $selesaiKonfirmasi){

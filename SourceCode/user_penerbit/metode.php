@@ -248,9 +248,6 @@ session_start();
                                                 <label><span class="label-text">Harga Buku</span></label> 
                                                 <input type="text" value="<?php echo $data['harga_buku'] ?>" id="harga_buku" name="harga_buku" class="form-control cvv-class" placeholder="Harga Buku" required> 
                                             </div>
-                                            <div class="mt-3">
-                                                <input type="hidden" value="<?php echo $data['contain_buku'] ?>" id="contain_buku" name="contain_buku" class="form-control cvv-class" placeholder="Harga Buku" required> 
-                                            </div>
                                             <div class="d-flex justify-content-between pt-5 align-items-center"> 
                                             <div class="mt-3">
 
@@ -269,9 +266,8 @@ session_start();
                                                     $noseri_buku = $_POST['noseri_buku'];
                                                     $judul = $_POST['judul'];
                                                     $harga_buku = $_POST['harga_buku'];
-                                                    $contain_buku = $_POST['contain_buku'];
                                                     
-                                                    $sql = "INSERT INTO metode_pembayaran (id_user,noseri_buku,method_payment,username,judul,harga_buku,contain_buku) VALUES ('$id_user','$noseri_buku','$method_payment','$username','$judul','$harga_buku','$contain_buku')";
+                                                    $sql = "INSERT INTO metode_pembayaran (id_user,noseri_buku,method_payment,username,judul,harga_buku) VALUES ('$id_user','$noseri_buku','$method_payment','$username','$judul','$harga_buku')";
                                                 
                                                         if($koneksi->query($sql)===TRUE){
                                                             echo "<script>
