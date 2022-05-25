@@ -21,7 +21,7 @@
     include '../includes/koneksi.php';
 
     $noseri_buku = input($_GET['noseri_buku']);
-    $query = mysqli_query($koneksi, "SELECT * FROM bukusaya WHERE noseri_buku='".$noseri_buku."' LIMIT 1");
+    $query = mysqli_query($koneksi, "SELECT * FROM pembelian WHERE noseri_buku='".$noseri_buku."' LIMIT 1");
     $data = mysqli_fetch_array($query);
 
     ?>
@@ -36,7 +36,7 @@
                 </div>
                 <div class='panel-body'>
                     <div>
-                        <embed src="../pdfBuku/<?php echo $data['contain_buku']; ?>" width='100%' height='1000px'>
+                        <embed src="pdfBuku/<?php echo $data['contain_buku']; ?>" width='100%' height='1000px'>
                     </div>
                 </div>
             </div>

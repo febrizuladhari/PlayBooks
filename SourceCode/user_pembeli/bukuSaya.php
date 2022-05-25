@@ -281,7 +281,7 @@
                                             }
                                             include '../includes/koneksi.php';
 
-                                            $SQL = "SELECT * FROM bukusaya";
+                                            $SQL = "SELECT * FROM pembelian";
                                             $SQL_QUERY = mysqli_query($koneksi, $SQL);
 
                                             while ($data = mysqli_fetch_array($SQL_QUERY)){
@@ -292,11 +292,10 @@
                                         <!-- Perulangan Buku -->
                                         <div class="col-2" <?=$noseri_buku;?>>
                                             <div class="card" style="height: 35rem;">
-                                                    <img class="img-fluid" src="../coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
+                                                    <img class="img-fluid" src="images/buku.png" alt="">
                                                 <div class="card-body">
                                                     <h5 class="card-title"><?php echo $data['judul'] ?></h5>
-                                                    <p class="card-text"><?php echo $data['penerbit'] ?></p>
-                                                    <p class="card-text"><?php echo $data['kategori'] ?></p>
+                                                    <p class="card-text"><?php echo $data['contain_buku'] ?></p>
                                                 </div>
                                                 <div class="btn-group dropright mb-3 ml-2" aria-expanded="false">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bd-isi-modal-lg">Action</button>
@@ -367,7 +366,7 @@
                                                     </div>
                                                         <button type="submit" class="btn btn-secondary ml-3 mb-3" data-dismiss="modal">Batal</button>
                                                         <input hidden type="text" name="seribuku" value="<?=$noseri_buku;?>">
-                                                        <input hidden type="text" name="isi" value="<?=$contain_buku;?>">
+                                                        <input hidden type="text" name="isi" value="<?=$judul;?>">
                                                         <button type="submit" name="btnselesai" class="btn btn-info ml-1 mb-3" action>Tambahi Selesai</button>
                                                             <?php
                                                                     require_once'../includes/koneksi.php';
@@ -413,7 +412,7 @@
                                                         if (isset($_POST['btnhapus'])){
                                                 
                                                             $id_buku = $_POST['idbuku'];
-                                                            $hapus = mysqli_query($koneksi, "DELETE FROM bukusaya WHERE noseri_buku='$id_buku'");
+                                                            $hapus = mysqli_query($koneksi, "DELETE FROM pembelian WHERE noseri_buku='$id_buku'");
                                                             if ($hapus){
                                                             echo "<script>setTimeout(\"location.href = 'bukuSaya.php';\",1500);</script>";
                                                     

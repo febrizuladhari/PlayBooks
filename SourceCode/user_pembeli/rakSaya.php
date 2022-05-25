@@ -374,7 +374,7 @@
                                                     require_once'../includes/koneksi.php';
 
                                                     $SQLisib = "SELECT * FROM tampung_rakbuku
-                                                    JOIN bukusaya ON tampung_rakbuku.noseri_buku = bukusaya.noseri_buku WHERE id_rak = '$id_rak'";
+                                                    JOIN pembelian ON tampung_rakbuku.noseri_buku = pembelian.noseri_buku WHERE id_rak = '$id_rak'";
                                                     $SQL_QUERYb = mysqli_query($koneksi, $SQLisib);
                                                     while ($data = mysqli_fetch_array($SQL_QUERYb)){
                                                         $noseri_buku=$data['noseri_buku']; 
