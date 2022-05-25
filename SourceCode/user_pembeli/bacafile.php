@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baca Buku</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="user/images/googlePlayLogo.png">
+</head>
+<body>
+    <?php 
+
+    function input($data) {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
+    }
+
+    include '../includes/koneksi.php';
+
+    $id_file = input($_GET['id_file']);
+    $query = mysqli_query($koneksi, "SELECT * FROM file WHERE id_file='".$id_file."' LIMIT 1");
+    $data = mysqli_fetch_array($query);
+
+    ?>
+    
+    <div class="container">
+        <div class="col">
+            <div class='panel panel-primary'>
+                <div class='panel-heading text-center'>
+                    <h1 class="text-center">
+                         <?php echo $data['contain'] ?> 
+                    </h1>
+                </div>
+                <div class='panel-body'>
+                    <div>
+                        <embed src="file/<?php echo $data['contain']; ?>" width='100%' height='1000px'>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

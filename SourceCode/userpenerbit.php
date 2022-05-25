@@ -310,6 +310,12 @@
                                     </div>
                                         <div class="row">
                                         <?php 
+                                        function input($data) {
+                                            $data = trim($data);
+                                            $data = stripslashes($data);
+                                            $data = htmlspecialchars($data);
+                                            return $data;
+                                        }
                                             include 'includes/koneksi.php';
 
                                             $sql = "SELECT * FROM terbitansaya ";
@@ -320,7 +326,7 @@
                                         <!-- Perulangan Buku -->
                                         <div class="col-2" <?php echo $data['noseri_buku'] ?>>
                                             <div class="card" style="height: 35rem;">
-                                                <a href="detailBuku.php?noseri_buku=<?php echo $data['noseri_buku'] ?>">
+                                                <a href="bacaBukuup.php?noseri_buku=<?php echo $data['noseri_buku'] ?>">
                                                     <img class="img-fluid" src="coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
                                                 </a>
                                                 <div class="card-body">
@@ -442,7 +448,7 @@
                                                                 move_uploaded_file($_FILES['cover']['tmp_name'],$direktori.$file_name);
                                                                 
                                                                 if ($koneksi){
-                                                                $update = "UPDATE terbitansaya SET noseri_buku='$noseri_buku', id_ulasan='$id_ulasan', judul='$judul', kategori='$kategori', sinopsis='$sinopsis', contoh_gratis='$contoh_gratis', rating='$rating', harga_buku='$harga_buku', jlh_halaman='$jlh_halaman', bahasa='$bahasa', penerbit='$penerbit', tanggal_terbit='$tanggal_terbit', contain_buku='$name_file', cover_buku='$file_name' WHERE noseri_buku=$noseri_buku";
+                                                                $update = "UPDATE buku SET noseri_buku='$noseri_buku', id_ulasan='$id_ulasan', judul='$judul', kategori='$kategori', sinopsis='$sinopsis', contoh_gratis='$contoh_gratis', rating='$rating', harga_buku='$harga_buku', jlh_halaman='$jlh_halaman', bahasa='$bahasa', penerbit='$penerbit', tanggal_terbit='$tanggal_terbit', contain_buku='$name_file', cover_buku='$file_name' WHERE noseri_buku=$noseri_buku";
                                                                 mysqli_query($koneksi,$update);
                                                                 echo "<script>setTimeout(\"location.href = 'userpenerbit.php';\",1500);</script>";
                                                         
@@ -456,7 +462,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Modal Delete Rak -->
+                                        <!-- Modal Delete Buku -->
                                         <div class="modal fade" id="deletebukuModal<?php echo $data['noseri_buku'] ?>" tabindex="-1" role="dialog" aria-labelledby="deletebukuModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -473,21 +479,6 @@
                                                         <button type="submit" class="btn btn-secondary ml-3 mb-3" data-dismiss="modal">Batal</button>
                                                         <input hidden type="text" name="idbuku" value="<?php echo $data['noseri_buku'] ?>">
                                                         <button type="submit" name="btnhapus" class="btn btn-danger ml-1 mb-3" action>Hapus Buku</button>
-                                                        <?php
-                                                        require_once'includes/koneksi.php';
-                                                        if (isset($_POST['btnhapus'])){
-                                                
-                                                            $id_buku = $_POST['idbuku'];
-                                                            $hapus = mysqli_query($koneksi, "DELETE FROM terbitansaya WHERE noseri_buku='$id_buku'");
-                                                            if ($hapus){
-                                                            echo "<script>setTimeout(\"location.href = 'userpenerbit.php';\",1500);</script>";
-                                                    
-                                                            } elseif($koneksi->connect_error){
-                                                                echo 'Gagal';
-                                                                header('userpenerbit.php');
-                                                            }
-                                                        }
-                                                        ?>
                                                         <?php
                                                         require_once'includes/koneksi.php';
                                                         if (isset($_POST['btnhapus'])){
