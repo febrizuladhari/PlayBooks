@@ -1,13 +1,3 @@
-<?php
-session_start();
-    if(empty($_SESSION['level'])) {
-        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../login.php'</script>";
-    }
-?>
-
-<?php 
-    include "../includes/koneksi.php";
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +6,7 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Google Admin</title>
+    <title>Admin - Pembelian</title>
     <!-- Favicon icon -->
     <link rel="icon" type="images/image/png" sizes="16x16" href="images/googlePlayLogo.png">
     <!-- Font Awesome -->
@@ -38,7 +28,7 @@ session_start();
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="../index.php">
+                <a href="payment.php">
                     <b class="logo-abbr"><img src="images/googlePlayLogo.png" alt=""> </b>
                     <span class="logo-compact mx-auto"><img src="images/googlePlay.png" alt=""></span>
                     <span class="brand-title">
@@ -127,94 +117,236 @@ session_start();
         
         <div class="content-body">
 
-<!-- Daftar Buku -->
+
 <div class="container-fluid">
     <div class="row" id="populer">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <div class="row">
-                        <!-- Paling Populer -->
+                        <!-- Pembelian User -->
                         <div class="col-6 text-left">
                             <h4 class="card-title">Daftar Pembelian</h4>
                         </div>
 
+                        <table class ='table table-bordered text-center'>
+                            <thead>
+                                <tr>
+                                    <th>ID Pembelian</th>
+                                    <th>ID User</th>
+                                    <th>Username</th>
+                                    <th>No Seri Buku</th>
+                                    <th>Metode Pembayaran</th>
+                                    <th>Judul Buku</th>
+                                    <th>Harga Buku</th>
+                                    <th colspan='2'>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <?php
+                                    require("../includes/koneksi.php");
+                                    $query = "SELECT * FROM metode_pembayaran JOIN buku ON metode_pembayaran.noseri_buku = buku.noseri_buku";
+                                    $hasil = mysqli_query($koneksi,$query);
+
+                                    foreach ($hasil as $data){
+                                    
+                                ?>
+
+                                <tr>
+                                    <td><?= $data['id_method'] ?></td>
+                                    <td><?= $data['id_user'] ?></td>
+                                    <td><?= $data['username'] ?></td>
+                                    <td><?= $data['noseri_buku'] ?></td>
+                                    <td><?= $data['method_payment'] ?></td>
+                                    <td><?= $data['judul'] ?></td>
+                                    <td><?= $data['harga_buku'] ?></td>
+                                    <td>
+                                        <button type='button' name='konfirmasi' class='btn btn-outline-success btn-sm' data-toggle='modal' data-target='#konfirmasi<?= $data['id_method'] ?>'>
+                                        Konfirmasi <i class='fa fa-check'></i> 
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type='button' name='delete' class='btn btn-outline-danger btn-sm' data-toggle='modal' data-target='#delete<?= $data['id_method'] ?>'>
+                                        Tolak <i class='fa fa-trash'></i> 
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tr>
+
+                                <!-- Konfirmasi Modal -->
+                                <div class="modal fade" id="konfirmasi<?= $data['id_method'] ?>" tabindex="-1" role="dialog" aria-labelledby="konfirmasi" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Konfirmasi Buku</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                        </div>
+                                            <div class="modal-body">
+                                            <form method="POST">
+                                                <div class="form-group">
+                                                    <label for="id_method" class="col-form-label">ID Pembelian :</label>
+                                                    <input type="text" name="id_method" value="<?= $data['id_method'] ?>" class="form-control" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="id_user" class="col-form-label">ID User :</label>
+                                                    <input type="text" name="id_user" value="<?= $data['id_user'] ?>" class="form-control" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="method_payment" class="col-form-label">Metode Pembayaran :</label>
+                                                    <input type="text" name="method_payment" value="<?= $data['method_payment'] ?>" class="form-control" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="username" class="col-form-label">Username :</label>
+                                                    <input type="text" name="username" value="<?= $data['username'] ?>" class="form-control" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="noseri_buku" class="col-form-label">No Seri Buku :</label>
+                                                    <input type="text" name="noseri_buku" value="<?= $data['noseri_buku'] ?>" class="form-control" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="judul" class="col-form-label">Judul Buku :</label>
+                                                    <input type="text" name="judul" value="<?= $data['judul'] ?>" class="form-control" required>
+                                                </div>
+                                                
+                                                <div class="form-group">
+                                                    <label for="harga_buku" class="col-form-label">Harga Buku :</label>
+                                                    <input type="text" name="harga_buku" value="<?= $data['harga_buku'] ?>" class="form-control" required>
+                                                </div>
+                                                <div class="modal-footer"> 
+                                                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                    <input hidden type="text" name="id_pembelian" value="<?= $data['id_method'] ?>">
+                                                    <button type="submit" name="btnKonfirmasi" class="btn btn-primary">Konfirmasi</button>
+                                                </div>
+                                            </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Delete Modal -->
+                                <div class="modal fade" id="delete<?= $data['id_method'] ?>" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title">Hapus History Ini ?</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form method="POST">
+                                                <div class="modal-body">
+                                                    Apakah Anda Yakin Ingin Menghapus History Pembelian dengan Kode : <?= $data['id_method'] ?> 
+                                                <div class="modal-footer"> 
+                                                    <button type="submit" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                    <input hidden type="text" name="id_method" value="<?= $data['id_method'] ?>">
+                                                    <button type="submit" name="btnHapus" class="btn btn-danger" action>Tolak</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <?php 
+                                    }
+                                ?>
+                            </tbody>
+                        </table>
+
                         <?php
-                            require("../includes/koneksi.php");
-                            $query = "SELECT * FROM metode_pembayaran JOIN buku ON metode_pembayaran.noseri_buku= buku.noseri_buku";
-                            $hasil = mysqli_query($koneksi,$query);
+                            // require("../includes/koneksi.php");
+                            // $query = "SELECT * FROM metode_pembayaran JOIN buku ON metode_pembayaran.noseri_buku= buku.noseri_buku";
+                            // $hasil = mysqli_query($koneksi,$query);
 
-                            echo "<table class ='table table-bordered'>";
-                            echo "<tr><th>id method</th><th>id user</th><th>Username</th><th>No Seri Buku</th><th>Metode Pembayaran</th><th>Judul Buku</th>
-                            </th><th>Harga Buku</th><tr>";
+                            // echo "<table class ='table table-bordered text-center'>";
+                            // echo "<tr>
+                            //     <th>ID Pembelian</th>
+                            //     <th>ID User</th>
+                            //     <th>Username</th>
+                            //     <th>No Seri Buku</th>
+                            //     <th>Metode Pembayaran</th>
+                            //     <th>Judul Buku</th>
+                            //     <th>Harga Buku</th>
+                            //     <th colspan='2'>Action</th>
+                            // <tr>";
 
-                            foreach ($hasil as $data){
-                                echo "<tr>";
-                                echo "<td>$data[id_method]";
-                                echo "<td>$data[id_user]";
-                                echo "<td>$data[username]";
-                                echo "<td>$data[noseri_buku]";
-                                echo "<td>$data[method_payment]";
-                                echo "<td>$data[judul]";
-                                echo "<td>$data[harga_buku]";
+                            // foreach ($hasil as $data){
+                            //     echo "<tr>";
+                            //     echo "<td>$data[id_method]";
+                            //     echo "<td>$data[id_user]";
+                            //     echo "<td>$data[username]";
+                            //     echo "<td>$data[noseri_buku]";
+                            //     echo "<td>$data[method_payment]";
+                            //     echo "<td>$data[judul]";
+                            //     echo "<td>$data[harga_buku]";
 
-                                // tombol konfirmasi
-                                // input hidden = nampak id nya
-                                echo "<td><form onsubmit=\"return confirm ('Setujui Pembayaran Ini?');\"method='POST'>";
-                                echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
-                                echo "<button type='submit' name='btnUbah'class='btn btn-success btn-sm'>
-                                <i class= 'fa fa-check' title='konfirmasi'></i></button>";
-                                echo "</form></td>";
+                            //     // tombol konfirmasi
 
-                                // tombol delete
-                                echo "<td><form onsubmit=\"return confirm ('Hapus Pembayaran ini?');\"method='POST'>";
-                                echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
-                                echo "<button type='submit' name='btnHapus'class='btn btn-danger btn-sm'><i class='fa fa-trash' title='hapus'></i></button>";
-                                echo "</form></td>";
-                                echo "</tr>";
+                            //     echo "<td><form onsubmit=\"return confirm ('Setujui Pembayaran Ini?');\"method='POST'>";
+                            //     echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
+                            //     echo "<button type='submit' name='btnKonfirmasi'class='btn btn-success btn-sm'>
+                            //             Konfirmasi <i class= 'fa fa-check' title='konfirmasi'></i></button>";
+                            //     echo "</form></td>";
 
-                            }
-                            echo "</table>";
+                            //     // tombol delete
+                            //     echo "<td><form onsubmit=\"return confirm ('Hapus Pembayaran ini?');\"method='POST'>";
+                            //     echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
+                            //     echo "<button type='submit' name='btnHapus'class='btn btn-danger btn-sm'>Hapus <i class='fa fa-trash' title='hapus'></i></button>";
+                            //     echo "</form></td>";
+                            //     echo "</tr>";
 
+                            // }
+                            // echo "</table>";
                         ?>
 
+                            <!-- Fungsi Konfirmasi Pembelian -->
                             <?php
-                                if(isset($_POST['btnUbah'])){
+                                if(isset($_POST['btnKonfirmasi'])){
 
-                                    require_once'../includes/koneksi.php';
+                                    include '../includes/koneksi.php';
 
-                                        //$id_method = $_POST['id_method'];
+                                        $id_method = $_POST['id_method'];
                                         $id_user = $_POST['id_user'];
-                                        $noseri_buku = $_POST['noseri_buku'];
                                         $method_payment = $_POST['method_payment'];
                                         $username = $_POST['username'];
-                                        $judul_buku = $_POST['judul'];
+                                        $noseri_buku = $_POST['noseri_buku'];
+                                        $judul = $_POST['judul'];
                                         $harga_buku = $_POST['harga_buku'];
-                                        $sql = "INSERT INTO pembelian (id_user,noseri_buku,method_payment,username,judul,harga_buku) VALUES ('$id_user','$noseri_buku','$method_payment','$username','$judul','$harga_buku')";
-                                    
-                                    if($koneksi->query($sql)===TRUE){
-                                        echo "<p class='alert alert-success text-center'><b>Pembayaran Disetujui.<a href='payment.php' class='btn btn-primary'>Kembali</a></b></p>";
+
+                                        $SQL_masuk = "INSERT INTO pembelian (id_user,method_payment,noseri_buku,username,judul,harga_buku) VALUES ('$id_user','$method_payment','$noseri_buku','$username','$judul','$harga_buku')";
+                                        $selesaiKonfirmasi = mysqli_query($koneksi, "DELETE FROM metode_pembayaran WHERE id_method = '$id_method'");
+
+                                    if($koneksi->query($SQL_masuk)===TRUE && $selesaiKonfirmasi){
+                                        echo "<script>
+                                                alert('Konfirmasi Pembelian Buku Berhasil !');
+                                                setTimeout(\"location.href = 'payment.php';\",300);
+                                            </script> ";
                                     } else {
-                                    echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
-                                 }   
+                                        echo "Terjadi kesalahan:".$SQL_masuk."<br/>".$koneksi->error;
+                                    }   
                                 } 		
                             ?>
 
+                            <!-- Fungsi Delete Pembelian -->
                             <?php
                                 if(isset($_POST['btnHapus'])){
                                     $id = $_POST['id_method'];
-                                    
-                                    if($koneksi) {
-                                        $sql = "DELETE FROM metode_pembayaran WHERE id_method=$id";
-                                        mysqli_query($koneksi, $sql);
-                                        echo "<p class='alert alert-success text-center'><b>Pembayaran berhasil dihapus.<a href='payment.php' class='btn btn-primary'>Kembali</a></b></p>";
-                                    } elseif ($koneksi->connect_error){
-                                        echo "<p class='alert alert-danger text-center><b>Pembayaran gagal dihapus. Terjadi kesalahan: ";
-                                        echo $koneksi->connect_error . "</b></p>";
+                                    $hapus = mysqli_query($koneksi, "DELETE FROM metode_pembayaran WHERE id_method='$id'");
+
+                                    if($hapus) {
+                                        echo "<script>
+                                                alert('Pembelian Buku Berhasil Ditolak !');
+                                                setTimeout(\"location.href = 'prosesKonfirmasi.php';\",500);
+                                            </script> ";
+                                    } else {
+                                        echo "Terjadi kesalahan";
                                     }
 
                                 }
                             ?>
+
                         </div>
                     </div>
                 </div>

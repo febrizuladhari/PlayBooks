@@ -29,7 +29,9 @@ if(!isset($_SESSION)){
 
         // var_dump($password);die;
         mysqli_query($koneksi, "INSERT INTO user VALUES('', '$username', '$first_name', '$last_name', '$email', '$password', '$level')");
+        header("location:login.php");
         return mysqli_affected_rows($koneksi);
+        
         // $query = "INSERT INTO user VALUES('','username','first_name','last_name','email','email_verified','password','level')";
         // mysqli_query($koneksi,$query);
         // return mysqli_affected_rows($koneksi);

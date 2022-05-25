@@ -59,7 +59,7 @@
 		// end tes
 
 		$query = "
-		SELECT * FROM ulasan WHERE noseri_buku = $pilih_buku
+		SELECT * FROM ulasan
 		";
 		
 

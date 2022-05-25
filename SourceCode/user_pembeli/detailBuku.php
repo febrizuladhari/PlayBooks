@@ -287,13 +287,13 @@ session_start();
 
                                         <button type="button" class="btn mb-1 btn-info mt-5">Tambah ke Wishlish <span class="btn-icon-right"><i class="fa fa-bookmark"></i></span>
                                         </button>
-                                        
+
                                         <!-- Tombol Baca Buku -->
-                                        <a class="text-white text-decoration-none" href="bacaBuku.php?noseri_buku=<?php echo $data['noseri_buku'] ?>" target="_blank">
+                                        <!-- <a class="text-white text-decoration-none" href="bacaBuku.php?noseri_buku=<?php echo $data['noseri_buku'] ?>" target="_blank">
                                             <button type="button" class="btn mb-1 btn-info mt-5">Baca Buku
                                                 <span class="btn-icon-right"><i class="fa fa-book"></i></span>
                                             </button>
-                                        </a>
+                                        </a> -->
                                         
                                         
                                         

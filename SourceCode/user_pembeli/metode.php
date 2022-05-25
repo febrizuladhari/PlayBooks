@@ -272,7 +272,7 @@ session_start();
                                                         if($koneksi->query($sql)===TRUE){
                                                             echo "<script>
                                                             alert('Pembayaran Anda Berhasil !');
-                                                            setTimeout(\"location.href = 'index.php';\",1500);
+                                                            setTimeout(\"location.href = 'index.php';\",300);
                                                             </script> ";
                                                         } else {
                                                         echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;

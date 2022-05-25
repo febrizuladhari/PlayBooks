@@ -6,15 +6,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Admin - Management User</title>
+    <title>Google Admin</title>
     <!-- Favicon icon -->
     <link rel="icon" type="images/image/png" sizes="16x16" href="images/googlePlayLogo.png">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="icons/font-awesome/css/font-awesome.min.css">
     <!-- Custom Stylesheet -->
-    <link href= "css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
 </head>
+
 <body>
 
     <!--**********************************
@@ -27,7 +28,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="admin.php">
+                <a href="../index.php">
                     <b class="logo-abbr"><img src="images/googlePlayLogo.png" alt=""> </b>
                     <span class="logo-compact mx-auto"><img src="images/googlePlay.png" alt=""></span>
                     <span class="brand-title">
@@ -56,7 +57,7 @@
                 <div class="header-left">
                     <div class="input-group icons">
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2" style="width: 750px;" type="search" placeholder="Telusuri" aria-label="Search">
+                            <input class="form-control mr-sm-2" style="width: 700px;" type="search" placeholder="Telusuri" aria-label="Search">
                             <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
@@ -113,94 +114,116 @@
                 </ul>
             </div>
         </div>
-        <!--**********************************
-            Sidebar end
-        ***********************************-->
-
-        <!--**********************************
-            Content body start
-        ***********************************-->
+        
         <div class="content-body">
 
-            
-            <div class="container-fluid">
-                <div class="row" id="populer">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <!-- Management User -->
-                                    <div class="col-6 text-left">
-                                        <h4 class="card-title">User Management</h4>
-                                    </div>
-                                    <?php
-                                    require("../includes/koneksi.php");
-                                    $query = "SELECT * FROM user";
-                                    $hasil = mysqli_query($koneksi,$query);
-                                    echo "<table class ='table table-bordered text-center'>";
-                                    echo "<tr>
-                                        <th>Username</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Level</th>
-                                        <th colspan='2'>Action</th>
-                                    <tr>";
-                                    foreach ($hasil as $data){
-                                        echo "<tr>";
-                                        echo "<td>$data[username]";
-                                        echo "<td>$data[first_name]";
-                                        echo "<td>$data[last_name]";
-                                        echo "<td>$data[email]";
-                                        echo "<td>$data[level]";
 
-                                        // tombol update
-                                        // input hidden = nampak id nya
-                                        echo "<td><form method='POST'action='ubah.php'>";
-                                        echo "<input hidden type='text'name='id_user' value=$data[id_user]>";
-                                        echo "<button type='submit' name='btnUpdate'class='btn btn-success'>Update</button>";
-                                        echo "</form></td>";
+<div class="container-fluid">
+    <div class="row" id="populer">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Pembelian User -->
+                        <div class="col-6 text-left">
+                            <h4 class="card-title">Daftar Pembelian</h4>
+                        </div>
 
-                                        // tombol delete
-                                        echo "<td><form onsubmit=\"return confirm ('Anda yakin mau menghapus data?');\"method='POST'>";
-                                        echo "<input hidden type='text'name='id_user' value=$data[id_user]>";
-                                        echo "<button type='submit' name='btnHapus'class='btn btn-danger'><i class='far fa-trash-alt'></i> Delete</button>";
-                                        echo "</form></td>";
+                        <?php
+                            require("../includes/koneksi.php");
+                            $query = "SELECT * FROM metode_pembayaran JOIN buku ON metode_pembayaran.noseri_buku= buku.noseri_buku";
+                            $hasil = mysqli_query($koneksi,$query);
 
-                                        // tomboh tambah
+                            echo "<table class ='table table-bordered text-center'>";
+                            echo "<tr>
+                                <th>ID Pembelian</th>
+                                <th>ID User</th>
+                                <th>Username</th>
+                                <th>No Seri Buku</th>
+                                <th>Metode Pembayaran</th>
+                                <th>Judul Buku</th>
+                                <th>Harga Buku</th>
+                                <th colspan='2'>Action</th>
+                            <tr>";
 
-                                        echo "</tr>";
+                            foreach ($hasil as $data){
+                                echo "<tr>";
+                                echo "<td>$data[id_method]";
+                                echo "<td>$data[id_user]";
+                                echo "<td>$data[username]";
+                                echo "<td>$data[noseri_buku]";
+                                echo "<td>$data[method_payment]";
+                                echo "<td>$data[judul]";
+                                echo "<td>$data[harga_buku]";
+
+                                // tombol konfirmasi
+                                // input hidden = nampak id nya
+                                echo "<td><form onsubmit=\"return confirm ('Setujui Pembayaran Ini?');\"method='POST'>";
+                                echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
+                                echo "<button type='submit' name='btnKonfirmasi'class='btn btn-success btn-sm'>
+                                        Konfirmasi <i class= 'fa fa-check' title='konfirmasi'></i></button>";
+                                echo "</form></td>";
+
+                                // tombol delete
+                                echo "<td><form onsubmit=\"return confirm ('Hapus Pembayaran ini?');\"method='POST'>";
+                                echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
+                                echo "<button type='submit' name='btnHapus'class='btn btn-danger btn-sm'>Hapus <i class='fa fa-trash' title='hapus'></i></button>";
+                                echo "</form></td>";
+                                echo "</tr>";
+
+                            }
+                            echo "</table>";
+
+                        ?>
+
+                            <?php
+                                if(isset($_POST['btnKonfirmasi'])){
+
+                                    include '../includes/koneksi.php';
+                                        
+                                        $id_user = $_POST['id_user'];
+                                        $method_payment = $_POST['method_payment'];
+                                        $username = $_POST['username'];
+                                        $noseri_buku = $_POST['noseri_buku'];
+                                        $judul = $_POST['judul'];
+                                        $harga_buku = $_POST['harga_buku'];
+
+                                        $SQL_masuk = "INSERT INTO pembelian (id_user,method_payment,noseri_buku,username,judul,harga_buku) VALUES ('$id_user','$method_payment','$noseri_buku','$username','$judul','$harga_buku')";
+                                    
+                                    if($koneksi->query($SQL_masuk)===TRUE){
+                                        echo "<p class='alert alert-success text-center'><b>Pembayaran Disetujui.<a href='payment.php' class='btn btn-primary'>Kembali</a></b></p>";
+                                    } else {
+                                    echo "Terjadi kesalahan:".$SQL_masuk."<br/>".$koneksi->error;
+                                    }   
+                                } 		
+                            ?>
+
+                            <?php
+                                if(isset($_POST['btnHapus'])){
+                                    $id = $_POST['id_method'];
+                                    
+                                    if($koneksi) {
+                                        $sql = "DELETE FROM metode_pembayaran WHERE id_method=$id";
+                                        mysqli_query($koneksi, $sql);
+                                        echo "<p class='alert alert-success text-center'><b>Pembayaran berhasil dihapus.<a href='payment.php' class='btn btn-primary'>Kembali</a></b></p>";
+                                    } elseif ($koneksi->connect_error){
+                                        echo "<p class='alert alert-danger text-center><b>Pembayaran gagal dihapus. Terjadi kesalahan: ";
+                                        echo $koneksi->connect_error . "</b></p>";
                                     }
-                                    echo "</table>";
-                                    ?>
-                                    <?php
-                                        if(isset($_POST['btnHapus'])){
-                                            $id = $_POST['id_user'];
-                                            
-                                            if($koneksi) {
-                                                $sql = "DELETE FROM user WHERE id_user=$id";
-                                                mysqli_query($koneksi, $sql);
-                                                echo "<p class='alert alert-success text-center'><b> Data Akun berhasil dihapus.</b></p>";
-                                            } else {
-                                                echo "Terjadi kesalahan";
-                                            }
 
-                                        }
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
+                                }
+                            ?>
+
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- #/ container -->
         </div>
-        <!--**********************************
-            Content body end
-        ***********************************-->
+    </div>
+</div>
 
+<!-- #/ container -->
+</div>
         <!--**********************************
             Footer start
         ***********************************-->
