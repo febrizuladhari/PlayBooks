@@ -1,4 +1,14 @@
+<?php
+session_start();
+    if(empty($_SESSION['level'])) {
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../pages/login.php'</script>";
+    }
+?>
 
+<?php 
+    include "../pages/cek_admin.php";
+    include "../includes/koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,16 +66,23 @@
                 </div>
                 <div class="header-left">
                     <div class="input-group icons">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" style="width: 700px;" type="search" placeholder="Telusuri" aria-label="Search">
-                            <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
+                        <!-- Form Search Data -->
+                        <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST" class="form-inline">
+                        <?php
+                            $kata_kunci="";
+                            if (isset($_POST['kata_kunci'])) {
+                                $kata_kunci = $_POST['kata_kunci'];
+                            }
+                        ?>    
+                        <input name="kata_kunci" value="<?php echo $kata_kunci;?>" class="form-control mr-sm-2" style="width: 750px;" type="text" placeholder="Telusuri" aria-label="Search">
+                            <button name="cari" value="cari" class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
-                            <i class="fa fa-th fa-lg mr-3"></i>
+                            <h5 class="mx-3"><?=$_SESSION['first_name']?> <?=$_SESSION['last_name']?></h5>
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
@@ -80,7 +97,7 @@
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="../login.php"><span>Logout</span></a>
+                                            <a href="../pages/login.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -144,12 +161,28 @@
                             </thead>
                             <tbody>
 
+                                <!-- Fungsi Search Data -->
                                 <?php
                                     require("../includes/koneksi.php");
-                                    $query = "SELECT * FROM metode_pembayaran JOIN buku ON metode_pembayaran.noseri_buku = buku.noseri_buku";
-                                    $hasil = mysqli_query($koneksi,$query);
 
-                                    foreach ($hasil as $data){
+                                    if(isset($_POST['kata_kunci'])) {
+                                        $kata_kunci = trim($_POST['kata_kunci']);
+                                        $sql = "SELECT * FROM metode_pembayaran JOIN buku ON metode_pembayaran.noseri_buku = buku.noseri_buku WHERE method_payment LIKE '%".$kata_kunci."%' or username LIKE '%".$kata_kunci."%'";
+                                        $sql_query = mysqli_query($koneksi, $sql);
+                                    } else {
+                                        $sql = "SELECT * FROM metode_pembayaran JOIN buku ON metode_pembayaran.noseri_buku = buku.noseri_buku";
+                                        $sql_query = mysqli_query($koneksi, $sql);
+                                    }
+
+                                    foreach ($sql_query as $data) {
+                                ?>
+
+                                <?php
+                                    // require("../includes/koneksi.php");
+                                    // $query = "SELECT * FROM metode_pembayaran JOIN buku ON metode_pembayaran.noseri_buku = buku.noseri_buku";
+                                    // $hasil = mysqli_query($koneksi,$query);
+
+                                    // foreach ($hasil as $data){
                                     
                                 ?>
 
@@ -257,52 +290,6 @@
                                 ?>
                             </tbody>
                         </table>
-
-                        <?php
-                            // require("../includes/koneksi.php");
-                            // $query = "SELECT * FROM metode_pembayaran JOIN buku ON metode_pembayaran.noseri_buku= buku.noseri_buku";
-                            // $hasil = mysqli_query($koneksi,$query);
-
-                            // echo "<table class ='table table-bordered text-center'>";
-                            // echo "<tr>
-                            //     <th>ID Pembelian</th>
-                            //     <th>ID User</th>
-                            //     <th>Username</th>
-                            //     <th>No Seri Buku</th>
-                            //     <th>Metode Pembayaran</th>
-                            //     <th>Judul Buku</th>
-                            //     <th>Harga Buku</th>
-                            //     <th colspan='2'>Action</th>
-                            // <tr>";
-
-                            // foreach ($hasil as $data){
-                            //     echo "<tr>";
-                            //     echo "<td>$data[id_method]";
-                            //     echo "<td>$data[id_user]";
-                            //     echo "<td>$data[username]";
-                            //     echo "<td>$data[noseri_buku]";
-                            //     echo "<td>$data[method_payment]";
-                            //     echo "<td>$data[judul]";
-                            //     echo "<td>$data[harga_buku]";
-
-                            //     // tombol konfirmasi
-
-                            //     echo "<td><form onsubmit=\"return confirm ('Setujui Pembayaran Ini?');\"method='POST'>";
-                            //     echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
-                            //     echo "<button type='submit' name='btnKonfirmasi'class='btn btn-success btn-sm'>
-                            //             Konfirmasi <i class= 'fa fa-check' title='konfirmasi'></i></button>";
-                            //     echo "</form></td>";
-
-                            //     // tombol delete
-                            //     echo "<td><form onsubmit=\"return confirm ('Hapus Pembayaran ini?');\"method='POST'>";
-                            //     echo "<input hidden type='text'name='id_method' value=$data[id_method]>";
-                            //     echo "<button type='submit' name='btnHapus'class='btn btn-danger btn-sm'>Hapus <i class='fa fa-trash' title='hapus'></i></button>";
-                            //     echo "</form></td>";
-                            //     echo "</tr>";
-
-                            // }
-                            // echo "</table>";
-                        ?>
 
                             <!-- Fungsi Konfirmasi Pembelian -->
                             <?php

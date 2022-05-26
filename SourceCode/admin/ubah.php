@@ -1,4 +1,14 @@
+<?php
+session_start();
+    if(empty($_SESSION['level'])) {
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../pages/login.php'</script>";
+    }
+?>
 
+<?php 
+    include "../pages/cek_admin.php";
+    include "../includes/koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -64,7 +74,7 @@
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
-                            <i class="fa fa-th fa-lg mr-3"></i>
+                            <h5 class="mx-3"><?=$_SESSION['first_name']?> <?=$_SESSION['last_name']?></h5>
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
@@ -79,7 +89,7 @@
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="SourceCode/login.php"><span>Logout</span></a>
+                                            <a href="../pages/login.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -190,20 +200,20 @@
         </form>
         <?php 
         if (isset($_POST['btnUbah'])){
-           $no = $_POST['id_user'];
-           $user = $_POST['username'];
-           $first_name = $_POST['first_name'];
-           $last_name = $_POST['last_name'];
-           $pass = $_POST['password'];
-           $email = $_POST['email'];
+            $no = $_POST['id_user'];
+            $user = $_POST['username'];
+            $first_name = $_POST['first_name'];
+            $last_name = $_POST['last_name'];
+            $pass = $_POST['password'];
+            $email = $_POST['email'];
 
-           if ($koneksi){
+            if ($koneksi){
             $sql = "UPDATE user SET username='$user',first_name='$first_name', last_name='$last_name', password='$pass',email='$email' WHERE id_user=$no";
             mysqli_query($koneksi,$sql);
             echo "<p class='alert alert-success text-center'><b>Perubahan Akun Berhasil Disimpan. <a href='admin.php' class='btn btn-primary'>Kembali</a></b></p>";
-          } elseif ($koneksi->connect_error) {
+            } else  {
                 echo "<p class='alert alert-danger text-center><b>Terjadi kesalahan: $error</b></p>";
-          }      
+            }      
         }
         ?>
     </div>

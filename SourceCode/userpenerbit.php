@@ -65,8 +65,7 @@
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
-                            <h5 class="mx-3">Donny</h5>
-                            <!-- <i class="fa fa-th fa-lg mr-3"></i> -->
+                            <h5 class="mx-3"><?=$_SESSION['first_name']?> <?=$_SESSION['last_name']?></h5>
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">

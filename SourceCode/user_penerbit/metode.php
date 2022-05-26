@@ -1,7 +1,7 @@
 <?php
 session_start();
     if(empty($_SESSION['level'])) {
-        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../login.php'</script>";
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../pages/login.php'</script>";
     }
 ?>
 
@@ -89,7 +89,7 @@ session_start();
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="../logout.php"><span>Logout</span></a>
+                                            <a href="../pages/login.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -218,12 +218,20 @@ session_start();
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center form-check mt-4">
                                                 <div class="form-group">
-                                                    <label class="radio-inline mr-3">
-                                                        <input type="radio" value="transfer_bank" name="method_payment" required> Transfer Bank</label>
-                                                    <label class="radio-inline mr-3">
-                                                        <input type="radio" value="gopay" name="method_payment" required> Gopay </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" value="shopeepay"  name="method_payment" required> Shopeepay</label>
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <label class="radio-inline mr-3">
+                                                            <input type="radio" value="transfer_bank" name="method_payment" required> Transfer Bank <img src="images/transfer.png" style="width:15%;" alt=""></label>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label class="radio-inline mr-3">
+                                                            <input type="radio" value="gopay" name="method_payment" required> Gopay <img src="images/gopay.png" style="width:15%;" alt=""></label>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label class="radio-inline">
+                                                            <input type="radio" value="shopeepay"  name="method_payment" required> Shopeepay <img src="images/shopeepay.png" style="width:15%;" alt=""></label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div>  
@@ -232,7 +240,6 @@ session_start();
                                             <div class="pt-4"> 
                                                 <label class="d-flex justify-content-between"> 
                                                     <span class="label-text label-text-cc-number">Username</span>
-                                                    <img src="https://img.icons8.com/dusk/64/000000/visa.png" width="30" class="visa-icon" />
                                                 </label>
                                             <div>  
                                                 <input type="text" value="<?=$_SESSION['username']?>" id="username" name="username" class="form-control credit-card-number" placeholder="username" required>

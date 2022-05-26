@@ -1,11 +1,12 @@
 <?php
 session_start();
     if(empty($_SESSION['level'])) {
-        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../login.php'</script>";
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../pages/login.php'</script>";
     }
 ?>
 
 <?php 
+    include "../pages/cek_pembeli.php";
     include "../includes/koneksi.php";
 ?>
 <!DOCTYPE html>
@@ -89,7 +90,7 @@ session_start();
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="../logout.php"><span>Logout</span></a>
+                                            <a href="../pages/login.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -128,48 +129,23 @@ session_start();
                 <hr>
                 <ul class="metismenu" id="menu">
                     <li>
-                        <a href="akun.html" aria-expanded="false">
-                            <span class="nav-text">Akun</span>
+                        <a href="upload.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Upload</span>
                         </a>
                     </li>
                     <li>
-                        <a href="metode.php" aria-expanded="false">
-                            <span class="nav-text">Metode Pembayaran</span>
+                        <a href="rakSaya.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Rak Saya</span>
                         </a>
                     </li>
                     <li>
-                        <a href="playPoints.html" aria-expanded="false">
-                            <span class="nav-text">Play Points</span>
+                        <a href="pembelian.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Pembelian</span>
                         </a>
                     </li>
                     <li>
-                        <a href="langganan.html" aria-expanded="false">
-                            <span class="nav-text">Langganan saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tukarkan.html" aria-expanded="false">
-                            <span class="nav-text">Tukarkan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="beliKartu.html" aria-expanded="false">
-                            <span class="nav-text">Beli kartu hadiah</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishlist.html" aria-expanded="false">
-                            <span class="nav-text">Wishlish saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="aktivitas.html" aria-expanded="false">
-                            <span class="nav-text">Aktivitas Play saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="panduanOrang.html" aria-expanded="false">
-                            <span class="nav-text">Panduan Orang Tua</span>
+                        <a href="selesai.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Selesai</span>
                         </a>
                     </li>
                 </ul>
@@ -213,17 +189,25 @@ session_start();
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <h5 class="total-amount">Total amount</h5>
                                             </div>
-                                            <div class="d-flex justify-content-between align-items-center">
+                                            <div class="d-flex justify-content-between align-items-center mb-5">
                                                 <h7 class="total-amount">Pilih Metode Pembayaran</h7>
                                             </div>
                                             <div class="d-flex justify-content-between align-items-center form-check mt-4">
                                                 <div class="form-group">
-                                                    <label class="radio-inline mr-3">
-                                                        <input type="radio" value="transfer_bank" name="method_payment" required> Transfer Bank</label>
-                                                    <label class="radio-inline mr-3">
-                                                        <input type="radio" value="gopay" name="method_payment" required> Gopay </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" value="shopeepay"  name="method_payment" required> Shopeepay</label>
+                                                    <div class="row">
+                                                        <div class="col-4">
+                                                            <label class="radio-inline mr-3">
+                                                            <input type="radio" value="transfer_bank" name="method_payment" required> Transfer Bank <img src="images/transfer.png" style="width:15%;" alt=""></label>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label class="radio-inline mr-3">
+                                                            <input type="radio" value="gopay" name="method_payment" required> Gopay <img src="images/gopay.png" style="width:15%;" alt=""></label>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label class="radio-inline">
+                                                            <input type="radio" value="shopeepay"  name="method_payment" required> Shopeepay <img src="images/shopeepay.png" style="width:15%;" alt=""></label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div>  
@@ -232,7 +216,6 @@ session_start();
                                             <div class="pt-4"> 
                                                 <label class="d-flex justify-content-between"> 
                                                     <span class="label-text label-text-cc-number">Username</span>
-                                                    <img src="https://img.icons8.com/dusk/64/000000/visa.png" width="30" class="visa-icon" />
                                                 </label>
                                             <div>  
                                                 <input type="text" value="<?=$_SESSION['username']?>" id="username" name="username" class="form-control credit-card-number" placeholder="username" required>

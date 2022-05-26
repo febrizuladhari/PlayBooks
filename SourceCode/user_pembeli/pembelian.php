@@ -1,3 +1,14 @@
+<?php
+session_start();
+    if(empty($_SESSION['level'])) {
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../pages/login.php'</script>";
+    }
+?>
+
+<?php 
+    include "../pages/cek_pembeli.php";
+    include "../includes/koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +38,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="index.php">
                     <b class="logo-abbr"><img src="images/googlePlayLogo.png" alt=""> </b>
                     <span class="logo-compact mx-auto"><img src="images/googlePlay.png" alt=""></span>
                     <span class="brand-title">
@@ -67,7 +78,7 @@
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
-                            <i class="fa fa-th fa-lg mr-3"></i>
+                            <h5 class="mx-3"><?=$_SESSION['first_name']?> <?=$_SESSION['last_name']?></h5>
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
@@ -82,7 +93,7 @@
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="../login.php"><span>Logout</span></a>
+                                            <a href="../pages/login.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -103,8 +114,8 @@
             <div class="nk-nav-scroll">
                 <ul class="metismenu" id="menu">
                     <li>
-                        <a href="index.html" aria-expanded="true">
-                            <span class="nav-text ml-3" style="font-size: large;"><i class="fa fa-book fa-lg"></i> Buku</span>
+                        <a href="index.php" aria-expanded="true">
+                            <span class="nav-text ml-3" style="font-size: large;">Buku</span>
                         </a>
                     </li>
                     <li>

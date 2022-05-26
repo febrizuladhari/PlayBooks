@@ -1,11 +1,12 @@
 <?php
 session_start();
     if(empty($_SESSION['level'])) {
-        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../login.php'</script>";
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../pages/login.php'</script>";
     }
 ?>
 
 <?php 
+    include "../pages/cek_pembeli.php";
     include "../includes/koneksi.php";
 ?>
 

@@ -6,6 +6,13 @@ session_start();
 ?>
 
 <?php 
+    if($_SESSION['level']!="Pembeli")
+    {
+        echo "<script>
+            alert('Anda Bukan Pembeli, Silakan Keluar !');
+            setTimeout(\"location.href = '../../pages/login.php';\",300);
+        </script> ";
+    }
     include "../../includes/koneksi.php";
 ?>
 
@@ -98,7 +105,7 @@ session_start();
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="../../logout.php"><span>Logout</span></a>
+                                            <a href="../../pages/logout.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -137,48 +144,23 @@ session_start();
                 <hr>
                 <ul class="metismenu" id="menu">
                     <li>
-                        <a href="akun.html" aria-expanded="false">
-                            <span class="nav-text">Akun</span>
+                        <a href="upload.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Upload</span>
                         </a>
                     </li>
                     <li>
-                        <a href="metode.html" aria-expanded="false">
-                            <span class="nav-text">Metode Pembayaran</span>
+                        <a href="rakSaya.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Rak Saya</span>
                         </a>
                     </li>
                     <li>
-                        <a href="playPoints.html" aria-expanded="false">
-                            <span class="nav-text">Play Points</span>
+                        <a href="pembelian.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Pembelian</span>
                         </a>
                     </li>
                     <li>
-                        <a href="langganan.html" aria-expanded="false">
-                            <span class="nav-text">Langganan saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tukarkan.html" aria-expanded="false">
-                            <span class="nav-text">Tukarkan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="beliKartu.html" aria-expanded="false">
-                            <span class="nav-text">Beli kartu hadiah</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishlist.html" aria-expanded="false">
-                            <span class="nav-text">Wishlish saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="aktivitas.html" aria-expanded="false">
-                            <span class="nav-text">Aktivitas Play saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="panduanOrang.html" aria-expanded="false">
-                            <span class="nav-text">Panduan Orang Tua</span>
+                        <a href="selesai.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Selesai</span>
                         </a>
                     </li>
                 </ul>
@@ -271,7 +253,7 @@ session_start();
                                                 
                                             } else {
 
-                                                $sql = "SELECT * FROM buku ORDER BY tanggal_terbit DESC";
+                                                $sql = "SELECT * FROM buku ORDER BY rand()";
                                                 $sql_query = mysqli_query($koneksi, $sql);
                                             }
 

@@ -1,4 +1,14 @@
+<?php
+session_start();
+    if(empty($_SESSION['level'])) {
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../pages/login.php'</script>";
+    }
+?>
 
+<?php 
+    include "../pages/cek_admin.php";
+    include "../includes/koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,16 +65,23 @@
                 </div>
                 <div class="header-left">
                     <div class="input-group icons">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" style="width: 750px;" type="search" placeholder="Telusuri" aria-label="Search">
-                            <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
+                        <!-- Form Search Data -->
+                        <form action="<?php echo $_SERVER["PHP_SELF"];?>" method="POST" class="form-inline">
+                        <?php
+                            $kata_kunci="";
+                            if (isset($_POST['kata_kunci'])) {
+                                $kata_kunci = $_POST['kata_kunci'];
+                            }
+                        ?>    
+                        <input name="kata_kunci" value="<?php echo $kata_kunci;?>" class="form-control mr-sm-2" style="width: 750px;" type="text" placeholder="Telusuri" aria-label="Search">
+                            <button name="cari" value="cari" class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
                 </div>
                 <div class="header-right">
                     <ul class="clearfix">
                         <li class="icons dropdown">
-                            <i class="fa fa-th fa-lg mr-3"></i>
+                            <h5 class="mx-3"><?=$_SESSION['first_name']?> <?=$_SESSION['last_name']?></h5>
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
@@ -79,7 +96,7 @@
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="../login.php"><span>Logout</span></a>
+                                            <a href="../pages/login.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -133,54 +150,98 @@
                                     <div class="col-6 text-left">
                                         <h4 class="card-title">User Management</h4>
                                     </div>
-                                    <?php
-                                    require("../includes/koneksi.php");
-                                    $query = "SELECT * FROM user";
-                                    $hasil = mysqli_query($koneksi,$query);
-                                    echo "<table class ='table table-bordered text-center'>";
-                                    echo "<tr>
-                                        <th>Username</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Email</th>
-                                        <th>Level</th>
-                                        <th colspan='2'>Action</th>
-                                    <tr>";
-                                    foreach ($hasil as $data){
-                                        echo "<tr>";
-                                        echo "<td>$data[username]";
-                                        echo "<td>$data[first_name]";
-                                        echo "<td>$data[last_name]";
-                                        echo "<td>$data[email]";
-                                        echo "<td>$data[level]";
 
-                                        // tombol update
-                                        // input hidden = nampak id nya
-                                        echo "<td><form method='POST'action='ubah.php'>";
-                                        echo "<input hidden type='text'name='id_user' value=$data[id_user]>";
-                                        echo "<button type='submit' name='btnUpdate'class='btn btn-success'>Update</button>";
-                                        echo "</form></td>";
+                                    <table class ='table table-bordered text-center'>
+                                        <thead>
+                                            <tr>
+                                                <th>Username</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>Level</th>
+                                                <th colspan='2'>Action</th>
+                                            <tr>
+                                        </thead>
+                                        <tbody>
 
-                                        // tombol delete
-                                        echo "<td><form onsubmit=\"return confirm ('Anda yakin mau menghapus data?');\"method='POST'>";
-                                        echo "<input hidden type='text'name='id_user' value=$data[id_user]>";
-                                        echo "<button type='submit' name='btnHapus'class='btn btn-danger'><i class='far fa-trash-alt'></i> Delete</button>";
-                                        echo "</form></td>";
+                                            <!-- Fungsi Search Data -->
+                                            <?php
+                                                require("../includes/koneksi.php");
 
-                                        // tomboh tambah
+                                                if(isset($_POST['kata_kunci'])) {
+                                                    $kata_kunci = trim($_POST['kata_kunci']);
+                                                    $sql = "SELECT * FROM user WHERE username LIKE '%".$kata_kunci."%' or first_name LIKE '%".$kata_kunci."%' or last_name LIKE '%".$kata_kunci."%' or level LIKE '%".$kata_kunci."%'";
+                                                    $sql_query = mysqli_query($koneksi, $sql);
+                                                } else {
+                                                    $sql = "SELECT * FROM user";
+                                                    $sql_query = mysqli_query($koneksi, $sql);
+                                                }
 
-                                        echo "</tr>";
-                                    }
-                                    echo "</table>";
-                                    ?>
+                                                foreach ($sql_query as $data) {
+                                            ?>
+
+                                                <tr>
+                                                    <td><?= $data['username'] ?></td>
+                                                    <td><?= $data['first_name'] ?></td>
+                                                    <td><?= $data['last_name'] ?></td>
+                                                    <td><?= $data['email'] ?></td>
+                                                    <td><?= $data['level'] ?></td>
+                                                    
+                                                    <td>
+                                                        <form method='POST'action='ubah.php'>
+                                                            <input hidden type='text'name='id_user' value='<?= $data['id_user'] ?>'>
+                                                            <button type='submit' name='btnUpdate'class='btn btn-success'>Update</button>
+                                                        </form>
+                                                    </td>
+
+                                                    <td>
+                                                        <button type='button' name='delete' class='btn btn-danger' data-toggle='modal' data-target='#delete<?= $data['id_user'] ?>'>
+                                                        Hapus
+                                                        </button>
+                                                    </td>
+
+                                                </tr>
+                                                    <!-- Delete Modal -->
+                                                    <div class="modal fade" id="delete<?= $data['id_user'] ?>" tabindex="-1" role="dialog" aria-labelledby="delete" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                <h5 class="modal-title">Hapus History Ini ?</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form method="POST">
+                                                                    <div class="modal-body">
+                                                                        Apakah Anda Yakin Ingin Menghapus User dengan Kode : <?= $data['id_user'] ?> 
+                                                                    <div class="modal-footer"> 
+                                                                        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                                        <input hidden type="text" name="id_user" value="<?= $data['id_user'] ?>">
+                                                                        <button type="submit" name="btnHapus" class="btn btn-danger" action>Hapus</button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            <?php 
+                                                }
+                                            ?>
+
+                                        </tbody>
+                                    </table>
+                                    
+
                                     <?php
                                         if(isset($_POST['btnHapus'])){
                                             $id = $_POST['id_user'];
                                             
                                             if($koneksi) {
-                                                $sql = "DELETE FROM user WHERE id_user=$id";
+                                                $sql = "DELETE FROM user WHERE id_user = $id";
                                                 mysqli_query($koneksi, $sql);
-                                                echo "<p class='alert alert-success text-center'><b> Data Akun berhasil dihapus.</b></p>";
+                                                echo "<script>
+                                                    alert('User Berhasil Dihapus !');
+                                                    setTimeout(\"location.href = 'admin.php';\",300);
+                                                </script> ";
                                             } else {
                                                 echo "Terjadi kesalahan";
                                             }

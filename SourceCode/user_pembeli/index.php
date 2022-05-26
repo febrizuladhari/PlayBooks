@@ -1,11 +1,12 @@
 <?php
 session_start();
     if(empty($_SESSION['level'])) {
-        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../login.php'</script>";
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../pages/login.php'</script>";
     }
 ?>
 
 <?php 
+    include "../pages/cek_pembeli.php";
     include "../includes/koneksi.php";
 ?>
 <!DOCTYPE html>
@@ -74,7 +75,6 @@ session_start();
                     <ul class="clearfix">
                         <li class="icons dropdown">
                             <h5 class="mx-3"><?=$_SESSION['first_name']?> <?=$_SESSION['last_name']?></h5>
-                            <!-- <i class="fa fa-th fa-lg mr-3"></i> -->
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
@@ -89,7 +89,7 @@ session_start();
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="../logout.php"><span>Logout</span></a>
+                                            <a href="../pages/logout.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -128,48 +128,23 @@ session_start();
                 <hr>
                 <ul class="metismenu" id="menu">
                     <li>
-                        <a href="akun.html" aria-expanded="false">
-                            <span class="nav-text">Akun</span>
+                        <a href="upload.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Upload</span>
                         </a>
                     </li>
                     <li>
-                        <a href="metode.html" aria-expanded="false">
-                            <span class="nav-text">Metode Pembayaran</span>
+                        <a href="rakSaya.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Rak Saya</span>
                         </a>
                     </li>
                     <li>
-                        <a href="playPoints.html" aria-expanded="false">
-                            <span class="nav-text">Play Points</span>
+                        <a href="pembelian.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Pembelian</span>
                         </a>
                     </li>
                     <li>
-                        <a href="langganan.html" aria-expanded="false">
-                            <span class="nav-text">Langganan saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tukarkan.html" aria-expanded="false">
-                            <span class="nav-text">Tukarkan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="beliKartu.html" aria-expanded="false">
-                            <span class="nav-text">Beli kartu hadiah</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishlist.html" aria-expanded="false">
-                            <span class="nav-text">Wishlish saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="aktivitas.html" aria-expanded="false">
-                            <span class="nav-text">Aktivitas Play saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="panduanOrang.html" aria-expanded="false">
-                            <span class="nav-text">Panduan Orang Tua</span>
+                        <a href="selesai.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Selesai</span>
                         </a>
                     </li>
                 </ul>
