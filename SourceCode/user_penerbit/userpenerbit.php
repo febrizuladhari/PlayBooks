@@ -323,7 +323,7 @@ session_start();
                                             foreach ($sql_query as $data) {
                                         ?>
                                         <!-- Perulangan Buku -->
-                                        <div class="col-2" <?php echo $data['noseri_buku'] ?>>
+                                        <div class="col-4" <?php echo $data['noseri_buku'] ?>>
                                             <div class="card" style="height: 35rem;">
                                                 <a href="bacaBukuup.php?noseri_buku=<?php echo $data['noseri_buku'] ?>">
                                                     <img class="img-fluid" src="../user_pembeli/coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
