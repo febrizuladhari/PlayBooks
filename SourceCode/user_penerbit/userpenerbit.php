@@ -90,7 +90,7 @@ session_start();
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="logout.php"><span>Logout</span></a>
+                                            <a href="../pages/logout.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -472,7 +472,7 @@ session_start();
                                                                 if ($koneksi){
                                                                 $update = "UPDATE terbitansaya SET noseri_buku='$noseri_buku', judul='$judul', kategori='$kategori', sinopsis='$sinopsis', harga_buku='$harga_buku', jlh_halaman='$jlh_halaman', bahasa='$bahasa', penerbit='$penerbit', tanggal_terbit='$tanggal_terbit', contain_buku='$name_file', cover_buku='$file_name' WHERE noseri_buku=$noseri_buku";
                                                                 mysqli_query($koneksi,$update);
-                                                                echo "<script>setTimeout(\"location.href = 'tesTerbit.php';\",1500);</script>";
+                                                                echo "<script>setTimeout(\"location.href = 'userpenerbit.php';\",1500);</script>";
                                                         
                                                                 } else {
                                                                     echo 'Gagal';

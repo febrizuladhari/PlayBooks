@@ -281,6 +281,7 @@ session_start();
                                                         Tambahkan <?php echo $data['judul'] ?> ke My Wishlist ?
                                                     </div>
                                                         <button type="submit" class="btn btn-secondary ml-3 mb-3" data-dismiss="modal">Batal</button>
+                                                        <input hidden type="text" name="id_user" value="<?=$_SESSION['id_user']?>">
                                                         <input hidden type="text" name="noseri_buku" value="<?php echo $data['noseri_buku'] ?>">
                                                         <input hidden type="text" name="cover_buku" value="<?php echo $data['cover_buku'] ?>">
                                                         <input hidden type="text" name="judul" value="<?php echo $data['judul'] ?>">
@@ -292,13 +293,14 @@ session_start();
                                                             require_once'../includes/koneksi.php';
                                                             
                                                             if(isset($_POST['buttonwl'])){
+                                                                $id_user = $_POST['id_user'];
                                                                 $noseri_buku = $_POST['noseri_buku'];
                                                                 $cover_buku = $_POST['cover_buku'];
                                                                 $judul = $_POST['judul'];
                                                                 $penerbit = $_POST['penerbit'];
                                                                 $kategori = $_POST['kategori'];
                                                                 $harga_buku = $_POST['harga_buku'];
-                                                                $sql = "INSERT INTO wishlist (noseri_buku, cover_buku, judul, penerbit, kategori, harga_buku) VALUES ('$noseri_buku','$cover_buku','$judul','$penerbit','$kategori','$harga_buku')";
+                                                                $sql = "INSERT INTO wishlist (id_user, noseri_buku, cover_buku, judul, penerbit, kategori, harga_buku) VALUES ('$id_user','$noseri_buku','$cover_buku','$judul','$penerbit','$kategori','$harga_buku')";
                                                                                     
                                                                 if($koneksi->query($sql)===TRUE){
                                                                 echo "<script>setTimeout(\"location.href = 'Mywishlist.php';\",1500);</script>";

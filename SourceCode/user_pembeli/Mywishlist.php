@@ -233,7 +233,8 @@ session_start();
                                         <?php 
                                             include '../includes/koneksi.php';
 
-                                            $sql = "SELECT * FROM wishlist";
+                                            $id_user = $_SESSION['id_user'];
+                                            $sql = "SELECT * FROM wishlist WHERE id_user = '".$id_user."'";
                                             $SQL_QUERY = mysqli_query($koneksi, $sql);
 
                                         while ($data = mysqli_fetch_array($SQL_QUERY)){

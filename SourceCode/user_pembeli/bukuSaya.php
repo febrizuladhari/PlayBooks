@@ -114,17 +114,17 @@ session_start();
                 <ul class="metismenu" id="menu">
                     <li>
                         <a href="index.php" aria-expanded="true">
-                            <span class="nav-text ml-3" style="font-size: large;">Buku</span>
+                            <span class="nav-text ml-3">Buku</span>
                         </a>
                     </li>
                     <li>
                         <a href="bukuSaya.php" aria-expanded="false">
-                            <span class="nav-text ml-3" style="font-size: large;">Buku Saya</span>
+                            <span class="nav-text ml-3">Buku Saya</span>
                         </a>
                     </li>
                     <li>
                         <a href="index.php" aria-expanded="false">
-                            <span class="nav-text ml-3" style="font-size: large;">Toko</span>
+                            <span class="nav-text ml-3">Toko</span>
                         </a>
                     </li>
                 </ul>
