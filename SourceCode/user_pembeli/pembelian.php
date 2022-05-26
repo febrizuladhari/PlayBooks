@@ -305,7 +305,7 @@ session_start();
                                             $contain_buku=$data['contain_buku'];
                                     ?>
                                     <!-- Perulangan Buku -->
-                                    <div class="col-2" <?=$noseri_buku;?>>
+                                    <div class="col-md-6 col-lg-3" <?=$noseri_buku;?>>
                                             <div class="card" style="height: 35rem;">
                                                     <img class="img-fluid" src="coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
                                                 <div class="card-body">
@@ -315,7 +315,7 @@ session_start();
                                                 </div>
                                                 <div class="btn-group dropright mb-3 ml-2" aria-expanded="false">
                                                     <button type="button" class="btn btn-info" data-toggle="modal" data-target=".bd-isi-modal-lg">Action</button>
-                                                    <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"></button>
+                                                    <button type="button" class="btn btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" style="width:60px"></button>
                                                     <div class="dropdown-menu">
                                                     <a class="dropdown-item" href="bacabukusaya.php?noseri_buku=<?php echo $data['noseri_buku'] ?>">Detail</a>
                                                     <a class="dropdown-item" data-toggle="modal" data-target="#addrakbukuModal<?=$noseri_buku;?>">Tambah ke Rak</a>

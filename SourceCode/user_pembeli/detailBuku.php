@@ -258,9 +258,56 @@ session_start();
                                                 <span class="btn-icon-right"><i class="fa fa-book"></i></span>
                                             </button>
                                         </a>
-
-                                        <button type="button" class="btn mb-1 btn-info mt-5">Tambah ke Wishlish <span class="btn-icon-right"><i class="fa fa-bookmark"></i></span>
+                                        
+                                        <button type="button" class="btn mb-1 btn-info mt-5" data-toggle="modal" data-target="#insertwlModal<?php echo $data['noseri_buku'] ?>">Tambah ke Wishlist <span class="btn-icon-right"><i class="fa fa-bookmark"></i></span>
                                         </button>
+                                        <!-- Modal Insert My Wishlist  -->
+                                        <div class="modal fade" id="insertwlModal<?php echo $data['noseri_buku'] ?>" tabindex="-1" role="dialog" aria-labelledby="insertwlModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                    <h5 class="modal-title" id="insertwlModalLabel">Tambahkan ke My Wsihlist</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form method="POST">
+                                                    <div class="modal-body">
+                                                        Tambahkan <?php echo $data['judul'] ?> ke My Wishlist ?
+                                                    </div>
+                                                        <button type="submit" class="btn btn-secondary ml-3 mb-3" data-dismiss="modal">Batal</button>
+                                                        <input hidden type="text" name="noseri_buku" value="<?php echo $data['noseri_buku'] ?>">
+                                                        <input hidden type="text" name="cover_buku" value="<?php echo $data['cover_buku'] ?>">
+                                                        <input hidden type="text" name="judul" value="<?php echo $data['judul'] ?>">
+                                                        <input hidden type="text" name="penerbit" value="<?php echo $data['penerbit'] ?>">
+                                                        <input hidden type="text" name="kategori" value="<?php echo $data['kategori'] ?>">
+                                                        <input hidden type="text" name="harga_buku" value="<?php echo $data['harga_buku'] ?>">
+                                                    <button type="submit" name="buttonwl" class="btn btn-info ml-1 mb-3" action>Add to My Wishlist</button>
+                                                        <?php
+                                                            require_once'../includes/koneksi.php';
+                                                            
+                                                            if(isset($_POST['buttonwl'])){
+                                                                $noseri_buku = $_POST['noseri_buku'];
+                                                                $cover_buku = $_POST['cover_buku'];
+                                                                $judul = $_POST['judul'];
+                                                                $penerbit = $_POST['penerbit'];
+                                                                $kategori = $_POST['kategori'];
+                                                                $harga_buku = $_POST['harga_buku'];
+                                                                $sql = "INSERT INTO wishlist (noseri_buku, cover_buku, judul, penerbit, kategori, harga_buku) VALUES ('$noseri_buku','$cover_buku','$judul','$penerbit','$kategori','$harga_buku')";
+                                                                                    
+                                                                if($koneksi->query($sql)===TRUE){
+                                                                echo "<script>setTimeout(\"location.href = 'Mywishlist.php';\",1500);</script>";
+                                                                } else {
+                                                                echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
+                                                                }
+
+                                                                
+                                                            }
+                                                        ?>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <!-- Tombol Baca Buku -->
                                         <!-- <a class="text-white text-decoration-none" href="bacaBuku.php?noseri_buku=<?php echo $data['noseri_buku'] ?>" target="_blank">
