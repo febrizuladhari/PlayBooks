@@ -90,11 +90,11 @@ session_start();
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="akun.html"><span>Kelola Akun Anda</span></a>
+                                            <a href="#"><span>Kelola Akun Anda</span></a>
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="../pages/login.php"><span>Logout</span></a>
+                                            <a href="../pages/logout.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>

@@ -88,7 +88,7 @@ session_start();
                                         </li>
                                         <hr class="my-2">
                                         <li>
-                                            <a href="../pages/login.php"><span>Logout</span></a>
+                                            <a href="../pages/logout.php"><span>Logout</span></a>
                                         </li>
                                     </ul>
                                 </div>
@@ -98,7 +98,7 @@ session_start();
                 </div>
             </div>
         </div>
-           <!--**********************************
+        <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
 
