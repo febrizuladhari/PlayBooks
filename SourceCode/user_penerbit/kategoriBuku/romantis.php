@@ -67,7 +67,7 @@ session_start();
                 <div class="header-left">
                     <div class="input-group icons">
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2" style="width: 750px;" type="search" placeholder="Telusuri" aria-label="Search">
+                            <input class="form-control mr-sm-2" style="width: 700px;" type="search" placeholder="Telusuri" aria-label="Search">
                             <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
@@ -110,15 +110,15 @@ session_start();
         ***********************************-->
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
+            <ul class="metismenu" id="menu">
                     <li>
                         <a href="../index.php" aria-expanded="true">
                             <span class="nav-text ml-3">Buku</span>
                         </a>
                     </li>
                     <li>
-                        <a href="bukuSaya.html" aria-expanded="false">
-                            <span class="nav-text ml-3">Buku Saya</span>
+                        <a href="../userpenerbit.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Terbitan Saya</span>
                         </a>
                     </li>
                     <li>
@@ -127,55 +127,6 @@ session_start();
                         </a>
                     </li>
                 </ul>
-                <hr>
-                <ul class="metismenu" id="menu">
-                    <li>
-                        <a href="akun.html" aria-expanded="false">
-                            <span class="nav-text">Akun</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="metode.html" aria-expanded="false">
-                            <span class="nav-text">Metode Pembayaran</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="playPoints.html" aria-expanded="false">
-                            <span class="nav-text">Play Points</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="langganan.html" aria-expanded="false">
-                            <span class="nav-text">Langganan saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="tukarkan.html" aria-expanded="false">
-                            <span class="nav-text">Tukarkan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="beliKartu.html" aria-expanded="false">
-                            <span class="nav-text">Beli kartu hadiah</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishlist.html" aria-expanded="false">
-                            <span class="nav-text">Wishlish saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="aktivitas.html" aria-expanded="false">
-                            <span class="nav-text">Aktivitas Play saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="panduanOrang.html" aria-expanded="false">
-                            <span class="nav-text">Panduan Orang Tua</span>
-                        </a>
-                    </li>
-                </ul>
-                <hr>
             </div>
         </div>
         <!--**********************************

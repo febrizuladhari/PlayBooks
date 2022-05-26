@@ -15,14 +15,14 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Selesai di Baca</title>
+    <title>Selesai Dibaca</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/googlePlayLogo.png">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="icons/font-awesome/css/font-awesome.min.css">
     <!-- Custom Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-   
+
 </head>
 
 <body>
@@ -114,22 +114,27 @@ session_start();
                 <ul class="metismenu" id="menu">
                     <li>
                         <a href="index.php" aria-expanded="true">
-                            <span class="nav-text ml-3" style="font-size: large;">Buku</span>
+                            <span class="nav-text ml-3">Buku</span>
                         </a>
                     </li>
                     <li>
                         <a href="bukuSaya.php" aria-expanded="false">
-                            <span class="nav-text ml-3" style="font-size: large;">Buku Saya</span>
+                            <span class="nav-text ml-3">Buku Saya</span>
                         </a>
                     </li>
                     <li>
                         <a href="index.php" aria-expanded="false">
-                            <span class="nav-text ml-3" style="font-size: large;">Toko</span>
+                            <span class="nav-text ml-3">Toko</span>
                         </a>
                     </li>
                 </ul>
                 <hr>
                 <ul class="metismenu" id="menu">
+                    <li>
+                        <a href="Mywishlist.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Wishlist</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="upload.php" aria-expanded="false">
                             <span class="nav-text ml-3">Upload</span>

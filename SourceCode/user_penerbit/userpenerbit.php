@@ -1,3 +1,13 @@
+<?php
+session_start();
+    if(empty($_SESSION['level'])) {
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../pages/login.php'</script>";
+    }
+?>
+
+<?php 
+    include "../includes/koneksi.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,13 +15,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Google Play Books</title>
+    <title>Terbitan Saya</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="user/images/googlePlayLogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/googlePlayLogo.png">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="user/icons/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="icons/font-awesome/css/font-awesome.min.css">
     <!-- Custom Stylesheet -->
-    <link href="user/css/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
 </head>
 
@@ -28,10 +38,10 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="index.php">
-                    <b class="logo-abbr"><img src="user/images/googlePlayLogo.png" alt=""> </b>
-                    <span class="logo-compact mx-auto"><img src="user/images/googlePlay.png" alt=""></span>
+                    <b class="logo-abbr"><img src="images/googlePlayLogo.png" alt=""> </b>
+                    <span class="logo-compact mx-auto"><img src="images/googlePlay.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="user/images/googlePlay.png" alt="" width="100%">
+                        <img src="images/googlePlay.png" alt="" width="100%">
                     </span>
                 </a>
             </div>
@@ -57,7 +67,7 @@
                 <div class="header-left">
                     <div class="input-group icons">
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2" style="width: 750px;" type="search" placeholder="Telusuri" aria-label="Search">
+                            <input class="form-control mr-sm-2" style="width: 700px;" type="search" placeholder="Telusuri" aria-label="Search">
                             <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
@@ -70,7 +80,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="user/images/profile.png" height="40" width="40" alt="">
+                                <img src="images/profile.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -99,20 +109,20 @@
         ***********************************-->
         <div class="nk-sidebar">           
             <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
+            <ul class="metismenu" id="menu">
                     <li>
-                        <a href="index.html" aria-expanded="true">
-                            <span class="nav-text ml-3" style="font-size: large;"><i class="fa fa-book fa-lg"></i> Buku</span>
+                        <a href="index.php" aria-expanded="true">
+                            <span class="nav-text ml-3">Buku</span>
                         </a>
                     </li>
                     <li>
-                        <a href="terbitanSaya.html" aria-expanded="false">
-                            <span class="nav-text ml-3" style="font-size: large;">Terbitan Saya</span>
+                        <a href="userpenerbit.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Terbitan Saya</span>
                         </a>
                     </li>
                     <li>
-                        <a href="index.html" aria-expanded="false">
-                            <span class="nav-text ml-3" style="font-size: large;">Toko</span>
+                        <a href="index.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Toko</span>
                         </a>
                     </li>
                 </ul>
@@ -151,142 +161,131 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                        <form method="POST" enctype="multipart/form-data">
-                                                            <div class="form-group">
-                                                                <span class="form-label">No Seri Buku</span>
-                                                                <input class="form-control" name="noSeri" type="number" required="">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">ID Ulasan</span>
-                                                                <input class="form-control" name="ulasan" type="number" required="">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Judul</span>
-                                                                <input class="form-control" name="judul" type="text">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Kategori</span>
-                                                                <input class="form-control" name="kategori" type="text">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Sinopsis</span>
-                                                                <input class="form-control" name="sinopsis" type="text">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Contoh gratis</span>
-                                                                <input class="form-control" name="contoh" type="text">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Rating</span>
-                                                                <input class="form-control" name="rating" type="text">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Harga</span>
-                                                                <input class="form-control" name="harga" type="text">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Halaman</span>
-                                                                <input class="form-control" name="halaman" type="number">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Bahasa</span>
-                                                                <input class="form-control" name="bahasa" type="text">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Penerbit</span>
-                                                                <input class="form-control" name="penerbit" type="text">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Tanggal</span>
-                                                                <input class="form-control" name="tanggal" type="date">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Contain Buku</span>
-                                                                <div class="input-group ">
-                                                                    <input type="file" class="form-control" style="height:auto" id="inputGroupFile02" name="filePDF"> 
-                                                                </div>            </div>
-                                                            <div class="form-group">
-                                                                <span class="form-label">Cover</span>
-                                                                <div class="input-group ">
-                                                                    <input type="file" class="form-control" style="height:auto" id="inputGroupFile01" name="namafile"> 
+                                                            <form method="POST" enctype="multipart/form-data">
+                                                                <div class="form-group">
+                                                                    <input class="form-control" name="id_user" value="<?=$_SESSION['id_user']?>" type="hidden" required="">
                                                                 </div>
-                                                            </div>
-                                                                        <button type="submit" class="btn btn-primary btn-lg" name="buttonins">Upload</button>
+                                                                <div class="form-group">
+                                                                    <span class="form-label">No Seri Buku</span>
+                                                                    <input class="form-control" name="noSeri" type="number" required="">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <span class="form-label">Judul</span>
+                                                                    <input class="form-control" name="judul" type="text">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <span class="form-label">Kategori</span>
+                                                                    <input class="form-control" name="kategori" type="text">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <span class="form-label">Sinopsis</span>
+                                                                    <input class="form-control" name="sinopsis" type="text">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <span class="form-label">Harga</span>
+                                                                    <input class="form-control" name="harga" type="text">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <span class="form-label">Halaman</span>
+                                                                    <input class="form-control" name="halaman" type="number">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <span class="form-label">Bahasa</span>
+                                                                    <input class="form-control" name="bahasa" type="text">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <span class="form-label">Penerbit</span>
+                                                                    <input class="form-control" name="penerbit" type="text">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <span class="form-label">Tanggal</span>
+                                                                    <input class="form-control" name="tanggal" type="date">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <span class="form-label">Contain Buku</span>
+                                                                    <div class="input-group ">
+                                                                        <input type="file" class="form-control" style="height:auto" id="inputGroupFile02" name="filePDF"> 
+                                                                    </div>            </div>
+                                                                <div class="form-group">
+                                                                    <span class="form-label">Cover</span>
+                                                                    <div class="input-group ">
+                                                                        <input type="file" class="form-control" style="height:auto" id="inputGroupFile01" name="namafile"> 
+                                                                    </div>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary btn-lg" name="buttonins">Upload</button>
+                                                            
+                                                                <button type="reset" class="btn btn-danger btn-lg" name="buttoncnc">Reset</button>
                                                                     
-                                                                        <button type="reset" class="btn btn-danger btn-lg" name="buttoncnc">Reset</button>
-                                                                   
-                                                            </div>
-                                                            <?php
-                                                                include 'includes/koneksi.php';
-                                                            
-                                                                if(isset($_POST['buttonins'])) {
-                                                                    $noseri_buku = $_POST['noSeri'];
-                                                                    $id_ulasan = $_POST['ulasan'];
-                                                                    $judul = $_POST['judul'];
-                                                                    $kategori = $_POST['kategori'];
-                                                                    $sinopsis = $_POST['sinopsis'];
-                                                                    $contoh_gratis = $_POST['contoh'];
-                                                                    $rating = $_POST['rating'];
-                                                                    $harga_buku = $_POST['harga'];
-                                                                    $jlh_halaman = $_POST['halaman'];
-                                                                    $bahasa = $_POST['bahasa'];
-                                                                    $penerbit = $_POST['penerbit'];
-                                                                    $tanggal_terbit = $_POST['tanggal'];
+                                                                </div>
+                                                                
+                                                                <?php
+                                                                    include '../includes/koneksi.php';
+                                                                
+                                                                    if(isset($_POST['buttonins'])) {
+                                                                        $noseri_buku = $_POST['noSeri'];
+                                                                        $judul = $_POST['judul'];
+                                                                        $kategori = $_POST['kategori'];
+                                                                        $sinopsis = $_POST['sinopsis'];
+                                                                        $harga_buku = $_POST['harga'];
+                                                                        $jlh_halaman = $_POST['halaman'];
+                                                                        $bahasa = $_POST['bahasa'];
+                                                                        $penerbit = $_POST['penerbit'];
+                                                                        $tanggal_terbit = $_POST['tanggal'];
 
-                                                                    // Uplaod PDF
-                                                                    $tujuan = "pdfBuku/";
-                                                                    $nama_file = $_FILES['filePDF']['name'];
-                                                                    move_uploaded_file($_FILES['filePDF']['tmp_name'],$tujuan.$nama_file);
+                                                                        // Uplaod PDF
+                                                                        $tujuan = "../user_pembeli/pdfBuku/";
+                                                                        $nama_file = $_FILES['filePDF']['name'];
+                                                                        move_uploaded_file($_FILES['filePDF']['tmp_name'],$tujuan.$nama_file);
 
-                                                                    // Upload Gambar
-                                                                    $direktori = "coverBuku/";
-                                                                    $file_name = $_FILES['namafile']['name'];
-                                                                    move_uploaded_file($_FILES['namafile']['tmp_name'],$direktori.$file_name);
-                                                                    $sql = "INSERT INTO buku (noseri_buku, id_ulasan, judul, kategori, sinopsis, contoh_gratis, rating, harga_buku, jlh_halaman, bahasa, penerbit, tanggal_terbit, contain_buku, cover_buku) VALUES ('$noseri_buku','$id_ulasan','$judul','$kategori','$sinopsis','$contoh_gratis','$rating','$harga_buku','$jlh_halaman','$bahasa','$penerbit','$tanggal_terbit','$nama_file','$file_name')";
-                                                                    $q = mysqli_multi_query($koneksi, $sql);
-                                                                    if($q===TRUE){
-                                                                        echo "<script>setTimeout(\"location.href = 'userpenerbit.php';\",1500);</script>";
-                                                                    } else {
-                                                                    echo "Terjadi kesalahan:".$q."<br/>".$koneksi->error;
+                                                                        // Upload Gambar
+                                                                        $direktori = "../user_pembeli/coverBuku/";
+                                                                        $file_name = $_FILES['namafile']['name'];
+                                                                        move_uploaded_file($_FILES['namafile']['tmp_name'],$direktori.$file_name);
+                                                                        $sql = "INSERT INTO buku (noseri_buku, judul, kategori, sinopsis, harga_buku, jlh_halaman, bahasa, penerbit, tanggal_terbit, contain_buku, cover_buku) VALUES ('$noseri_buku','$judul','$kategori','$sinopsis','$harga_buku','$jlh_halaman','$bahasa','$penerbit','$tanggal_terbit','$nama_file','$file_name')";
+                                                                        $q = mysqli_multi_query($koneksi, $sql);
+                                                                        if($q===TRUE){
+                                                                            echo "<script>setTimeout(\"location.href = 'userpenerbit.php';\",1500);</script>";
+                                                                        } else {
+                                                                        echo "Terjadi kesalahan:".$q."<br/>".$koneksi->error;
+                                                                        }
                                                                     }
-                                                                }
-                                                            ?>
-                                                            <?php
-                                                                include 'includes/koneksi.php';
-                                                            
-                                                                if(isset($_POST['buttonins'])) {
-                                                                    $noseri_buku = $_POST['noSeri'];
-                                                                    $id_ulasan = $_POST['ulasan'];
-                                                                    $judul = $_POST['judul'];
-                                                                    $kategori = $_POST['kategori'];
-                                                                    $sinopsis = $_POST['sinopsis'];
-                                                                    $contoh_gratis = $_POST['contoh'];
-                                                                    $rating = $_POST['rating'];
-                                                                    $harga_buku = $_POST['harga'];
-                                                                    $jlh_halaman = $_POST['halaman'];
-                                                                    $bahasa = $_POST['bahasa'];
-                                                                    $penerbit = $_POST['penerbit'];
-                                                                    $tanggal_terbit = $_POST['tanggal'];
+                                                                ?>
 
-                                                                    // Uplaod PDF
-                                                                    $tujuan = "pdfBuku/";
-                                                                    $nama_file = $_FILES['filePDF']['name'];
-                                                                    move_uploaded_file($_FILES['filePDF']['tmp_name'],$tujuan.$nama_file);
+                                                                <?php
+                                                                    include '../includes/koneksi.php';
 
-                                                                    // Upload Gambar
-                                                                    $direktori = "coverBuku/";
-                                                                    $file_name = $_FILES['namafile']['name'];
-                                                                    move_uploaded_file($_FILES['namafile']['tmp_name'],$direktori.$file_name);
-                                                                    $sql = "INSERT INTO terbitansaya (noseri_buku, id_ulasan, judul, kategori, sinopsis, contoh_gratis, rating, harga_buku, jlh_halaman, bahasa, penerbit, tanggal_terbit, contain_buku, cover_buku) VALUES ('$noseri_buku','$id_ulasan','$judul','$kategori','$sinopsis','$contoh_gratis','$rating','$harga_buku','$jlh_halaman','$bahasa','$penerbit','$tanggal_terbit','$nama_file','$file_name')";
-                                                                    $q = mysqli_multi_query($koneksi, $sql);
-                                                                    if($q===TRUE){
-                                                                        echo "<script>setTimeout(\"location.href = 'userpenerbit.php';\",1500);</script>";
-                                                                    } else {
-                                                                    echo "Terjadi kesalahan:".$q."<br/>".$koneksi->error;
+                                                                    if(isset($_POST['buttonins'])) {
+                                                                        $noseri_buku = $_POST['noSeri'];
+                                                                        $judul = $_POST['judul'];
+                                                                        $kategori = $_POST['kategori'];
+                                                                        $sinopsis = $_POST['sinopsis'];
+                                                                        $harga_buku = $_POST['harga'];
+                                                                        $jlh_halaman = $_POST['halaman'];
+                                                                        $bahasa = $_POST['bahasa'];
+                                                                        $penerbit = $_POST['penerbit'];
+                                                                        $tanggal_terbit = $_POST['tanggal'];
+                                                                        $id_user = $_POST['id_user'];
+
+                                                                        // Uplaod PDF
+                                                                        $tujuan = "../user_pembeli/pdfBuku/";
+                                                                        $nama_file = $_FILES['filePDF']['name'];
+                                                                        move_uploaded_file($_FILES['filePDF']['tmp_name'],$tujuan.$nama_file);
+
+                                                                        // Upload Gambar
+                                                                        $direktori = "../user_pembeli/coverBuku/";
+                                                                        $file_name = $_FILES['namafile']['name'];
+                                                                        move_uploaded_file($_FILES['namafile']['tmp_name'],$direktori.$file_name);
+                                                                        $sql = "INSERT INTO terbitansaya (id_user, noseri_buku, judul, kategori, sinopsis, harga_buku, jlh_halaman, bahasa, penerbit, tanggal_terbit, contain_buku, cover_buku) VALUES ('$id_user','$noseri_buku','$judul','$kategori','$sinopsis','$harga_buku','$jlh_halaman','$bahasa','$penerbit','$tanggal_terbit','$nama_file','$file_name')";
+                                                                        $q = mysqli_multi_query($koneksi, $sql);
+                                                                        if($q===TRUE){
+                                                                            echo "<script>setTimeout(\"location.href = 'userpenerbit.php';\",1500);</script>";
+                                                                        } else {
+                                                                        echo "Terjadi kesalahan:".$q."<br/>".$koneksi->error;
+                                                                        }
                                                                     }
-                                                                }
-                                                            ?>
-                                                        </form>
+                                                                ?>
+                                                                
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -315,9 +314,10 @@
                                             $data = htmlspecialchars($data);
                                             return $data;
                                         }
-                                            include 'includes/koneksi.php';
+                                            include '../includes/koneksi.php';
 
-                                            $sql = "SELECT * FROM terbitansaya ";
+                                            $id_user = $_SESSION['id_user'];
+                                            $sql = "SELECT * FROM terbitansaya WHERE id_user = '".$id_user."'";
                                             $sql_query = mysqli_query($koneksi, $sql);
 
                                             foreach ($sql_query as $data) {
@@ -326,7 +326,7 @@
                                         <div class="col-2" <?php echo $data['noseri_buku'] ?>>
                                             <div class="card" style="height: 35rem;">
                                                 <a href="bacaBukuup.php?noseri_buku=<?php echo $data['noseri_buku'] ?>">
-                                                    <img class="img-fluid" src="coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
+                                                    <img class="img-fluid" src="../user_pembeli/coverBuku/<?php echo $data['cover_buku'] ?>" alt="">
                                                 </a>
                                                 <div class="card-body">
                                                     <h5 class="card-title"><?php echo $data['judul'] ?></h5>
@@ -357,12 +357,12 @@
                                                     <div class="modal-body">
                                                     <form method="POST" enctype="multipart/form-data">
                                                         <div class="form-group">
-                                                            <span class="form-label">No Seri Buku</span>
-                                                            <input class="form-control" value="<?php echo $data['noseri_buku'] ?>" name="noSeri" type="number" required="">
+                                                            <span class="form-label">ID User</span>
+                                                            <input class="form-control" value="<?=$_SESSION['id_user']?>" name="id_user" type="number" required="">
                                                         </div>
                                                         <div class="form-group">
-                                                            <span class="form-label">ID Ulasan</span>
-                                                            <input class="form-control" value="<?php echo $data['id_ulasan'] ?>" name="ulasan" type="number" required="">
+                                                            <span class="form-label">No Seri Buku</span>
+                                                            <input class="form-control" value="<?php echo $data['noseri_buku'] ?>" name="noSeri" type="number" required="">
                                                         </div>
                                                         <div class="form-group">
                                                             <span class="form-label">Judul</span>
@@ -375,14 +375,6 @@
                                                         <div class="form-group">
                                                             <span class="form-label">Sinopsis</span>
                                                             <input class="form-control" value="<?php echo $data['sinopsis']?>" name="sinopsis" type="text">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <span class="form-label">Contoh gratis</span>
-                                                            <input class="form-control" value="<?php echo $data['contoh_gratis']?>" name="contoh" type="text">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <span class="form-label">Rating</span>
-                                                            <input class="form-control" value="<?php echo $data['rating']?>" name="rating" type="text">
                                                         </div>
                                                         <div class="form-group">
                                                             <span class="form-label">Harga</span>
@@ -422,38 +414,69 @@
                                                             
                                                     </form>
                                                     <?php
-                                                            require_once'includes/koneksi.php';
+                                                            require_once'../includes/koneksi.php';
                                                             if (isset($_POST['buttonupdt'])){
                                                                 $noseri_buku = $_POST['noSeri'];
-                                                                $id_ulasan = $_POST['ulasan'];
                                                                 $judul = $_POST['judul'];
                                                                 $kategori = $_POST['kategori'];
                                                                 $sinopsis = $_POST['sinopsis'];
-                                                                $contoh_gratis = $_POST['contoh'];
-                                                                $rating = $_POST['rating'];
                                                                 $harga_buku = $_POST['harga'];
                                                                 $jlh_halaman = $_POST['halaman'];
                                                                 $bahasa = $_POST['bahasa'];
                                                                 $penerbit = $_POST['penerbit'];
                                                                 $tanggal_terbit = $_POST['tanggal'];
                                                                 // Uplaod PDF
-                                                                $tujuan = "pdfBuku/";
+                                                                $tujuan = "../user_pembeli/pdfBuku/";
                                                                 $name_file = $_FILES['filePDF']['name'];
                                                                 move_uploaded_file($_FILES['filePDF']['tmp_name'],$tujuan.$nama_file);
 
                                                                 // Upload Gambar
-                                                                $direktori = "coverBuku/";
+                                                                $direktori = "../user_pembeli/coverBuku/";
                                                                 $file_name = $_FILES['cover']['name'];
                                                                 move_uploaded_file($_FILES['cover']['tmp_name'],$direktori.$file_name);
                                                                 
                                                                 if ($koneksi){
-                                                                $update = "UPDATE buku SET noseri_buku='$noseri_buku', id_ulasan='$id_ulasan', judul='$judul', kategori='$kategori', sinopsis='$sinopsis', contoh_gratis='$contoh_gratis', rating='$rating', harga_buku='$harga_buku', jlh_halaman='$jlh_halaman', bahasa='$bahasa', penerbit='$penerbit', tanggal_terbit='$tanggal_terbit', contain_buku='$name_file', cover_buku='$file_name' WHERE noseri_buku=$noseri_buku";
+                                                                $update = "UPDATE buku SET noseri_buku='$noseri_buku', judul='$judul', kategori='$kategori', sinopsis='$sinopsis', harga_buku='$harga_buku', jlh_halaman='$jlh_halaman', bahasa='$bahasa', penerbit='$penerbit', tanggal_terbit='$tanggal_terbit', contain_buku='$name_file', cover_buku='$file_name' WHERE noseri_buku=$noseri_buku";
                                                                 mysqli_query($koneksi,$update);
                                                                 echo "<script>setTimeout(\"location.href = 'userpenerbit.php';\",1500);</script>";
                                                         
                                                                 } else {
                                                                     echo 'Gagal';
-                                                                    header('rakSaya.php');
+                                                                    header('userpenerbit.php');
+                                                                }
+                                                            }
+                                                        ?>
+                                                        <?php
+                                                            require_once'../includes/koneksi.php';
+                                                            if (isset($_POST['buttonupdt'])){
+                                                                $noseri_buku = $_POST['noSeri'];
+                                                                $judul = $_POST['judul'];
+                                                                $kategori = $_POST['kategori'];
+                                                                $sinopsis = $_POST['sinopsis'];
+                                                                $harga_buku = $_POST['harga'];
+                                                                $jlh_halaman = $_POST['halaman'];
+                                                                $bahasa = $_POST['bahasa'];
+                                                                $penerbit = $_POST['penerbit'];
+                                                                $tanggal_terbit = $_POST['tanggal'];
+                                                                
+                                                                // Uplaod PDF
+                                                                $tujuan = "../user_pembeli/pdfBuku/";
+                                                                $name_file = $_FILES['filePDF']['name'];
+                                                                move_uploaded_file($_FILES['filePDF']['tmp_name'],$tujuan.$nama_file);
+
+                                                                // Upload Gambar
+                                                                $direktori = "../user_pembeli/coverBuku/";
+                                                                $file_name = $_FILES['cover']['name'];
+                                                                move_uploaded_file($_FILES['cover']['tmp_name'],$direktori.$file_name);
+                                                                
+                                                                if ($koneksi){
+                                                                $update = "UPDATE terbitansaya SET noseri_buku='$noseri_buku', judul='$judul', kategori='$kategori', sinopsis='$sinopsis', harga_buku='$harga_buku', jlh_halaman='$jlh_halaman', bahasa='$bahasa', penerbit='$penerbit', tanggal_terbit='$tanggal_terbit', contain_buku='$name_file', cover_buku='$file_name' WHERE noseri_buku=$noseri_buku";
+                                                                mysqli_query($koneksi,$update);
+                                                                echo "<script>setTimeout(\"location.href = 'tesTerbit.php';\",1500);</script>";
+                                                        
+                                                                } else {
+                                                                    echo 'Gagal';
+                                                                    header('userpenerbit.php');
                                                                 }
                                                             }
                                                         ?>
@@ -479,17 +502,17 @@
                                                         <input hidden type="text" name="idbuku" value="<?php echo $data['noseri_buku'] ?>">
                                                         <button type="submit" name="btnhapus" class="btn btn-danger ml-1 mb-3" action>Hapus Buku</button>
                                                         <?php
-                                                        require_once'includes/koneksi.php';
+                                                        require_once'../includes/koneksi.php';
                                                         if (isset($_POST['btnhapus'])){
                                                 
                                                             $id_buku = $_POST['idbuku'];
                                                             $hapus = mysqli_query($koneksi, "DELETE FROM buku WHERE noseri_buku='$id_buku'");
                                                             if ($hapus){
-                                                            echo "<script>setTimeout(\"location.href = 'userpenerbit.php';\",1500);</script>";
+                                                            echo "<script>setTimeout(\"location.href = 'tesTerbit.php';\",1500);</script>";
                                                     
                                                             } elseif($koneksi->connect_error){
                                                                 echo 'Gagal';
-                                                                header('userpenerbit.php');
+                                                                header('tesTerbit.php');
                                                             }
                                                         }
                                                         ?>
@@ -541,12 +564,12 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="user/plugins/common/common.min.js"></script>
-    <script src="user/js/custom.min.js"></script>
-    <script src="user/js/settings.js"></script>
-    <script src="user/js/gleek.js"></script>
-    <script src="user/js/styleSwitcher.js"></script>
-    <script src="user/js/dashboard/dashboard-1.js"></script>
+    <script src="plugins/common/common.min.js"></script>
+    <script src="js/custom.min.js"></script>
+    <script src="js/settings.js"></script>
+    <script src="js/gleek.js"></script>
+    <script src="js/styleSwitcher.js"></script>
+    <script src="js/dashboard/dashboard-1.js"></script>
     
 </body>
 

@@ -131,6 +131,11 @@ session_start();
                 <hr>
                 <ul class="metismenu" id="menu">
                     <li>
+                        <a href="Mywishlist.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Wishlist</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="upload.php" aria-expanded="false">
                             <span class="nav-text ml-3">Upload</span>
                         </a>
@@ -388,23 +393,23 @@ session_start();
                                                         <input hidden type="text" name="isi" value="<?=$judul;?>">
                                                         <button type="submit" name="btnselesai" class="btn btn-info ml-1 mb-3" action>Tambahi Selesai</button>
                                                             <?php
-                                                                    require_once'../includes/koneksi.php';
-                                                                    
-                                                                    
-                                                                    if(isset($_POST['btnselesai'])){
-                                                                        $id_user = $_POST['id_user'];
-                                                                        $noseri_buku = $_POST['seribuku'];
-                                                                        $contain = $_POST['isi'];
-                                                                        $sql = "INSERT INTO selesaibuku (id_user,id_selesai, contain_selesai) VALUES ('$id_user','$noseri_buku','$contain')";
-                                                                                            
-                                                                        if($koneksi->query($sql)===TRUE){
-                                                                        echo "<script>setTimeout(\"location.href = 'selesai.php';\",1500);</script>";
-                                                                        } else {
-                                                                        echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
-                                                                        }
-
-                                                                        
+                                                                require_once'../includes/koneksi.php';
+                                                                
+                                                                
+                                                                if(isset($_POST['btnselesai'])){
+                                                                    $id_user = $_POST['id_user'];
+                                                                    $noseri_buku = $_POST['seribuku'];
+                                                                    $contain = $_POST['isi'];
+                                                                    $sql = "INSERT INTO selesaibuku (id_user,id_selesai, contain_selesai) VALUES ('$id_user','$noseri_buku','$contain')";
+                                                                                        
+                                                                    if($koneksi->query($sql)===TRUE){
+                                                                    echo "<script>setTimeout(\"location.href = 'selesai.php';\",1500);</script>";
+                                                                    } else {
+                                                                    echo "Terjadi kesalahan:".$sql."<br/>".$koneksi->error;
                                                                     }
+
+                                                                    
+                                                                }
                                                             ?>
                                                     </form>
                                                 </div>
@@ -543,20 +548,20 @@ session_start();
                                                         <input hidden type="text" name="isifile" value="<?=$contain;?>">
                                                         <button type="submit" name="btnselesaif" class="btn btn-info ml-1 mb-3" action>Tambahi Selesai</button>
                                                             <?php
-                                                                    require_once'../includes/koneksi.php';
-                                                                    
-                                                                    if(isset($_POST['btnselesaif'])){
-                                                                        $id_user = $_POST['id_user'];
-                                                                        $noseri_file = $_POST['serifile'];
-                                                                        $containfile = $_POST['isifile'];
-                                                                        $sqlf = "INSERT INTO selesai (id_user, id_selesai, contain_selesai) VALUES ('$id_user', '$noseri_file','$containfile')";
-                                                                                            
-                                                                        if($koneksi->query($sqlf)===TRUE){
-                                                                        echo "<script>setTimeout(\"location.href = 'selesai.php';\",1500);</script>";
-                                                                        } else {
-                                                                        echo "Terjadi kesalahan:".$sqlf."<br/>".$koneksi->error;
-                                                                        }
+                                                                require_once'../includes/koneksi.php';
+                                                                
+                                                                if(isset($_POST['btnselesaif'])){
+                                                                    $id_user = $_POST['id_user'];
+                                                                    $noseri_file = $_POST['serifile'];
+                                                                    $containfile = $_POST['isifile'];
+                                                                    $sqlf = "INSERT INTO selesai (id_user, id_selesai, contain_selesai) VALUES ('$id_user', '$noseri_file','$containfile')";
+                                                                                        
+                                                                    if($koneksi->query($sqlf)===TRUE){
+                                                                    echo "<script>setTimeout(\"location.href = 'selesai.php';\",1500);</script>";
+                                                                    } else {
+                                                                    echo "Terjadi kesalahan:".$sqlf."<br/>".$koneksi->error;
                                                                     }
+                                                                }
                                                             ?>
                                                     </form>
                                                 </div>

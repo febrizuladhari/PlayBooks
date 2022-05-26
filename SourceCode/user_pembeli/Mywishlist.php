@@ -1,7 +1,7 @@
 <?php
 session_start();
     if(empty($_SESSION['level'])) {
-        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../login.php'</script>";
+        echo "<script>alert('Maaf, Anda Tidak Bisa Akses Halaman Ini !'); document.location='../pages/login.php'</script>";
     }
 ?>
 
@@ -15,7 +15,7 @@ session_start();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Google Play Books</title>
+    <title>Wishlist Saya</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/googlePlayLogo.png">
     <!-- Font Awesome -->
@@ -74,7 +74,6 @@ session_start();
                     <ul class="clearfix">
                         <li class="icons dropdown">
                             <h5 class="mx-3"><?=$_SESSION['first_name']?> <?=$_SESSION['last_name']?></h5>
-                            <!-- <i class="fa fa-th fa-lg mr-3"></i> -->
                         </li>
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative" data-toggle="dropdown">
@@ -115,7 +114,7 @@ session_start();
                         </a>
                     </li>
                     <li>
-                        <a href="bukuSaya.html" aria-expanded="false">
+                        <a href="bukuSaya.php" aria-expanded="false">
                             <span class="nav-text ml-3">Buku Saya</span>
                         </a>
                     </li>
@@ -128,48 +127,28 @@ session_start();
                 <hr>
                 <ul class="metismenu" id="menu">
                     <li>
-                        <a href="akun.html" aria-expanded="false">
-                            <span class="nav-text">Akun</span>
+                        <a href="Mywishlist.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Wishlist</span>
                         </a>
                     </li>
                     <li>
-                        <a href="metode.html" aria-expanded="false">
-                            <span class="nav-text">Metode Pembayaran</span>
+                        <a href="upload.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Upload</span>
                         </a>
                     </li>
                     <li>
-                        <a href="playPoints.html" aria-expanded="false">
-                            <span class="nav-text">Play Points</span>
+                        <a href="rakSaya.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Rak Saya</span>
                         </a>
                     </li>
                     <li>
-                        <a href="langganan.html" aria-expanded="false">
-                            <span class="nav-text">Langganan saya</span>
+                        <a href="pembelian.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Pembelian</span>
                         </a>
                     </li>
                     <li>
-                        <a href="tukarkan.html" aria-expanded="false">
-                            <span class="nav-text">Tukarkan</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="beliKartu.html" aria-expanded="false">
-                            <span class="nav-text">Beli kartu hadiah</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="wishlist.html" aria-expanded="false">
-                            <span class="nav-text">Wishlish saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="aktivitas.html" aria-expanded="false">
-                            <span class="nav-text">Aktivitas Play saya</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="panduanOrang.html" aria-expanded="false">
-                            <span class="nav-text">Panduan Orang Tua</span>
+                        <a href="selesai.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Selesai</span>
                         </a>
                     </li>
                 </ul>
@@ -270,11 +249,11 @@ session_start();
                                         <!-- Perulangan Buku -->
                                         <div class="col-md-6 col-lg-3" <?=$noseri_buku;?>>
                                             <div class="card">
-                                                <div class="card-header ml-3"><?=$judul;?></div>
                                                 <div class="card-body">
                                                 <img class="img-fluid" src="coverBuku/<?=$cover_buku;?>" width="100%" alt="">
                                                 <br> <br>
-                                                    <h5 class="card-title"><?=$penerbit;?></h5>
+                                                    <h5 class="card-title"><?=$judul;?></h5>
+                                                    <h7 class="card-title"><?=$penerbit;?></h7>
                                                     <p class="card-text"><?=$kategori;?></p>
                                                     <p class="card-text"><?=$harga_buku;?></p>
                                                     <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#deletewlModal<?=$noseri_buku;?>" style="width:80px">Delete</a>

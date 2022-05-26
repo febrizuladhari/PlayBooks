@@ -114,7 +114,7 @@ session_start();
                         </a>
                     </li>
                     <li>
-                        <a href="bukuSaya.html" aria-expanded="false">
+                        <a href="bukuSaya.php" aria-expanded="false">
                             <span class="nav-text ml-3">Buku Saya</span>
                         </a>
                     </li>
@@ -126,6 +126,11 @@ session_start();
                 </ul>
                 <hr>
                 <ul class="metismenu" id="menu">
+                    <li>
+                        <a href="Mywishlist.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Wishlist</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="upload.php" aria-expanded="false">
                             <span class="nav-text ml-3">Upload</span>

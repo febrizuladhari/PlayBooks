@@ -71,7 +71,7 @@ session_start();
                 <div class="header-left">
                     <div class="input-group icons">
                         <form class="form-inline">
-                            <input class="form-control mr-sm-2" style="width: 750px;" type="search" placeholder="Telusuri" aria-label="Search">
+                            <input class="form-control mr-sm-2" style="width: 700px;" type="search" placeholder="Telusuri" aria-label="Search">
                             <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
@@ -132,6 +132,11 @@ session_start();
                 </ul>
                 <hr>
                 <ul class="metismenu" id="menu">
+                    <li>
+                        <a href="Mywishlist.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Wishlist</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="upload.php" aria-expanded="false">
                             <span class="nav-text ml-3">Upload</span>
@@ -309,12 +314,6 @@ session_start();
                                             </div>
                                         </div>
 
-                                        <!-- Tombol Baca Buku -->
-                                        <!-- <a class="text-white text-decoration-none" href="bacaBuku.php?noseri_buku=<?php echo $data['noseri_buku'] ?>" target="_blank">
-                                            <button type="button" class="btn mb-1 btn-info mt-5">Baca Buku
-                                                <span class="btn-icon-right"><i class="fa fa-book"></i></span>
-                                            </button>
-                                        </a> -->
                                         
                                         
                                         

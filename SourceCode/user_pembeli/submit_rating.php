@@ -41,24 +41,6 @@
 		$total_user_rating = 0;
 		$review_content = array();
 
-		// start tes
-		// $noseri_buku = input($_GET['noseri_buku']);
-
-		// function input($data1) {
-		// 	$data1 = trim($data1);
-		// 	$data1 = stripslashes($data1);
-		// 	$data1 = htmlspecialchars($data1);
-		// 	return $data1;
-		// }
-
-		// include '../includes/koneksi.php';
-
-		// $noseri_buku = input($_GET['noseri_buku']);
-		// $query1 = mysqli_query($koneksi, "SELECT * FROM buku WHERE noseri_buku='$noseri_buku'");
-		// $data1 = mysqli_fetch_array($query1);
-		// $pilih_buku = $data1['noseri_buku'];
-		// end tes
-
 		$query = "
 		SELECT * FROM ulasan GROUP BY datetime DESC
 		";

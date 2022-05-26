@@ -72,7 +72,7 @@ session_start();
                                 $kata_kunci = $_POST['kata_kunci'];
                             }
                         ?>    
-                        <input name="kata_kunci" value="<?php echo $kata_kunci;?>" class="form-control mr-sm-2" style="width: 750px;" type="text" placeholder="Telusuri" aria-label="Search">
+                        <input name="kata_kunci" value="<?php echo $kata_kunci;?>" class="form-control mr-sm-2" style="width: 700px;" type="text" placeholder="Telusuri" aria-label="Search">
                             <button name="cari" value="cari" class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>

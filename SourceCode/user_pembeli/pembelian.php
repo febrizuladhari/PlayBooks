@@ -22,7 +22,7 @@ session_start();
     <link rel="stylesheet" href="icons/font-awesome/css/font-awesome.min.css">
     <!-- Custom Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-   
+
 </head>
 
 <body>
@@ -70,7 +70,6 @@ session_start();
                             <input class="form-control mr-sm-2" style="width: 700px;" type="search" placeholder="Telusuri" aria-label="Search">
                             <button class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                             
-                    
                         </form>
                     </div>
                 </div>
@@ -114,22 +113,27 @@ session_start();
                 <ul class="metismenu" id="menu">
                     <li>
                         <a href="index.php" aria-expanded="true">
-                            <span class="nav-text ml-3" style="font-size: large;">Buku</span>
+                            <span class="nav-text ml-3">Buku</span>
                         </a>
                     </li>
                     <li>
                         <a href="bukuSaya.php" aria-expanded="false">
-                            <span class="nav-text ml-3" style="font-size: large;">Buku Saya</span>
+                            <span class="nav-text ml-3">Buku Saya</span>
                         </a>
                     </li>
                     <li>
                         <a href="index.php" aria-expanded="false">
-                            <span class="nav-text ml-3" style="font-size: large;">Toko</span>
+                            <span class="nav-text ml-3">Toko</span>
                         </a>
                     </li>
                 </ul>
                 <hr>
                 <ul class="metismenu" id="menu">
+                    <li>
+                        <a href="Mywishlist.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Wishlist</span>
+                        </a>
+                    </li>
                     <li>
                         <a href="upload.php" aria-expanded="false">
                             <span class="nav-text ml-3">Upload</span>

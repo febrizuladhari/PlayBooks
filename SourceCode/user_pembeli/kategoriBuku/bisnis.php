@@ -74,7 +74,7 @@ session_start();
                                 $kata_kunci = $_POST['kata_kunci'];
                             }
                         ?>    
-                        <input name="kata_kunci" value="<?php echo $kata_kunci;?>" class="form-control mr-sm-2" style="width: 750px;" type="text" placeholder="Telusuri" aria-label="Search">
+                        <input name="kata_kunci" value="<?php echo $kata_kunci;?>" class="form-control mr-sm-2" style="width: 700px;" type="text" placeholder="Telusuri" aria-label="Search">
                             <button name="cari" value="cari" class="btn btn-info my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"></i></button>
                         </form>
                     </div>
@@ -124,7 +124,7 @@ session_start();
                         </a>
                     </li>
                     <li>
-                        <a href="bukuSaya.html" aria-expanded="false">
+                        <a href="../bukuSaya.php" aria-expanded="false">
                             <span class="nav-text ml-3">Buku Saya</span>
                         </a>
                     </li>
@@ -137,22 +137,27 @@ session_start();
                 <hr>
                 <ul class="metismenu" id="menu">
                     <li>
-                        <a href="upload.php" aria-expanded="false">
+                        <a href="../Mywishlist.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Wishlist</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../upload.php" aria-expanded="false">
                             <span class="nav-text ml-3">Upload</span>
                         </a>
                     </li>
                     <li>
-                        <a href="rakSaya.php" aria-expanded="false">
+                        <a href="../rakSaya.php" aria-expanded="false">
                             <span class="nav-text ml-3">Rak Saya</span>
                         </a>
                     </li>
                     <li>
-                        <a href="pembelian.php" aria-expanded="false">
+                        <a href="../pembelian.php" aria-expanded="false">
                             <span class="nav-text ml-3">Pembelian</span>
                         </a>
                     </li>
                     <li>
-                        <a href="selesai.php" aria-expanded="false">
+                        <a href="../selesai.php" aria-expanded="false">
                             <span class="nav-text ml-3">Selesai</span>
                         </a>
                     </li>

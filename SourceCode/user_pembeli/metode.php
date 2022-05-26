@@ -128,6 +128,11 @@ session_start();
                 <hr>
                 <ul class="metismenu" id="menu">
                     <li>
+                        <a href="Mywishlist.php" aria-expanded="false">
+                            <span class="nav-text ml-3">Wishlist</span>
+                        </a>
+                    </li>
+                    <li>
                         <a href="upload.php" aria-expanded="false">
                             <span class="nav-text ml-3">Upload</span>
                         </a>

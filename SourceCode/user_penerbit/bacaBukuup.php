@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Baca Buku</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="user/images/googlePlayLogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/googlePlayLogo.png">
 </head>
 <body>
     <?php 
@@ -18,7 +18,7 @@
         return $data;
     }
 
-    include 'includes/koneksi.php';
+    include '../includes/koneksi.php';
 
     $noseri_buku = input($_GET['noseri_buku']);
     $query = mysqli_query($koneksi, "SELECT * FROM terbitansaya WHERE noseri_buku='".$noseri_buku."' LIMIT 1");
@@ -37,7 +37,7 @@
                 </div>
                 <div class='panel-body'>
                     <div>
-                        <embed src="pdfBuku/<?php echo $data['contain_buku']; ?>" width='100%' height='1000px'>
+                        <embed src="../user_pembeli/pdfBuku/<?php echo $data['contain_buku']; ?>" width='100%' height='1000px'>
                     </div>
                 </div>
             </div>
