@@ -6,7 +6,6 @@ session_start();
 ?>
 
 <?php 
-    include "../pages/cek_admin.php";
     include "../includes/koneksi.php";
 ?>
 <!DOCTYPE html>
@@ -177,15 +176,6 @@ session_start();
                                     foreach ($sql_query as $data) {
                                 ?>
 
-                                <?php
-                                    // require("../includes/koneksi.php");
-                                    // $query = "SELECT * FROM metode_pembayaran JOIN buku ON metode_pembayaran.noseri_buku = buku.noseri_buku";
-                                    // $hasil = mysqli_query($koneksi,$query);
-
-                                    // foreach ($hasil as $data){
-                                    
-                                ?>
-
                                 <tr>
                                     <td><?= $data['id_method'] ?></td>
                                     <td><?= $data['id_user'] ?></td>
@@ -329,7 +319,7 @@ session_start();
                                     if($hapus) {
                                         echo "<script>
                                                 alert('Pembelian Buku Berhasil Ditolak !');
-                                                setTimeout(\"location.href = 'prosesKonfirmasi.php';\",500);
+                                                setTimeout(\"location.href = 'payment.php';\",500);
                                             </script> ";
                                     } else {
                                         echo "Terjadi kesalahan";

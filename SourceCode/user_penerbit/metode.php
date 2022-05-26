@@ -6,7 +6,6 @@ session_start();
 ?>
 
 <?php 
-    include "../pages/cek_penerbit.php";
     include "../includes/koneksi.php";
 ?>
 <!DOCTYPE html>
@@ -279,7 +278,7 @@ session_start();
                                                 
                                                         if($koneksi->query($sql)===TRUE){
                                                             echo "<script>
-                                                            alert('Pembayaran Anda Berhasil !');
+                                                            alert('Pembayaran Anda Berhasil, Tunggu Konfirmasi dari Kami !');
                                                             setTimeout(\"location.href = 'index.php';\",300);
                                                             </script> ";
                                                         } else {

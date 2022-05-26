@@ -6,7 +6,6 @@ session_start();
 ?>
 
 <?php 
-    include "../pages/cek_penerbit.php";
     include "../includes/koneksi.php";
 ?>
 <!DOCTYPE html>

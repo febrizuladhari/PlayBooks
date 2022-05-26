@@ -6,7 +6,6 @@ session_start();
 ?>
 
 <?php 
-    include "../pages/cek_pembeli.php";
     include "../includes/koneksi.php";
 ?>
 <!DOCTYPE html>
@@ -42,7 +41,7 @@ session_start();
             <div class='panel panel-primary'>
                 <div class='panel-heading text-center'>
                     <h1 class="text-center">
-                         <?php echo $data['contain'] ?> 
+                        <?php echo $data['contain'] ?> 
                     </h1>
                 </div>
                 <div class='panel-body'>

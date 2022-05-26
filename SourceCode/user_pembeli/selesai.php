@@ -6,7 +6,6 @@ session_start();
 ?>
 
 <?php 
-    include "../pages/cek_pembeli.php";
     include "../includes/koneksi.php";
 ?>
 <!DOCTYPE html>
@@ -194,6 +193,7 @@ session_start();
                                                             <div class="form-group">
                                                                 <label for="message-text" class="col-form-label">Input File:</label>
                                                                 <div class="input-group ">
+                                                                    <input type="hidden" class="form-control" value="<?=$_SESSION['id_user']?>" style="height:auto" id="id_user" name="id_user">
                                                                     <input type="file" class="form-control" style="height:auto" id="inputGroupFile01" name="namafile"> 
                                                                 </div>
                                                             </div>
@@ -205,9 +205,10 @@ session_start();
                                                                 
                                                                 if(isset($_POST['buttonup'])){
                                                                     $direktori = "../user_pembeli/file/";
+                                                                    $id_user = $_POST['id_user'];
                                                                     $file_name=$_FILES['namafile']['name'];
                                                                     move_uploaded_file($_FILES['namafile']['tmp_name'],$direktori.$file_name);
-                                                                    $sql = "INSERT INTO file (contain) VALUES ('$file_name')";
+                                                                    $sql = "INSERT INTO file (id_user, contain) VALUES ('$id_user', '$file_name')";
                                                                                         
                                                                     if($koneksi->query($sql)===TRUE){
                                                                     echo "<script>setTimeout(\"location.href = 'upload.php';\",1500);</script>";
@@ -238,6 +239,7 @@ session_start();
                                                         <form method="POST" enctype="multipart/form-data">
                                                             <div class="form-group">
                                                                 <label for="recipient-name" class="col-form-label">Masukkan Nama untuk Rak Ini :</label>
+                                                                <input type="hidden" class="form-control" value="<?=$_SESSION['id_user']?>" id="id_user" name="id_user">
                                                                 <input type="text" class="form-control" id="recipient-name" name="rak">
                                                             </div>
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -245,10 +247,10 @@ session_start();
                                                             <?php
                                                                 require_once'../includes/koneksi.php';
                                                                 
-                                                                
                                                                 if(isset($_POST['buttonrak'])){
+                                                                    $id_user = $_POST['id_user'];
                                                                     $nama_rak = $_POST['rak'];
-                                                                    $sql = "INSERT INTO rak (nama_rak) VALUES ('$nama_rak')";
+                                                                    $sql = "INSERT INTO rak (id_user, nama_rak) VALUES ('$id_user', '$nama_rak')";
                                                                                         
                                                                     if($koneksi->query($sql)===TRUE){
                                                                     echo "<script>setTimeout(\"location.href = 'rakSaya.php';\",1500);</script>";
@@ -292,7 +294,8 @@ session_start();
                                         }
                                         require_once'../includes/koneksi.php';
 
-                                        $SQL = "SELECT * FROM selesai";
+                                        $id_user = $_SESSION['id_user'];
+                                        $SQL = "SELECT * FROM selesai WHERE id_user = '".$id_user."'";
                                         $SQL_QUERY = mysqli_query($koneksi, $SQL);
 
                                         while ($data = mysqli_fetch_array($SQL_QUERY)){
@@ -315,21 +318,21 @@ session_start();
                                     </div>
                                     <!-- Add to Belum Selesai -->
                                     <div class="modal fade" id="deleteslsModal<?=$id_selesai;?>" tabindex="-1" role="dialog" aria-labelledby="deleteslsModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog" role="document">
-                                             <div class="modal-content">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
                                                 <div class="modal-header">
-                                                   <h5 class="modal-title" id="deleteslsModalLabel">Belum Selesai ?</h5>
-                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                         <span aria-hidden="true">&times;</span>
-                                                      </button>
+                                                <h5 class="modal-title" id="deleteslsModalLabel">Belum Selesai ?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
                                                 </div>
-                                                   <form method="POST">
-                                                   <div class="modal-body">
+                                                <form method="POST">
+                                                <div class="modal-body">
                                                     Apakah Tandai <?=$contain;?> Belum Selesai di Baca ?
-                                                   </div>
-                                                      <button type="submit" class="btn btn-secondary ml-3 mb-3" data-dismiss="modal">Batal</button>
-                                                      <input hidden type="text" name="id_selesai" value="<?=$id_selesai;?>">
-                                                      <button type="submit" name="btnhapussls" class="btn btn-warning ml-1 mb-3" action>Tandai Belum di Baca</button>
+                                                </div>
+                                                    <button type="submit" class="btn btn-secondary ml-3 mb-3" data-dismiss="modal">Batal</button>
+                                                    <input hidden type="text" name="id_selesai" value="<?=$id_selesai;?>">
+                                                    <button type="submit" name="btnhapussls" class="btn btn-warning ml-1 mb-3" action>Tandai Belum di Baca</button>
                                                     <?php
                                                     require_once'../includes/koneksi.php';
                                                     if (isset($_POST['btnhapussls'])){
@@ -337,7 +340,7 @@ session_start();
                                                         $id_selesai = $_POST['id_selesai'];
                                                         $hapussls = mysqli_query($koneksi, "DELETE FROM selesai WHERE id_selesai='$id_selesai'");
                                                         if ($hapussls){
-                                                           echo "<script>setTimeout(\"location.href = 'selesai.php';\",1500);</script>";
+                                                        echo "<script>setTimeout(\"location.href = 'selesai.php';\",1500);</script>";
                                                 
                                                         } elseif($koneksi->connect_error){
                                                             echo 'Gagal';
@@ -345,9 +348,9 @@ session_start();
                                                         }
                                                     }
                                                     ?>
-                                                   </form>
-                                             </div>
-                                          </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                     <?php
                                     }
@@ -355,7 +358,8 @@ session_start();
                                     <?php
                                         require_once'../includes/koneksi.php';
 
-                                        $SQL = "SELECT * FROM selesaibuku";
+                                        $id_user = $_SESSION['id_user'];
+                                        $SQL = "SELECT * FROM selesaibuku WHERE id_user = '".$id_user."'";
                                         $SQL_QUERY = mysqli_query($koneksi, $SQL);
 
                                         while ($data = mysqli_fetch_array($SQL_QUERY)){
@@ -378,21 +382,21 @@ session_start();
                                     </div>
                                     <!-- Add to Belum Selesai Buku -->
                                     <div class="modal fade" id="deleteslsbModal<?=$id_selesaib;?>" tabindex="-1" role="dialog" aria-labelledby="deleteslsbModalLabel" aria-hidden="true">
-                                          <div class="modal-dialog" role="document">
-                                             <div class="modal-content">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
                                                 <div class="modal-header">
-                                                   <h5 class="modal-title" id="deleteslsbModalLabel">Belum Selesai ?</h5>
-                                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                         <span aria-hidden="true">&times;</span>
-                                                      </button>
+                                                <h5 class="modal-title" id="deleteslsbModalLabel">Belum Selesai ?</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
                                                 </div>
-                                                   <form method="POST">
-                                                   <div class="modal-body">
+                                                <form method="POST">
+                                                <div class="modal-body">
                                                     Apakah Tandai <?=$containb;?> Belum Selesai di Baca ?
-                                                   </div>
-                                                      <button type="submit" class="btn btn-secondary ml-3 mb-3" data-dismiss="modal">Batal</button>
-                                                      <input hidden type="text" name="id_selesaib" value="<?=$id_selesaib;?>">
-                                                      <button type="submit" name="btnhapusslsb" class="btn btn-warning ml-1 mb-3" action>Tandai Belum di Baca</button>
+                                                </div>
+                                                    <button type="submit" class="btn btn-secondary ml-3 mb-3" data-dismiss="modal">Batal</button>
+                                                    <input hidden type="text" name="id_selesaib" value="<?=$id_selesaib;?>">
+                                                    <button type="submit" name="btnhapusslsb" class="btn btn-warning ml-1 mb-3" action>Tandai Belum di Baca</button>
                                                     <?php
                                                     require_once'../includes/koneksi.php';
                                                     if (isset($_POST['btnhapusslsb'])){
@@ -400,21 +404,23 @@ session_start();
                                                         $id_selesaib = $_POST['id_selesaib'];
                                                         $hapusslsb = mysqli_query($koneksi, "DELETE FROM selesaibuku WHERE id_selesai='$id_selesaib'");
                                                         if ($hapusslsb){
-                                                           echo "<script>setTimeout(\"location.href = 'selesai.php';\",1500);</script>";
+                                                        echo "<script>setTimeout(\"location.href = 'selesai.php';\",1500);</script>";
                                                 
-                                                        } elseif($koneksi->connect_error){
+                                                        } elseif ($koneksi->connect_error){
                                                             echo 'Gagal';
                                                             header('selesai.php');
                                                         }
                                                     }
                                                     ?>
-                                                   </form>
-                                             </div>
-                                          </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <?php
                                     }
                                     ?>  
+
                                     </div>
                                 </div>
                             </div>

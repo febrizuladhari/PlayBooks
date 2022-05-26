@@ -6,7 +6,6 @@ session_start();
 ?>
 
 <?php 
-    include "../pages/cek_pembeli.php";
     include "../includes/koneksi.php";
 ?>
 <!DOCTYPE html>
@@ -194,6 +193,7 @@ session_start();
                                                             <div class="form-group">
                                                                 <label for="message-text" class="col-form-label">Input File:</label>
                                                                 <div class="input-group ">
+                                                                    <input type="hidden" class="form-control" value="<?=$_SESSION['id_user']?>" style="height:auto" id="id_user" name="id_user"> 
                                                                     <input type="file" class="form-control" style="height:auto" id="inputGroupFile01" name="namafile"> 
                                                                 </div>
                                                             </div>
@@ -206,8 +206,9 @@ session_start();
                                                                 if(isset($_POST['buttonup'])){
                                                                     $direktori = "../user_pembeli/file/";
                                                                     $file_name=$_FILES['namafile']['name'];
+                                                                    $id_user = $_POST['id_user'];
                                                                     move_uploaded_file($_FILES['namafile']['tmp_name'],$direktori.$file_name);
-                                                                    $sql = "INSERT INTO file (contain) VALUES ('$file_name')";
+                                                                    $sql = "INSERT INTO file (id_user, contain) VALUES ('$id_user', '$file_name')";
                                                                                         
                                                                     if($koneksi->query($sql)===TRUE){
                                                                     echo "<script>setTimeout(\"location.href = 'upload.php';\",1500);</script>";
@@ -238,6 +239,7 @@ session_start();
                                                         <form method="POST" enctype="multipart/form-data">
                                                             <div class="form-group">
                                                                 <label for="recipient-name" class="col-form-label">Masukkan Nama untuk Rak Ini :</label>
+                                                                <input type="hidden" class="form-control" value="<?=$_SESSION['id_user']?>" id="id_user" name="id_user">
                                                                 <input type="text" class="form-control" id="recipient-name" name="rak">
                                                             </div>
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -248,7 +250,7 @@ session_start();
                                                                 
                                                                 if(isset($_POST['buttonrak'])){
                                                                     $nama_rak = $_POST['rak'];
-                                                                    $sql = "INSERT INTO rak (nama_rak) VALUES ('$nama_rak')";
+                                                                    $sql = "INSERT INTO rak (id_user, nama_rak) VALUES ('$id_user', '$nama_rak')";
                                                                                         
                                                                     if($koneksi->query($sql)===TRUE){
                                                                     echo "<script>setTimeout(\"location.href = 'rakSaya.php';\",1500);</script>";
@@ -292,8 +294,9 @@ session_start();
                                         }
                                         require_once'../includes/koneksi.php';
 
+                                        $id_user = $_SESSION['id_user'];
                                         $SQL = "SELECT * FROM pembelian 
-                                        JOIN buku ON pembelian.noseri_buku = buku.noseri_buku";
+                                        JOIN buku ON pembelian.noseri_buku = buku.noseri_buku WHERE id_user = '".$id_user."'";
                                         $SQL_QUERY = mysqli_query($koneksi, $SQL);
 
                                         while ($data = mysqli_fetch_array($SQL_QUERY)){
@@ -338,7 +341,8 @@ session_start();
                                                         <?php
                                                         require_once'../includes/koneksi.php';
 
-                                                        $SQLrb = "SELECT * FROM rak";
+                                                        $id_user = $_SESSION['id_user'];
+                                                        $SQLrb = "SELECT * FROM rak WHERE id_user = '".$id_user."'";
                                                         $SQL_QUERYrb = mysqli_query($koneksi, $SQLrb);
 
                                                         while ($data = mysqli_fetch_array($SQL_QUERYrb)){
@@ -378,17 +382,19 @@ session_start();
                                                     Apakah Anda Telah Selesai Baca <?=$judul;?>?
                                                 </div>
                                                     <button type="submit" class="btn btn-secondary ml-3 mb-3" data-dismiss="modal">Batal</button>
+                                                    <input hidden type="hidden" name="id_user" value="<?=$_SESSION['id_user']?>">
                                                     <input hidden type="text" name="seribuku" value="<?=$noseri_buku;?>">
                                                     <input hidden type="text" name="isi" value="<?=$judul;?>">
-                                                    <button type="submit" name="btnselesai" class="btn btn-info ml-1 mb-3" action>Tambahi Selesai</button>
+                                                    <button type="submit" name="btnselesai" class="btn btn-info ml-1 mb-3" action>Tambah ke Selesai</button>
                                                         <?php
                                                                 require_once'../includes/koneksi.php';
                                                                 
                                                                 
                                                                 if(isset($_POST['btnselesai'])){
+                                                                    $id_user = $_POST['id_user'];
                                                                     $noseri_buku = $_POST['seribuku'];
                                                                     $contain = $_POST['isi'];
-                                                                    $sql = "INSERT INTO selesaibuku (id_selesai, contain_selesai) VALUES ('$noseri_buku','$contain')";
+                                                                    $sql = "INSERT INTO selesaibuku (id_user, id_selesai, contain_selesai) VALUES ('$id_user', '$noseri_buku','$contain')";
                                                                                         
                                                                     if($koneksi->query($sql)===TRUE){
                                                                     echo "<script>setTimeout(\"location.href = 'selesai.php';\",1500);</script>";

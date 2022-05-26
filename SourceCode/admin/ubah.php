@@ -6,7 +6,6 @@ session_start();
 ?>
 
 <?php 
-    include "../pages/cek_admin.php";
     include "../includes/koneksi.php";
 ?>
 <!DOCTYPE html>
